@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription"
+    android:background="#D9D9D9"
+    tools:context=".Type_contrat">
+    <ImageView
+        android:id="@+id/still_valid"
+        android:layout_width="168dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginLeft="67dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginRight="67dp"
+        android:contentDescription="@string/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="248dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginRight="130dp"
+        android:layout_marginBottom="628dp"
+        android:text="@string/ap"
+        android:textColor="#FA8258"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/still_valid" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="57dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="540dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/home_button" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="520dp"
+        android:size="10sp"
+        android:text="@string/ac"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="57dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginRight="130dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/menu_button" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
+        android:layout_marginBottom="536dp"
+        android:size="16sp"
+        android:text="@string/me"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="475dp"
+        android:text="@string/v"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+    <Button
+        android:id="@+id/valid"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginRight="115dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_round"
+        android:text="@string/va"
+        app:layout_constraintBottom_toTopOf="@+id/efface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/efface"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/valid"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginRight="115dp"
+        android:layout_marginBottom="123dp"
+        android:background="@drawable/button_noir"
+        android:text="@string/e"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="291dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/edit_round"
+        app:layout_constraintBottom_toTopOf="@+id/valid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <ImageView
+        android:id="@+id/mic"
+        android:layout_width="56dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        android:layout_marginBottom="345dp"
+        android:layout_weight="0.2"
+        android:src="@drawable/microphone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="147dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/efface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        app:srcCompat="@drawable/left" />
+
+</android.support.constraint.ConstraintLayout>

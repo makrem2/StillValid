@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D9D9D9"
+    tools:ignore="ContentDescription"
+    tools:context=".DetaileProduits">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="168dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginRight="130dp"
+        android:layout_marginBottom="680dp"
+        android:text="@string/pr"
+        android:textColor="#FA8258"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="57dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="632dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:srcCompat="@drawable/home_button" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:size="10sp"
+        android:text="@string/ac"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="57dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginRight="147dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:srcCompat="@drawable/menu_button" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginRight="128dp"
+        android:layout_marginBottom="604dp"
+        android:size="16sp"
+        android:text="@string/me"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <RelativeLayout
+        android:layout_width="370dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="508dp"
+        android:background="#FE642E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="325dp"
+            android:layout_marginLeft="325dp"
+            app:srcCompat="@drawable/point_image" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="120dp"
+            android:layout_marginLeft="120dp"
+            android:text="@string/te"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="370dp"
+        android:layout_height="434dp"
+        android:background="#FFFFFF"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="215dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/duree"
+            android:text="@string/mois"
+            android:layout_marginLeft="160dp"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#21610B"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/duree"
+            android:layout_marginLeft="130dp"
+            app:layout_constraintTop_toBottomOf="@id/duree"
+            app:layout_constraintStart_toEndOf="@id/duree"
+            android:src="@mipmap/ic_launcher" />
+        <TextView
+            android:layout_marginLeft="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="false"
+            android:text="Télévision"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:id="@+id/name_img"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_img"
+            android:layout_marginLeft="115dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_round"
+            android:text="@string/x"
+            android:textColor="#FFFFFF" />
+
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
