@@ -21,5 +21,6 @@ public class Accueil extends AppCompatActivity {
         TextView textView = findViewById(R.id.bas);
         textView.setText("COPYRGHIT StillValid All RIGHTS RESERVED - " + str );
 
+
     }
 }
