@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="cercle_color">#4CAF50</color>
+    <color name="bgColor">#D9D9D9</color>
+    <color name="orange">#FF5722</color>
+    <color name="noir">#000</color>
+    <color name="red">#DF0101</color>
 </resources>

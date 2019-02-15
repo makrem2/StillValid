@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D9D9D9"
-    tools:ignore="ContentDescription"
-    tools:context=".MesProduits">
-
+    android:background="@color/bgColor"
+    tools:context=".Detail_Contrat">
     <ImageView
         android:id="@+id/modif_supp_btn"
         android:layout_width="232dp"
@@ -28,7 +27,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="@string/re"
+        android:text="@string/ca"
         android:textAllCaps="true"
         android:textColor="@color/orange"
         android:textSize="18sp"
@@ -103,18 +102,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/lin_mes_prod"
+        android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="196dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/edit_round2"
+        android:background="@drawable/layout_two_corners"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_prod"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,81 +122,125 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="55dp"
-            android:layout_weight="8"
-            android:gravity="left"
+            android:layout_weight="7"
+            android:gravity="center"
             android:padding="15dp"
-            android:text="@string/pr"
-            android:textColor="@color/noir"
-            android:textSize="20sp"
+            android:text="Fiche Contrat"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
             android:textStyle="italic" />
 
+        <ImageView
+            android:id="@+id/menuItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:onClick="EditProduit"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            app:srcCompat="@drawable/ic_point_image"
+            tools:ignore="VectorDrawableCompat" />
     </LinearLayout>
-
 
     <LinearLayout
-        android:id="@+id/lin_con_abo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/line"
+        android:layout_width="372dp"
+        android:layout_height="361dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/edit_round2"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_con_abo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_prod">
-
-        <TextView
-            android:id="@+id/txtconab"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            android:layout_weight="8"
-            android:gravity="left"
-            android:padding="15dp"
-            android:text="@string/ca"
-            android:textColor="@color/noir"
-            android:textSize="20sp"
-            android:textStyle="italic" />
-
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_prod"
-        android:scrollbars="vertical"
-        android:layout_width="395dp"
-        android:layout_height="176dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/lin_con_abo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lin_mes_prod" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_con_abo"
-        android:scrollbars="vertical"
-
-        android:layout_width="395dp"
-        android:layout_height="201dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="120dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lin_con_abo" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/logo"
+            app:civ_border_color="@color/red"
+            app:civ_border_width="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <TextView
+            android:id="@+id/txtDat"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="@string/assurance"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+        <TextView
+            android:id="@+id/enseigne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="25/05/2019"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDat" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/orange_btn"
+            android:gravity="center"
+            android:onClick="VoirFacture"
+            android:padding="10dp"
+            android:text="@string/vc"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enseigne" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/return_btn"
+        android:layout_width="50dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="Mes_Produit"
+        android:src="@drawable/left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint"
+        android:layout_marginLeft="16dp" />
 
 </android.support.constraint.ConstraintLayout>

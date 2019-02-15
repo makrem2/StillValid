@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_still"
         android:layout_width="277dp"
         android:layout_height="138dp"
         android:layout_marginStart="67dp"
@@ -18,6 +18,7 @@
         android:layout_marginTop="120dp"
         android:layout_marginEnd="67dp"
         android:layout_marginRight="67dp"
+        android:onClick="pass"
         android:layout_marginBottom="298dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +30,7 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_still"
         android:layout_width="200dp"
         android:layout_height="32dp"
         android:layout_marginStart="105dp"
@@ -41,11 +42,11 @@
         android:gravity="center"
         android:text="@string/sv"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:textStyle="normal|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/img_still" />
 
 
 </android.support.constraint.ConstraintLayout>

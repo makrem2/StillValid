@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,7 @@
     tools:context=".Inscription">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_still"
         android:layout_width="277dp"
         android:layout_height="138dp"
         android:layout_marginStart="67dp"
@@ -26,10 +27,10 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/edit_email"
         android:layout_width="320dp"
         android:layout_height="45dp"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/img_still"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="30dp"
@@ -42,14 +43,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/img_still"
         android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/main_motdepasse"
+        android:id="@+id/edit_passwordl"
         android:layout_width="320dp"
         android:layout_height="45dp"
-        android:layout_below="@+id/email"
+        android:layout_below="@+id/edit_email"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="45dp"
@@ -62,13 +63,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_email" />
 
     <EditText
         android:id="@+id/conf_motdepasse"
         android:layout_width="320dp"
         android:layout_height="45dp"
-        android:layout_below="@+id/main_motdepasse"
+        android:layout_below="@+id/edit_passwordl"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="45dp"
@@ -82,11 +83,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_motdepasse"
+        app:layout_constraintTop_toBottomOf="@+id/edit_passwordl"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/main_login"
+        android:id="@+id/log"
         android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/conf_motdepasse"
@@ -96,8 +97,10 @@
         android:layout_marginEnd="115dp"
         android:layout_marginRight="115dp"
         android:layout_marginBottom="150dp"
-        android:background="@drawable/button_round"
-        android:text=""
+        android:onClick="inscription"
+        android:textColor="@android:color/white"
+        android:background="@drawable/orange_btn"
+        android:text="@string/va"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
