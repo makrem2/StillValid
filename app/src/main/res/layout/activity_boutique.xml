@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_boutique"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/modif_supp_btn" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/line_accu_men"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/txt_boutique">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
                 app:srcCompat="@drawable/home_button" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/txt_accueil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -90,7 +90,7 @@
                 app:srcCompat="@drawable/menu_button" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/txt_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -102,6 +102,7 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/edit_recherche"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="20dp"
@@ -114,6 +115,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/line_accu_men" />
 
 </android.support.constraint.ConstraintLayout>

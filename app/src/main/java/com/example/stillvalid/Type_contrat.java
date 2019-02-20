@@ -13,7 +13,7 @@ public class Type_contrat extends AppCompatActivity {
         setContentView(R.layout.activity_type_contrat);
 
     }
-    public void valid_cont (View view){
+    public void valid_contrat (View view){
         startActivity(new Intent(this,Date_echence.class));
     }
 }

@@ -13,7 +13,7 @@ public class Date_achat extends AppCompatActivity {
         setContentView(R.layout.activity_date_achat);
     }
 
-    public void valid_data (View view){
+    public void valid_date_achat (View view){
         startActivity(new Intent(this,Duree_garantie.class));
     }
 }

@@ -7,6 +7,7 @@
     tools:ignore="ContentDescription"
     android:background="@color/bgColor"
     tools:context=".Duree_garantie">
+
     <ImageView
         android:id="@+id/modif_supp_btn"
         android:layout_width="232dp"
@@ -20,7 +21,7 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_ajou_prod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -38,18 +39,18 @@
         app:layout_constraintTop_toBottomOf="@+id/modif_supp_btn" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/line_accu_men"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/txt_ajou_prod">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -66,7 +67,7 @@
                 app:srcCompat="@drawable/home_button" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/txt_accueil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -82,7 +83,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/menu"
+                android:id="@+id/img_menu"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_gravity="center"
@@ -90,7 +91,7 @@
                 app:srcCompat="@drawable/menu_button" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/txt_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -102,119 +103,106 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView18"
-        android:layout_width="348dp"
+        android:id="@+id/txt_duree_garentie"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="475dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginRight="90dp"
         android:gravity="center"
         android:text="@string/vg"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/line_accu_men" />
 
 
     <Button
         android:id="@+id/valid"
-        android:layout_width="176dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginLeft="34dp"
-        android:layout_marginTop="20dp"
-
-        android:layout_marginEnd="118dp"
-        android:layout_marginRight="118dp"
-        android:layout_marginBottom="180dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
         android:background="@drawable/orange_btn"
+        android:gravity="center"
+        android:onClick="valid_duree_garantie"
         android:text="@string/va"
-        android:onClick="valid_garantie"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/efface" />
 
     <Button
         android:id="@+id/efface"
-        android:layout_width="176dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/valid"
-        android:layout_marginStart="118dp"
-        android:layout_marginLeft="118dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="118dp"
-        android:layout_marginRight="118dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginRight="110dp"
         android:background="@drawable/button_noir"
+        android:gravity="center"
         android:text="@string/e"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/valid"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/sp_duree_garentie" />
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="291dp"
+    <EditText
+        android:id="@+id/sp_duree_garentie"
+        android:layout_width="299dp"
         android:layout_height="42dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
-        android:layout_marginBottom="40dp"
-        android:autofillHints="58"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
         android:background="@drawable/edit_round"
-        app:layout_constraintBottom_toTopOf="@+id/valid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
+        android:hint="   55"
+        app:layout_constraintEnd_toStartOf="@+id/mic"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:layout_constraintVertical_bias="0.149" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_duree_garentie" />
 
     <ImageView
         android:id="@+id/mic"
-        android:layout_width="68dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="408dp"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
         android:layout_weight="0.2"
         android:background="@drawable/edit_round"
         android:src="@drawable/microphone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/spinner2"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/sp_duree_garentie"
+        app:layout_constraintTop_toBottomOf="@+id/txt_duree_garentie" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="70dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="144dp"
+        android:id="@+id/img_return"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="147dp"
+        android:layout_marginBottom="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/efface"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/valid"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        app:layout_constraintVertical_bias="0.64"
+        app:layout_constraintTop_toBottomOf="@+id/efface"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/left" />
+
 </android.support.constraint.ConstraintLayout>

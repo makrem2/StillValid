@@ -171,7 +171,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_prod"
-        android:scrollbars="vertical"
+        android:scrollbars="horizontal"
         android:layout_width="395dp"
         android:layout_height="176dp"
         android:layout_marginStart="20dp"
@@ -187,8 +187,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_con_abo"
-        android:scrollbars="vertical"
-
+        android:scrollbars="horizontal"
         android:layout_width="395dp"
         android:layout_height="201dp"
         android:layout_marginStart="20dp"

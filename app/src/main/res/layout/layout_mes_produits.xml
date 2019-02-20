@@ -8,8 +8,8 @@
     app:cardElevation="3dp">
 
     <LinearLayout
-        android:layout_width="489dp"
-        android:layout_height="245dp"
+        android:layout_width="476dp"
+        android:layout_height="235dp"
         android:orientation="vertical">
 
         <TextView

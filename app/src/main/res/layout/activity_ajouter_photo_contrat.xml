@@ -12,21 +12,20 @@
         android:id="@+id/modif_supp_btn"
         android:layout_width="232dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_ajou_contrat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="32dp"
         android:gravity="center"
         android:text="@string/acc"
         android:textAllCaps="true"
@@ -39,18 +38,18 @@
         app:layout_constraintTop_toBottomOf="@+id/modif_supp_btn" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/line_acc_men"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="32dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/txt_ajou_contrat">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,7 +66,7 @@
                 app:srcCompat="@drawable/home_button" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/txt_accueil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -91,7 +90,7 @@
                 app:srcCompat="@drawable/menu_button" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/txt_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -103,112 +102,118 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/txt_prendre_photo_contrat"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="478dp"
         android:text="@string/ph"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintTop_toBottomOf="@+id/line_acc_men" />
 
     <ImageView
+        android:id="@+id/img_prendre_photo_contrat"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:layout_marginStart="140dp"
         android:layout_marginLeft="140dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="140dp"
         android:layout_marginRight="140dp"
-        android:layout_marginBottom="20dp"
         android:foregroundGravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView19"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:srcCompat="@drawable/pr" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_prendre_photo_contrat"
+        app:srcCompat="@drawable/camera" />
 
     <ImageView
+        android:id="@+id/img_import_photo_contrat"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:layout_marginStart="140dp"
         android:layout_marginLeft="140dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="140dp"
         android:layout_marginRight="140dp"
-        android:layout_marginBottom="41dp"
         android:foregroundGravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/valid"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19"
-        app:srcCompat="@drawable/impor" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_import_photo_contrat"
+        app:srcCompat="@drawable/camera" />
 
     <TextView
-        android:id="@+id/textView19"
-        android:layout_width="300dp"
+        android:id="@+id/txt_nb_photo"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:text="il vous reste 10 image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/img_return"
+        app:layout_constraintTop_toBottomOf="@+id/img_import_photo_contrat" />
+
+    <TextView
+        android:id="@+id/txt_import_photo_contrat"
+        android:layout_width="320dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/ih"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintTop_toBottomOf="@+id/img_prendre_photo_contrat" />
 
     <Button
         android:id="@+id/valid"
         android:layout_width="176dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginLeft="34dp"
-        android:layout_marginTop="20dp"
 
-        android:layout_marginEnd="118dp"
-        android:layout_marginRight="118dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/orange_btn"
         android:foregroundGravity="center"
-        android:text="@string/va"
         android:onClick="valid_photo_cont"
+        android:text="@string/va"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/efface" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_nb_photo"
+        app:layout_constraintVertical_bias="0.537" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_return"
         android:layout_width="70dp"
         android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="147dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/efface"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/valid"
+        app:layout_constraintHorizontal_bias="0.705"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        app:layout_constraintVertical_bias="0.64"
         app:srcCompat="@drawable/left" />
 
 </android.support.constraint.ConstraintLayout>

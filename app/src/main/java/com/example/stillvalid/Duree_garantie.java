@@ -13,7 +13,7 @@ public class Duree_garantie extends AppCompatActivity {
         setContentView(R.layout.activity_duree_garantie);
     }
 
-    public void valid_garantie (View view){
+    public void valid_duree_garantie (View view){
         startActivity(new Intent(this,Ajouter_Photo_Produit.class));
     }
 }

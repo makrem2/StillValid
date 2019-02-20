@@ -13,7 +13,7 @@ public class Date_echence extends AppCompatActivity {
         setContentView(R.layout.activity_date_echence);
     }
 
-    public void valid_ech (View view){
+    public void valid_echeance (View view){
         startActivity(new Intent(this,Ajouter_photo_contrat.class));
     }
 }

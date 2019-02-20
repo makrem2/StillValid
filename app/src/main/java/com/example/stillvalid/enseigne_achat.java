@@ -13,7 +13,7 @@ public class enseigne_achat extends AppCompatActivity {
         setContentView(R.layout.activity_enseigne_achat);
     }
 
-    public void valid (View view){
+    public void valid_enseigne_achat (View view){
         startActivity(new Intent(this,Marque_Produit.class));
     }
 }

@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D9D9D9"
     tools:ignore="ContentDescription"
+    android:background="@color/bgColor"
     tools:context=".Accueil">
 
     <ImageView
         android:id="@+id/img_still"
-        android:layout_width="277dp"
-        android:layout_height="138dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginLeft="67dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginRight="67dp"
+        android:layout_width="222dp"
+        android:layout_height="111dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
         android:contentDescription="@string/logo"
+        android:onClick="pass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread"
@@ -42,15 +43,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="334dp"
-        android:layout_height="139dp"
+        android:layout_width="356dp"
+        android:layout_height="160dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="216dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -71,8 +74,8 @@
                 android:layout_width="72dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:paddingTop="5dp"
                 android:onClick="mes_prod"
+                android:paddingTop="5dp"
                 app:srcCompat="@drawable/produit"
                 tools:ignore="VectorDrawableCompat" />
 
@@ -95,7 +98,6 @@
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:onClick="ajout_prod"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="268dp"
             tools:layout_editor_absoluteY="351dp">
@@ -105,6 +107,7 @@
                 android:layout_width="79dp"
                 android:layout_height="78dp"
                 android:layout_weight="2"
+                android:onClick="ajout_prod"
                 android:paddingTop="5dp"
                 app:srcCompat="@drawable/ajoutproduit"
                 tools:ignore="VectorDrawableCompat" />
@@ -114,8 +117,8 @@
                 android:layout_width="94dp"
                 android:layout_height="65dp"
                 android:layout_weight="1"
-                android:paddingTop="3dp"
                 android:onClick="ajou_prod"
+                android:paddingTop="3dp"
                 android:text="@string/ap"
                 android:textAlignment="center"
                 android:textColor="@color/noir"
@@ -139,6 +142,7 @@
                 android:layout_width="72dp"
                 android:layout_height="64dp"
                 android:layout_weight="2"
+                android:onClick="bou"
                 android:paddingTop="5dp"
                 app:srcCompat="@drawable/botique"
                 tools:ignore="VectorDrawableCompat" />
@@ -150,7 +154,6 @@
                 android:layout_weight="2"
                 android:paddingTop="3dp"
                 android:text="@string/bo"
-                android:onClick="bou"
                 android:textAlignment="center"
                 android:textColor="@color/noir"
                 android:textSize="16sp" />
@@ -167,51 +170,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/bas"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
     <LinearLayout
-        android:layout_width="223dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="155dp"
         android:layout_height="67dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="472dp">
+        app:layout_constraintTop_toBottomOf="@+id/view3">
 
         <ImageView
             android:id="@+id/facebook"
-            android:layout_width="72dp"
-            android:layout_height="64dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/facebok" />
 
         <ImageView
             android:id="@+id/gmail"
-            android:layout_width="72dp"
-            android:layout_height="64dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/email" />
 
         <ImageView
             android:id="@+id/twiter"
-            android:layout_width="72dp"
-            android:layout_height="64dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/twiter" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="227dp"
-        android:layout_height="71dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="548dp">
-
-        <TextView
-            android:id="@+id/bas"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="16sp"
-            android:textStyle="bold|italic" />
     </LinearLayout>
 
 
