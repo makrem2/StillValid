@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_nom_produit"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/pr" />
+
+        <TextView
+            android:id="@+id/txt_nom_produit"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/img_nom_produit"
+            android:text="Nom de produit"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="356dp" />
+
+
+        <TextView
+            android:id="@+id/txt_lieu_produit"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/txt_nom_produit"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/img_nom_produit"
+            android:text="BEJA"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            tools:layout_editor_absoluteX="178dp"
+            tools:layout_editor_absoluteY="217dp" />
+
+        <TextView
+            android:id="@+id/txt_prix_produit"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/txt_lieu_produit"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/img_nom_produit"
+            android:text="500"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            tools:layout_editor_absoluteX="131dp"
+            tools:layout_editor_absoluteY="428dp" />
+
+    </RelativeLayout>
+
+
+
+    </android.support.constraint.ConstraintLayout>
