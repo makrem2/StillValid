@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Modifier_Annonce"></activity>
+        <activity android:name=".Fiche_Produite"></activity>
+        <activity android:name=".Modifier_Annonce" />
         <activity android:name=".Detail_Contrat" />
         <activity android:name=".Boutique" />
         <activity android:name=".recapitulatife_Produit" />

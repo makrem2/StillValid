@@ -23,7 +23,7 @@ public class MesProduits extends AppCompatActivity {
         recyclerView = findViewById(R.id.RV_post);
 
     posts = new ArrayList<>();
-        for (int i = 0 ; i<10;i++){
+        for (int i = 0 ; i<3;i++){
         posts.add(new PostProduit("txt_prod"+i , "txt_duree"+i,""));
     }
         postsAdapterProduit = new PostsAdapterProduit(this,posts);

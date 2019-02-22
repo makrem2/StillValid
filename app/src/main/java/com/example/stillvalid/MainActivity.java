@@ -14,6 +14,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pass(View view) {
-        startActivity(new Intent(this,DeposerAnonnce.class));
+        startActivity(new Intent(this,Login.class));
     }
 }
