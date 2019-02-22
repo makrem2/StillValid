@@ -15,4 +15,7 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
     public void valid_photo_cont (View view){
         startActivity(new Intent(this,Recapulatif_contrat.class));
     }
+    public void return_date_echance (View view){
+        startActivity(new Intent(this,Date_echence.class));
+    }
 }

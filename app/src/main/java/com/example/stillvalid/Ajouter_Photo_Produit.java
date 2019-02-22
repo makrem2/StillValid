@@ -15,4 +15,7 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
     public void valid_photo (View view){
         startActivity(new Intent(this,recapitulatife_Produit.class));
     }
+    public void return_ajou_ph_prod (View view){
+    startActivity(new Intent(this,Duree_garantie.class));
+}
 }

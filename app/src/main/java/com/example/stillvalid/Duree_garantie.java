@@ -16,4 +16,8 @@ public class Duree_garantie extends AppCompatActivity {
     public void valid_duree_garantie (View view){
         startActivity(new Intent(this,Ajouter_Photo_Produit.class));
     }
+
+    public void return_ajou_date_achat (View view){
+        startActivity(new Intent(this,Date_achat.class));
+    }
 }

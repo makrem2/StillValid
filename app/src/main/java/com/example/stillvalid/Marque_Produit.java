@@ -15,4 +15,10 @@ public class Marque_Produit extends AppCompatActivity {
     public void valid_marque (View view){
         startActivity(new Intent(this,Nom_Produit.class));
     }
+
+    public void return_ens_achat (View view){
+        startActivity(new Intent(this,enseigne_achat.class));
+    }
+
 }
+

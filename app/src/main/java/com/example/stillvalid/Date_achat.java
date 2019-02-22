@@ -16,4 +16,7 @@ public class Date_achat extends AppCompatActivity {
     public void valid_date_achat (View view){
         startActivity(new Intent(this,Duree_garantie.class));
     }
+    public void return_ajou_nom_prod (View view){
+        startActivity(new Intent(this,Nom_Produit.class));
+    }
 }

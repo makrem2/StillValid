@@ -1,118 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.constraint.ConstraintLayout
+    android:layout_width="150dp"
+    android:layout_height="270dp"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bgColor"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bgColor"
-        tools:context=".DetailProduit">
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraint"
-            android:layout_width="365dp"
-            android:layout_height="367dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/white_layout"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.888"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/txtgarantie"
-                android:layout_width="68dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="150dp"
-                android:layout_marginRight="88dp"
-                android:gravity="center"
-                android:text="142 j "
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/txtnom"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="55dp"
-                    android:layout_weight="7"
-                    android:padding="15dp"
-                    android:text="Mes poduits"
-                    android:textColor="@color/noir"
-                    android:textSize="18sp"
-                    android:textStyle="italic" />
-
-            </LinearLayout>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/logo"
-                app:civ_border_color="@color/cercle_color"
-                app:civ_border_width="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="41dp"
-                android:layout_height="37dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginEnd="90dp"
-                android:layout_marginRight="90dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-                app:srcCompat="@drawable/check_produits" />
-
-            <TextView
-                android:id="@+id/txtDat"
-                android:layout_width="0dp"
-                android:layout_height="21dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:gravity="center"
-                android:text="Television"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
 
-        </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtgarantie"
+        android:layout_width="120dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="142 j "
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_below="@+id/txtgarantie"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/logo"
+        app:civ_border_color="@color/cercle_color"
+        app:civ_border_width="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtgarantie" />
+
+    <ImageView
+        android:id="@+id/img_check"
+        android:layout_width="41dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtgarantie"
+        app:srcCompat="@drawable/check_produits" />
+
+    <TextView
+        android:id="@+id/txtDat"
+        android:layout_width="144dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/profile_image"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Television"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+
 
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>

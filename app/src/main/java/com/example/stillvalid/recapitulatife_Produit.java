@@ -15,4 +15,8 @@ public class recapitulatife_Produit extends AppCompatActivity {
     public void valid_recap (View view){
         startActivity(new Intent(this,Boutique.class));
     }
+    public void return_ajou_ph_prod (View view){
+        startActivity(new Intent(this,Ajouter_Photo_Produit.class));
+    }
+
 }

@@ -16,4 +16,7 @@ public class Date_echence extends AppCompatActivity {
     public void valid_echeance (View view){
         startActivity(new Intent(this,Ajouter_photo_contrat.class));
     }
+    public void return_type_contrat (View view){
+        startActivity(new Intent(this,Type_contrat.class));
+    }
 }

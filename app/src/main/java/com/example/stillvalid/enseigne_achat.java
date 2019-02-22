@@ -16,4 +16,7 @@ public class enseigne_achat extends AppCompatActivity {
     public void valid_enseigne_achat (View view){
         startActivity(new Intent(this,Marque_Produit.class));
     }
+    public void return_ajout_prod (View view){
+        startActivity(new Intent(this,Ajouter_Produits.class));
+    }
 }

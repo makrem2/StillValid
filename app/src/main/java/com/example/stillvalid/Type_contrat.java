@@ -16,4 +16,7 @@ public class Type_contrat extends AppCompatActivity {
     public void valid_contrat (View view){
         startActivity(new Intent(this,Date_echence.class));
     }
+    public void return_ajouterproduit (View view){
+        startActivity(new Intent(this,Ajouter_Produits.class));
+    }
 }

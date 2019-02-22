@@ -156,17 +156,16 @@
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="309dp"
+        android:layout_width="280dp"
         android:layout_height="42dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:background="@drawable/edit_round"
         android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/mic"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -174,8 +173,6 @@
         android:id="@+id/mic"
         android:layout_width="50dp"
         android:layout_height="40dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
@@ -183,7 +180,6 @@
         android:background="@drawable/edit_round"
         android:src="@drawable/microphone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner2"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <ImageView
@@ -196,6 +192,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="90dp"
+        android:onClick="return_ajout_prod"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/valid"
         app:layout_constraintHorizontal_bias="1.0"
