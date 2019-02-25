@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/action_bar"
+        android:title="Menu"
+        android:icon="@drawable/menu_button"
+        app:showAsAction="always">
+                    <menu>
+                    <item
+                        android:id="@+id/txt_list_rem"
+                        android:icon="@drawable/fleches"
+                        android:orderInCategory="100"
+                        app:showAsAction="never"
+                        android:title="LISTE DES REMINDERS" />
+                    <item
+                        android:id="@+id/txt_ajou_remd"
+                        android:orderInCategory="100"
+                        android:icon="@drawable/plus"
+                        app:showAsAction="never"
+                        android:title="AJOUTER UN REMINDER" />
+                    <item
+                        android:id="@+id/txt_boutique"
+                        android:orderInCategory="100"
+                        app:showAsAction="never"
+                        android:icon="@drawable/dollar"
+                        android:title="BOUTIQUE" />
+                    <item
+                        android:id="@+id/txt_deconnexion"
+                        android:orderInCategory="100"
+                        app:showAsAction="never"
+                        android:icon="@drawable/door_exit"
+                        android:title="DECONNEXION" />
+                    </menu>
+
+    </item>
+
+
+</menu>

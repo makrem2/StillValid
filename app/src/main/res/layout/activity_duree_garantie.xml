@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -104,19 +105,18 @@
 
     <TextView
         android:id="@+id/txt_duree_garentie"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginLeft="90dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginRight="90dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/vg"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_accu_men" />
 
@@ -157,14 +157,14 @@
 
     <EditText
         android:id="@+id/sp_duree_garentie"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/edit_round"
+        android:background="@drawable/add_layout"
         android:hint="   55"
         app:layout_constraintEnd_toStartOf="@+id/mic"
         app:layout_constraintHorizontal_bias="1.0"

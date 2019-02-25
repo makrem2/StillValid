@@ -4,17 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
-    android:layout_height="200dp"
-    android:background="@color/bgColor">
-
+    android:layout_height="200dp">
 
     <TextView
-        android:id="@+id/txtgarantie"
-        android:layout_width="80dp"
+        android:id="@+id/txt_duree_contrat"
+        android:layout_width="60dp"
         android:layout_height="27dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="142 j "
         android:textColor="@color/colorPrimaryDark"
@@ -25,42 +23,44 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/img_contart"
+        android:onClick="btn_Detail_contrat"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_below="@+id/txtgarantie"
+        android:layout_below="@+id/txt_duree_contrat"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/logo"
-        android:onClick="btn_Detail_prod"
         app:civ_border_color="@color/cercle_color"
         app:civ_border_width="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtgarantie" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_duree_contrat" />
 
     <ImageView
         android:id="@+id/img_check"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtgarantie"
+        app:layout_constraintTop_toBottomOf="@+id/txt_duree_contrat"
         app:srcCompat="@drawable/check_produits" />
 
     <TextView
-        android:id="@+id/txtDat"
+        android:id="@+id/txt_nom_contrat"
         android:layout_width="100dp"
-        android:layout_height="34dp"
-        android:layout_below="@+id/profile_image"
-        android:layout_marginStart="16dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/img_contart"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:text="Television"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
-
+        app:layout_constraintTop_toBottomOf="@+id/img_contart" />
 
 </android.support.constraint.ConstraintLayout>

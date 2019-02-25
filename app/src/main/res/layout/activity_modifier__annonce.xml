@@ -39,6 +39,7 @@
             android:layout_marginLeft="130dp"
             android:layout_marginTop="500dp"
             android:ems="10"
+            android:background="@drawable/add_layout"
             android:inputType="textPersonName" />
 
         <View
@@ -70,6 +71,7 @@
             android:layout_height="45dp"
             android:layout_marginLeft="130dp"
             android:layout_marginTop="420dp"
+            android:background="@drawable/add_layout"
             android:ems="10"
             android:inputType="textPersonName" />
 
@@ -103,6 +105,7 @@
             android:layout_marginLeft="130dp"
             android:layout_marginTop="360dp"
             android:ems="10"
+            android:background="@drawable/add_layout"
             android:inputType="textPersonName" />
 
         <TextView
@@ -135,6 +138,7 @@
             android:layout_marginLeft="130dp"
             android:layout_marginTop="260dp"
             android:ems="10"
+            android:background="@drawable/add_layout"
             android:inputType="textPersonName" />
 
         <TextView
@@ -219,6 +223,7 @@
         <Spinner
             android:id="@+id/sp_categorie"
             android:layout_width="240dp"
+            android:background="@drawable/add_layout"
             android:layout_height="30dp"
             android:layout_marginLeft="130dp"
             android:layout_marginTop="120dp" />
@@ -228,6 +233,7 @@
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:layout_marginLeft="130dp"
+            android:background="@drawable/add_layout"
             android:layout_marginTop="190dp"
             android:ems="10"
             android:inputType="textPersonName"
