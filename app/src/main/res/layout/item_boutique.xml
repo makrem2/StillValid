@@ -22,6 +22,7 @@
             android:id="@+id/img_nom_produit"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:onClick="btn_fiche_prod"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/pr" />
