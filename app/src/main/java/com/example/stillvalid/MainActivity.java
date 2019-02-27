@@ -11,9 +11,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void pass(View view) {
-        startActivity(new Intent(this,Login.class));
+        Thread thread=new Thread(){
+            @Override
+            public  void  run(){
+                try {
+                    sleep(2000);
+                    Intent intent =new Intent(getApplicationContext(),Login.class);
+                    startActivity(intent);
+                    finish();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
+
     }
 }

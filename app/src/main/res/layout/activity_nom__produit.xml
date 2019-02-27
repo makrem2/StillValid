@@ -156,12 +156,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_nom_prod" />
 
-    <TextView
-        android:id="@+id/spinner2"
+    <EditText
+        android:id="@+id/edit_nom_prod"
         android:layout_width="0dp"
-        android:layout_height="42dp"
+        android:layout_height="51dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
@@ -182,6 +182,7 @@
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:layout_weight="0.2"
+        android:onClick="vocale"
         android:background="@drawable/edit_round"
         android:src="@drawable/microphone"
         app:layout_constraintEnd_toEndOf="parent"
