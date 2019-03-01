@@ -27,7 +27,7 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/edit_mail"
+        android:id="@+id/etemail"
         android:layout_width="320dp"
         android:layout_height="43dp"
         android:layout_below="@+id/img_still"
@@ -42,17 +42,17 @@
         android:hint="   E-mail"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.366"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_still" />
 
     <EditText
-        android:id="@+id/edit_password"
+        android:id="@+id/etpassword"
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:autofillHints="Mot de passe"
@@ -60,48 +60,44 @@
         android:ems="10"
         android:hint="   Mot de Passe"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.366"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_mail" />
+        app:layout_constraintTop_toBottomOf="@+id/etemail" />
 
     <Button
-        android:id="@+id/main_login"
+        android:id="@+id/blogin"
         android:layout_width="174dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_password"
-        android:layout_marginStart="115dp"
-        android:layout_marginLeft="115dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginRight="115dp"
-        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/etpassword"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginRight="130dp"
         android:background="@drawable/orange_btn"
-        android:onClick="log"
+        android:onClick="main_login"
         android:text="@string/va"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/main_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
+        app:layout_constraintTop_toBottomOf="@+id/etpassword" />
 
     <Button
-        android:id="@+id/main_register"
+        android:id="@+id/bregister"
         android:layout_width="176dp"
         android:layout_height="48dp"
         android:layout_below="@+id/main_login"
-        android:layout_marginStart="115dp"
-        android:layout_marginLeft="115dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginRight="115dp"
-        android:layout_marginBottom="123dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginRight="125dp"
         android:background="@drawable/button_noir"
         android:onClick="main_register"
         android:text="@string/cc"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_login" />
+        app:layout_constraintTop_toBottomOf="@+id/blogin" />
 
 </android.support.constraint.ConstraintLayout>

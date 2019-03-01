@@ -243,7 +243,7 @@
             android:id="@+id/main_login"
             android:layout_width="174dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_password"
+            android:layout_below="@+id/etpassword"
             android:layout_marginStart="115dp"
             android:layout_marginLeft="115dp"
             android:layout_marginTop="580dp"
