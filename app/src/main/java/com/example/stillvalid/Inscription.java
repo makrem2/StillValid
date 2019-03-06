@@ -1,8 +1,10 @@
 package com.example.stillvalid;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,15 +20,30 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Inscription extends AppCompatActivity {
+    String URL="http://192.168.1.21/stillvalid/signup.php";
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +        //at least 1 digit
+                    //"(?=.*[a-z])" +        //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +        //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +       //any letter
+                    //"(?=.*[@#$%^&+=])" +   //at least 1 special character
+                    "(?=\\S+$)" +            //no white spaces
+                    ".{4,}" +                //at least 4 characters
+                    "$");
     Button bregister,blogin;
     EditText etName, etemail, etpassword;
     String email,password,name;
-    String URL="http://192.168.1.21/stillvalid/signup.php";
+
     public static final String NAME="name";
     public static final String EMAIL="email";
     public static final String PASSWORD="password";
+    private TextInputLayout textInputEmail;
+    private TextInputLayout textInputUsername;
+    private TextInputLayout textInputPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +51,54 @@ public class Inscription extends AppCompatActivity {
         etName = (EditText) findViewById(R.id.etName);
         etemail = (EditText) findViewById(R.id.etemail);
         etpassword = (EditText) findViewById(R.id.etpassword);
+
+        textInputEmail = findViewById(R.id.text_input_email);
+        textInputUsername = findViewById(R.id.text_input_username);
+        textInputPassword = findViewById(R.id.text_input_password);
+    }
+    private boolean validateEmail() {
+        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            textInputEmail.setError("Field can't be empty");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            textInputEmail.setError("Please enter a valid email address");
+            return false;
+        } else {
+            textInputEmail.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateUsername() {
+        String usernameInput = textInputUsername.getEditText().getText().toString().trim();
+
+        if (usernameInput.isEmpty()) {
+            textInputUsername.setError("Field can't be empty");
+            return false;
+        } else if (usernameInput.length() > 15) {
+            textInputUsername.setError("Username too long");
+            return false;
+        } else {
+            textInputUsername.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            textInputPassword.setError("Field can't be empty");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            textInputPassword.setError("Password too weak");
+            return false;
+        } else {
+            textInputPassword.setError(null);
+            return true;
+        }
     }
 
     public void login_login(View view) {
@@ -45,9 +110,8 @@ public class Inscription extends AppCompatActivity {
         name=etName.getText().toString().trim();
         email=etemail.getText().toString().trim();
         password=etpassword.getText().toString().trim();
-        if (name.equals("") || email.equals("") || password.equals("")) {
-
-            Toast.makeText(Inscription.this, "All Fields Are Compulsory", Toast.LENGTH_SHORT);
+        if (!validateEmail() | !validateUsername() | !validatePassword()) {
+            return;
         }
         else {
             RequestQueue requestQueue = Volley.newRequestQueue(this);

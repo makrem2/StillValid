@@ -27,4 +27,8 @@ public class DeposerAnonnce extends AppCompatActivity {
     }
     public void acueil (View view){
         startActivity(new Intent(this,Accueil.class));}
+
+    public void btn_efface(View view) {
+
+    }
 }

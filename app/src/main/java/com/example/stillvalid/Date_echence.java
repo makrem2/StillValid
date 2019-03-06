@@ -26,9 +26,6 @@ public class Date_echence extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_echence);
 
-
-
-
        btn_menu = findViewById(R.id.img_menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,5 +90,16 @@ public class Date_echence extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public void btn_efface(View view) {
+        String Text = Date.getText().toString();
+        if (Text.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
+        }else{
+            Date.setText("");
+        }
+
+
     }
 }

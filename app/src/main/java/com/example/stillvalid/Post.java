@@ -1,42 +1,35 @@
 package com.example.stillvalid;
 
 public class Post {
-    String txt_nom_produit;
-    String txt_lieu_produit;
+    String nom_produit;
+    String lieu;
     String img_nom_produit;
-    String  txt_prix_produit;
+    String prix;
 
     public Post() {
     }
 
-    public Post(String txt_nom_produit, String txt_lieu_produit, String txt_prix_produit,String img_nom_produit) {
-        this.txt_nom_produit = txt_nom_produit;
-        this.txt_lieu_produit = txt_lieu_produit;
+    public Post(String nom_produit, String lieu, String img_nom_produit, String prix) {
+        this.nom_produit = nom_produit;
+        this.lieu = lieu;
         this.img_nom_produit = img_nom_produit;
-        this.txt_prix_produit = txt_prix_produit;
+        this.prix = prix;
     }
 
-    public Post(String txt_nom_produit, String txt_lieu_produit, String img_nom_produit) {
-        this.txt_nom_produit = txt_nom_produit;
-        this.txt_lieu_produit = txt_lieu_produit;
-        this.img_nom_produit = img_nom_produit;
-        this.txt_prix_produit = txt_prix_produit;
+    public String getNom_produit() {
+        return nom_produit;
     }
 
-    public String getTxt_nom_produit() {
-        return txt_nom_produit;
+    public void setNom_produit(String nom_produit) {
+        this.nom_produit = nom_produit;
     }
 
-    public void setTxt_nom_produit(String txt_nom_produit) {
-        this.txt_nom_produit = txt_nom_produit;
+    public String getLieu() {
+        return lieu;
     }
 
-    public String getTxt_lieu_produit() {
-        return txt_lieu_produit;
-    }
-
-    public void setTxt_lieu_produit(String txt_lieu_produit) {
-        this.txt_lieu_produit = txt_lieu_produit;
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
     }
 
     public String getImg_nom_produit() {
@@ -47,11 +40,11 @@ public class Post {
         this.img_nom_produit = img_nom_produit;
     }
 
-    public String getTxt_prix_produit() {
-        return txt_prix_produit;
+    public String getPrix() {
+        return prix;
     }
 
-    public void setTxt_prix_produit(String txt_prix_produit) {
-        this.txt_prix_produit = txt_prix_produit;
+    public void setPrix(String prix) {
+        this.prix = prix;
     }
 }

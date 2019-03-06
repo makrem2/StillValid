@@ -6,40 +6,45 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
-
+    private Context context;
+    private List<Post> posts = new ArrayList<>();
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nom_produit, lieu,prix;
-        CircleImageView image;
+        ImageView image;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder (View itemView) {
             super(itemView);
             nom_produit = itemView.findViewById(R.id.txt_nom_produit);
             lieu = itemView.findViewById(R.id.txt_lieu_produit);
             prix = itemView.findViewById(R.id.txt_prix_produit);
-            image = itemView.findViewById(R.id.img_prod);
+            image = itemView.findViewById(R.id.img_nom_produit);
 
         }
     }
 
-    private Context context;
-    private List<Post> posts;
+
 
     public PostsAdapter(Context c, List<Post> postList) {
         this.context = c;
-        posts = postList;
+        this.posts = postList;
     }
 
     @NonNull
     @Override
     public PostsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
         View v = LayoutInflater.from(context).inflate(R.layout.item_boutique, parent, false);
 
 
@@ -50,10 +55,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull PostsAdapter.ViewHolder holder, int position) {
 
         Post p = posts.get(position);
-        holder.nom_produit.setText(p.getTxt_nom_produit());
-        holder.lieu.setText(p.getTxt_lieu_produit());
-        holder.prix.setText(p.getTxt_prix_produit());
+        holder.nom_produit.setText(p.getNom_produit());
+        holder.lieu.setText(p.getLieu());
 
+        Glide.with(context)
+                .load(p.getImg_nom_produit())
+                .into(holder.image);
+        holder.prix.setText(p.getPrix());
     }
 
     @Override

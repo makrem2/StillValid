@@ -23,10 +23,10 @@
 
         <ImageView
             android:id="@+id/img_fiche_prod"
-            android:layout_width="258dp"
-            android:layout_height="240dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="80dp"
             android:src="@drawable/camera" />
 
         <TextView

@@ -102,38 +102,21 @@
         </LinearLayout>
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edit_recherche"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/edit_round"
-        android:hint="Mot(s)-Clé(s)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_accu_men" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_boutique"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="420dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_recherche" />
+        app:layout_constraintTop_toBottomOf="@+id/line_accu_men" />
 
 
 </android.support.constraint.ConstraintLayout>
