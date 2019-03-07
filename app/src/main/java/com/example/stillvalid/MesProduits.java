@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,6 +32,7 @@ public class MesProduits extends AppCompatActivity {
     private PostsAdaptercadremesproduit postsAdaptercadremesproduit;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<PostProduit> posts ;
+   // List<Post> postList=new ArrayList<>();
     private ArrayList<Postcadremesproduit> posts_con ;
     public static final String Produit_URL = "http://192.168.1.7/StillValid/mesproduit.php";
     ImageView btn_menu;
@@ -43,9 +45,6 @@ public class MesProduits extends AppCompatActivity {
         recyclerView = findViewById(R.id.RV_post);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager (new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
-
-
         recyclerView_contrat = findViewById(R.id.Rv_contrat_abon);
 
         btn_menu = findViewById(R.id.menu);
@@ -68,18 +67,11 @@ public class MesProduits extends AppCompatActivity {
     }
         postsAdapterProduit = new PostsAdapterProduit(this,posts);
         postsAdaptercadremesproduit = new PostsAdaptercadremesproduit(this,posts_con);
-
         recyclerView_contrat.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerView_contrat.setAdapter(postsAdaptercadremesproduit);
-
         recyclerView.setLayoutManager (new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setAdapter(postsAdapterProduit);*/
-
         loadProduit();
-
-
-
-
     }
 
 
@@ -90,13 +82,25 @@ public class MesProduits extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray produit = new JSONArray(response);
+                            JSONArray produits = new JSONArray(response);
 
-                            for (int i = 0; i <produit.length();i++){
+                            for (int i = 0; i <produits.length();i++){
 
-                                JSONObject produitobhect = produit.getJSONObject(i);
+                                JSONObject produitsObject = produits.getJSONObject(i);
+                                String name_prod = produitsObject.getString("name");
+                                String duree = produitsObject.getString("dAchat");
+                                String image = produitsObject.getString("photo");
+                                //String dFin = produitsObject.getString("dFin");
 
+                                //int res = Integer.parseInt(dFin);
+
+                                //PostProduit produit = new PostProduit(nom,dAchat,photo,dFin);
+                                PostProduit produit = new PostProduit(name_prod,duree,image);
+                                posts.add(produit);
                             }
+
+                            postsAdapterProduit = new PostsAdapterProduit(MesProduits.this,posts);
+                             recyclerView.setAdapter(postsAdapterProduit);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -106,15 +106,15 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_boutique"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="495dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_accu_men" />
 

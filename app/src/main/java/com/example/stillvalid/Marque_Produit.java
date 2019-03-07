@@ -70,5 +70,16 @@ public class Marque_Produit extends AppCompatActivity {
                 break;
         }
     }
+
+    public void btn_efface(View view) {
+        String Text = marqueprod.getContext().toString();
+        if (Text.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
+        }else{
+            marqueprod.setAdapter(null);
+        }
+
+
+    }
 }
 

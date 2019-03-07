@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
-    <RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/Rel_boutique"
         android:layout_width="match_parent"
-        android:layout_height="153dp"
+        android:layout_height="120dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,12 +17,12 @@
 
         <ImageView
             android:id="@+id/img_nom_produit"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:onClick="btn_fiche_prod"
-            android:src="@drawable/pr" />
+             />
 
         <TextView
             android:id="@+id/txt_nom_produit"
@@ -33,7 +30,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/img_nom_produit"
-            android:text="Nom de produit"
+
             android:textSize="20sp"
             android:textStyle="bold|italic"
             tools:layout_editor_absoluteX="157dp"
@@ -47,7 +44,7 @@
             android:layout_below="@+id/txt_nom_produit"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/img_nom_produit"
-            android:text="BEJA"
+
             android:textSize="20sp"
             android:textStyle="bold|italic"
             tools:layout_editor_absoluteX="178dp"
@@ -61,14 +58,17 @@
             android:layout_marginLeft="34dp"
             android:layout_marginTop="0dp"
             android:layout_toRightOf="@+id/img_nom_produit"
-            android:text="500"
+
             android:textSize="20sp"
             android:textStyle="bold|italic"
             tools:layout_editor_absoluteX="131dp"
             tools:layout_editor_absoluteY="428dp" />
+    <TextView
+        android:id="@+id/id"
+        android:visibility="invisible"
+        android:layout_width="200dp"
+        android:layout_height="30dp" />
+
 
     </RelativeLayout>
 
-
-
-    </android.support.constraint.ConstraintLayout>

@@ -223,7 +223,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_categorie" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_categorie"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <EditText
             android:id="@+id/edit_annonce"
@@ -401,7 +402,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_tel" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edit_email"
             android:layout_width="320dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
@@ -429,7 +430,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_email" />
 
         <Button
             android:id="@+id/valid"
@@ -448,7 +449,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/efface"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_email" />
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

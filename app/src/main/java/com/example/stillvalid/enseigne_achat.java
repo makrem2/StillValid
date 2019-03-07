@@ -66,4 +66,16 @@ public class enseigne_achat extends AppCompatActivity {
     }
     public void acueil (View view){
         startActivity(new Intent(this,Accueil.class));}
+
+
+    public void btn_efface(View view) {
+        String Text = Enseigne.getText().toString();
+        if (Text.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
+        }else{
+            Enseigne.setText("");
+        }
+
+
+    }
 }

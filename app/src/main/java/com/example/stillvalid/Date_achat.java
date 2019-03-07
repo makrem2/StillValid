@@ -89,4 +89,14 @@ public class Date_achat extends AppCompatActivity {
                 break;
         }
     }
+    public void btn_efface(View view) {
+        String Text = date.getText().toString();
+        if (Text.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
+        }else{
+            date.setText("");
+        }
+
+
+    }
 }

@@ -5,7 +5,7 @@ public class PostProduit {
     String txt_duree;
     String img_prod;
 
-    public PostProduit (){
+    public PostProduit(String nom, String dAchat, String photo, String dFin){
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.stillvalid;
 
 public class Post {
+    int id;
     String nom_produit;
     String lieu;
     String img_nom_produit;
@@ -9,11 +10,20 @@ public class Post {
     public Post() {
     }
 
-    public Post(String nom_produit, String lieu, String img_nom_produit, String prix) {
+    public Post(int id, String nom_produit, String lieu, String img_nom_produit, String prix) {
+        this.id = id;
         this.nom_produit = nom_produit;
         this.lieu = lieu;
         this.img_nom_produit = img_nom_produit;
         this.prix = prix;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom_produit() {

@@ -147,6 +147,7 @@
         android:layout_marginRight="110dp"
         android:background="@drawable/button_noir"
         android:gravity="center"
+        android:onClick="btn_efface"
         android:text="@string/e"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"

@@ -59,4 +59,15 @@ public class Nom_Produit extends AppCompatActivity {
     public void acueil (View view){
         startActivity(new Intent(this,Accueil.class));}
 
+    public void btn_efface(View view) {
+        String Text = nomproduit.getText().toString();
+        if (Text.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
+        }else{
+            nomproduit.setText("");
+        }
+
+
+    }
+
 }
