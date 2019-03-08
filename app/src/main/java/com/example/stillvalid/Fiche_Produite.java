@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class Fiche_Produite extends AppCompatActivity {
     SharedPreferences prefs;
     ImageView imgproduit;
     Context context;
+    ImageView editbnt;
     TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
     public String url = "http://192.168.1.21/StillValid/boutiqueById.php?id_annonce=";
 
@@ -45,6 +47,7 @@ public class Fiche_Produite extends AppCompatActivity {
         textemail = findViewById(R.id.txt_email);
         textville = findViewById(R.id.txt_ville_vendeur);
         textprix = findViewById(R.id.txt_prix_prod);
+        editbnt = findViewById(R.id.editbnt);
 
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
         String restoredid = prefs.getString("Id_Annonce", null);
@@ -93,6 +96,12 @@ public class Fiche_Produite extends AppCompatActivity {
 
     public void btnreturn(View view) {
         startActivity(new Intent(this, Boutique.class));
+    }
+
+    public void btn_edit(View view) {
+        PopupMenu popupMenu = new PopupMenu(Fiche_Produite.this, editbnt);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_ficheproduit, popupMenu.getMenu());
+        popupMenu.show();
     }
 }
 

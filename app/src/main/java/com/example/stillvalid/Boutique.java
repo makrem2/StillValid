@@ -36,11 +36,9 @@ public class Boutique extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     List<Post> postList = new ArrayList<>();
-    RelativeLayout relativeLayout;
     public static final String Boutique_URL = "http://192.168.1.21/StillValid/Boutique.php";
     ImageView btn_menu;
     int id_annonce;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +48,10 @@ public class Boutique extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         loadboutique();
         btn_menu = findViewById(R.id.menu);
-
-        relativeLayout = findViewById(R.id.Rel_boutique);
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
         editors = prefs.edit();
-
-
     }
-
     private void loadboutique() {
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Boutique_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -74,14 +66,11 @@ public class Boutique extends AppCompatActivity {
                                 String lieu = produitobject.getString("ville");
                                 String image = produitobject.getString("photoProduit");
                                 String prix = produitobject.getString("prix");
-
-
                                 Post product = new Post(id_annonce, nom_produit, lieu, image, prix);
                                 postList.add(product);
                             }
                             postsAdapter = new PostsAdapter(Boutique.this, postList);
                             recyclerView.setAdapter(postsAdapter);
-
                             recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView,
                                     new RecyclerViewClickListener() {
                                         @Override
