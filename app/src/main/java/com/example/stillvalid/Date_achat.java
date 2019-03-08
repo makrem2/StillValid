@@ -3,6 +3,7 @@ package com.example.stillvalid;
 import android.app.DatePickerDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,26 +22,33 @@ public class Date_achat extends AppCompatActivity {
     EditText date;
     DatePickerDialog datePickerDialog;
     ImageView btn_menu;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editors;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_achat);
 
+        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        editors = prefs.edit();
+
+
         date = findViewById(R.id.sp_date_achat);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar=Calendar.getInstance();
-                final int year=calendar.get(Calendar.YEAR);
-                final int month=calendar.get(Calendar.MONTH);
-                final int day=calendar.get(Calendar.DAY_OF_MONTH);
-                    datePickerDialog=new DatePickerDialog(Date_achat.this, new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        date.setText(day+"-"+(month+1)+"-"+year);
-                        }
-                    },year,month,day);
-                    datePickerDialog.show();
+                Calendar calendar = Calendar.getInstance();
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                datePickerDialog = new DatePickerDialog(Date_achat.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        date.setText(day + "-" + (month + 1) + "-" + year);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
             }
         });
 
@@ -48,21 +56,30 @@ public class Date_achat extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(Date_achat.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(Date_achat.this, btn_menu);
+                popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
                 popupMenu.show();
             }
         });
     }
 
-    public void valid_date_achat (View view){
-        startActivity(new Intent(this,Duree_garantie.class));
+    public void valid_date_achat(View view) {
+        editors.putString("dateachat", date.getText().toString());
+        editors.commit();
+//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(), Duree_garantie.class);
+        startActivity(intent);
+
     }
-    public void return_ajou_nom_prod (View view){
-        startActivity(new Intent(this,Nom_Produit.class));
+
+    public void return_ajou_nom_prod(View view) {
+        startActivity(new Intent(this, Nom_Produit.class));
     }
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
+
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
 
 
     public void vocale(View view) {
@@ -76,6 +93,7 @@ public class Date_achat extends AppCompatActivity {
             Toast.makeText(this, "Sorry! Your device doesn't support speech language!", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -89,11 +107,12 @@ public class Date_achat extends AppCompatActivity {
                 break;
         }
     }
+
     public void btn_efface(View view) {
         String Text = date.getText().toString();
-        if (Text.isEmpty()){
-            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
-        }else{
+        if (Text.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Already Empty!!!", Toast.LENGTH_SHORT);
+        } else {
             date.setText("");
         }
 

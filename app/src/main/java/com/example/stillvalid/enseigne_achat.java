@@ -2,6 +2,7 @@ package com.example.stillvalid;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,10 +19,16 @@ import java.util.Locale;
 public class enseigne_achat extends AppCompatActivity {
     ImageView btn_menu;
     EditText Enseigne;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enseigne_achat);
+
+
+        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        editors = prefs.edit();
 
         btn_menu = findViewById(R.id.menu);
         Enseigne = findViewById(R.id.enseigne);
@@ -59,8 +67,16 @@ public class enseigne_achat extends AppCompatActivity {
         }
     }
     public void valid_enseigne_achat (View view){
-        startActivity(new Intent(this,Marque_Produit.class));
+        editors.putString("enseigne", Enseigne.getText().toString());
+        editors.commit();
+//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), Marque_Produit.class);
+        startActivity(intent);
+
     }
+
+
+
     public void return_ajout_prod (View view){
         startActivity(new Intent(this,Ajouter_Produits.class));
     }

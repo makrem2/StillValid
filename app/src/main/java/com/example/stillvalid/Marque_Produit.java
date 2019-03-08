@@ -2,6 +2,7 @@ package com.example.stillvalid;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,12 +18,18 @@ import java.util.Locale;
 public class Marque_Produit extends AppCompatActivity {
     ImageView btn_menu;
     Spinner marqueprod;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marque__produit);
 
         marqueprod = findViewById(R.id.sp_marque_prod);
+
+
+        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        editors = prefs.edit();
 
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +43,13 @@ public class Marque_Produit extends AppCompatActivity {
 
     }
     public void valid_marque (View view){
-        startActivity(new Intent(this,Nom_Produit.class));
+        editors.putString("marqueprod", marqueprod.getAdapter().toString());
+        editors.commit();
+//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(), Nom_Produit.class);
+        startActivity(intent);
+
     }
 
     public void return_ens_achat (View view){

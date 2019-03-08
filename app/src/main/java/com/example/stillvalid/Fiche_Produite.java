@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -31,7 +33,7 @@ public class Fiche_Produite extends AppCompatActivity {
     ImageView imgproduit;
     Context context;
     ImageView editbnt;
-    TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
+    TextView nomproduit, textdescription, telphone, textemail, textville, textprix,Id_user;
     public String url = "http://192.168.1.21/StillValid/boutiqueById.php?id_annonce=";
 
     @Override
@@ -40,6 +42,7 @@ public class Fiche_Produite extends AppCompatActivity {
         setContentView(R.layout.activity_fiche__produite);
 
         context = this;
+        Id_user = findViewById(R.id.user_id);
         imgproduit = findViewById(R.id.img_fiche_prod);
         nomproduit = findViewById(R.id.txt_nom_prod);
         textdescription = findViewById(R.id.txt_categorie);
@@ -57,6 +60,7 @@ public class Fiche_Produite extends AppCompatActivity {
             //  Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
         }
     }
+
     private void loadboutique() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url + id_annonce, null, new Response.Listener<JSONObject>() {
             @Override
@@ -70,6 +74,8 @@ public class Fiche_Produite extends AppCompatActivity {
                     textville.setText(response.getString("ville"));
                     textprix.setText(response.getString("prix"));
                     textdescription.setText(response.getString("description"));
+                    Id_user.setText(response.getInt("user_id"));
+
                     Picasso.get()
                             .load(response.getString("photoProduit"))
                             .resize(400, 500)
@@ -79,9 +85,9 @@ public class Fiche_Produite extends AppCompatActivity {
                     e.printStackTrace();
                 }
 //                if (List.get(0).getUser_id().equals(Id_user)) {
-//                    editMenu.setVisibility(View.VISIBLE);
+//                    editbnt.setVisibility(View.VISIBLE);
 //                } else {
-//                    editMenu.setVisibility(View.INVISIBLE);
+//                    editbnt.setVisibility(View.INVISIBLE);
 //                }
             }
         }, new Response.ErrorListener() {
@@ -103,5 +109,6 @@ public class Fiche_Produite extends AppCompatActivity {
         popupMenu.getMenuInflater().inflate(R.menu.menu_ficheproduit, popupMenu.getMenu());
         popupMenu.show();
     }
+
 }
 

@@ -2,6 +2,7 @@ package com.example.stillvalid;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,11 +17,17 @@ import java.util.Locale;
 public class Nom_Produit extends AppCompatActivity {
     ImageView btn_menu;
     EditText nomproduit;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nom__produit);
         nomproduit = findViewById(R.id.edit_nom_prod);
+
+        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        editors = prefs.edit();
+
 
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +53,13 @@ public class Nom_Produit extends AppCompatActivity {
     }
 
     public void valid_Article (View view){
-        startActivity(new Intent(this,Date_achat.class));
+        editors.putString("nomproduit", nomproduit.getText().toString());
+        editors.commit();
+//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(), Date_achat.class);
+        startActivity(intent);
+
     }
 
     public void vers_date_achat (View view){
