@@ -11,8 +11,8 @@ import android.widget.PopupMenu;
 public class Ajouter_Photo_Produit extends AppCompatActivity {
     ImageView btn_menu,prnd_photo_article,prnd_photo_facture;
 
-    SharedPreferences prefs;
-    SharedPreferences.Editor editors;
+//    SharedPreferences prefs;
+//    SharedPreferences.Editor editors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +21,8 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
         prnd_photo_article=findViewById(R.id.img_prender_article);
         prnd_photo_facture=findViewById(R.id.img_prender_facture);
 
-        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
-        editors = prefs.edit();
+//        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+//        editors = prefs.edit();
 
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -41,9 +41,9 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
 //
 //        editor.commit();
 ////      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(getApplicationContext(), recapitulatife_Produit.class);
-        startActivity(intent);
+//
+//        Intent intent = new Intent(getApplicationContext(), recapitulatife_Produit.class);
+//        startActivity(intent);
 
     }
     public void return_ajou_ph_prod (View view){

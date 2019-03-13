@@ -36,9 +36,10 @@ public class Boutique extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     List<Post> postList = new ArrayList<>();
-    public static final String Boutique_URL = "http://192.168.1.21/StillValid/Boutique.php";
+    public static final String Boutique_URL = "http://192.168.1.20/StillValid/Boutique.php";
     ImageView btn_menu;
     int id_annonce;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class Boutique extends AppCompatActivity {
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
         editors = prefs.edit();
     }
+
     private void loadboutique() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Boutique_URL,
                 new Response.Listener<String>() {
@@ -81,15 +83,12 @@ public class Boutique extends AppCompatActivity {
 //                                            Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(getApplicationContext(), Fiche_Produite.class);
                                             startActivity(intent);
-
                                         }
 
                                         @Override
                                         public void onLongClick(View view, int position) {
-
                                         }
                                     }));
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

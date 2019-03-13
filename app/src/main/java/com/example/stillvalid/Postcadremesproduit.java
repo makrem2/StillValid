@@ -1,6 +1,8 @@
 package com.example.stillvalid;
 
 public class Postcadremesproduit {
+    int id ;
+    int idUser;
     String txt_nom_contrat;
     String txt_duree_contrat;
     String img_contrat;
@@ -8,10 +10,28 @@ public class Postcadremesproduit {
     public Postcadremesproduit() {
     }
 
-    public Postcadremesproduit(String txt_nom_contrat, String txt_duree_contrat, String img_contrat) {
+    public Postcadremesproduit(int id, int idUser, String txt_nom_contrat, String txt_duree_contrat, String img_contrat) {
+        this.id = id;
+        this.idUser = idUser;
         this.txt_nom_contrat = txt_nom_contrat;
         this.txt_duree_contrat = txt_duree_contrat;
         this.img_contrat = img_contrat;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getTxt_nom_contrat() {
@@ -37,5 +57,4 @@ public class Postcadremesproduit {
     public void setImg_contrat(String img_contrat) {
         this.img_contrat = img_contrat;
     }
-
 }

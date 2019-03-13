@@ -30,7 +30,7 @@ public class Date_achat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_achat);
 
-        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
 
 
@@ -64,12 +64,15 @@ public class Date_achat extends AppCompatActivity {
     }
 
     public void valid_date_achat(View view) {
-        editors.putString("dateachat", date.getText().toString());
-        editors.commit();
-//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
+        String enseigne = date.getText().toString();
+        if (!enseigne.isEmpty()) {
+            editors.putString("dateachat", enseigne);
+            editors.apply();
+            startActivity(new Intent(this, Date_achat.class));
+        } else {
+            date.setError("Champ obligatoire");
+        }
 
-        Intent intent = new Intent(getApplicationContext(), Duree_garantie.class);
-        startActivity(intent);
 
     }
 

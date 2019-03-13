@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -33,16 +34,17 @@ public class Fiche_Produite extends AppCompatActivity {
     ImageView imgproduit;
     Context context;
     ImageView editbnt;
-    TextView nomproduit, textdescription, telphone, textemail, textville, textprix,Id_user;
-    public String url = "http://192.168.1.21/StillValid/boutiqueById.php?id_annonce=";
+    TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
+    //TextView Id_user;
+    public String url = "http://192.168.1.20/StillValid/boutiqueById.php?id_annonce=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fiche__produite);
-
         context = this;
-        Id_user = findViewById(R.id.user_id);
+
+        //Id_user = findViewById(R.id.txt_user_id);
         imgproduit = findViewById(R.id.img_fiche_prod);
         nomproduit = findViewById(R.id.txt_nom_prod);
         textdescription = findViewById(R.id.txt_categorie);
@@ -74,12 +76,13 @@ public class Fiche_Produite extends AppCompatActivity {
                     textville.setText(response.getString("ville"));
                     textprix.setText(response.getString("prix"));
                     textdescription.setText(response.getString("description"));
-                    Id_user.setText(response.getInt("user_id"));
+                    //Id_user.setText(response.getInt("user_id"));
 
                     Picasso.get()
                             .load(response.getString("photoProduit"))
                             .resize(400, 500)
                             .into(imgproduit);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -110,5 +113,12 @@ public class Fiche_Produite extends AppCompatActivity {
         popupMenu.show();
     }
 
+    public void modifer(MenuItem item) {
+        startActivity(new Intent(this, Modifier_Annonce.class));
+    }
+
+    public void supprimer(MenuItem item) {
+
+    }
 }
 

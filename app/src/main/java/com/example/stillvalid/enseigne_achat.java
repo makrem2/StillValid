@@ -21,13 +21,14 @@ public class enseigne_achat extends AppCompatActivity {
     EditText Enseigne;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enseigne_achat);
 
 
-        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
 
         btn_menu = findViewById(R.id.menu);
@@ -35,12 +36,13 @@ public class enseigne_achat extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(enseigne_achat.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(enseigne_achat.this, btn_menu);
+                popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
                 popupMenu.show();
             }
         });
     }
+
     public void vocale(View view) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -66,32 +68,29 @@ public class enseigne_achat extends AppCompatActivity {
                 break;
         }
     }
-    public void valid_enseigne_achat (View view){
-        editors.putString("enseigne", Enseigne.getText().toString());
-        editors.commit();
-//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), Marque_Produit.class);
-        startActivity(intent);
+
+    public void valid_enseigne_achat(View view) {
+        String enseigne = Enseigne.getText().toString();
+        if (!enseigne.isEmpty()) {
+            editors.putString("Enseigne", enseigne);
+            editors.apply();
+            startActivity(new Intent(this, Marque_Produit.class));
+        } else {
+            Enseigne.setError("Champ obligatoire");
+        }
 
     }
 
-
-
-    public void return_ajout_prod (View view){
-        startActivity(new Intent(this,Ajouter_Produits.class));
+    public void return_ajout_prod(View view) {
+        startActivity(new Intent(this, Ajouter_Produits.class));
     }
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
+
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
 
 
     public void btn_efface(View view) {
-        String Text = Enseigne.getText().toString();
-        if (Text.isEmpty()){
-            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
-        }else{
-            Enseigne.setText("");
-        }
-
-
+        Enseigne.setText("");
     }
 }

@@ -152,7 +152,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-    <EditText
+    <Spinner
         android:id="@+id/edit_type"
         android:layout_width="320dp"
         android:layout_height="55dp"
@@ -258,6 +258,7 @@
         android:layout_marginBottom="44dp"
         android:background="@drawable/orange_btn"
         android:text="@string/va"
+        android:onClick="recapulatifcontart"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

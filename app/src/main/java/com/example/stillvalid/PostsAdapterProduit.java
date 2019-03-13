@@ -16,13 +16,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProduit.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name_prod, duree;
+        TextView name_prod, duree , id_produit;
         CircleImageView image;
         public ViewHolder(View itemView) {
             super(itemView);
+
             name_prod = itemView.findViewById(R.id.txtDat);
             duree = itemView.findViewById(R.id.txtgarantie);
             image = itemView.findViewById(R.id.profile_image);
+            id_produit = itemView.findViewById(R.id.id_prod);
 
         }
     }
@@ -33,7 +35,6 @@ public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProdui
         this.context = c;
         posts = postList;
     }
-
 
     @NonNull
     @Override
@@ -48,8 +49,8 @@ public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProdui
     public void onBindViewHolder(@NonNull PostsAdapterProduit.ViewHolder holder, int position) {
         PostProduit p = posts.get(position);
         holder.name_prod.setText(p.getTxt_prod());
+        holder.id_produit.setText(String.valueOf(p.getId_prod()));
         holder.duree.setText(p.getTxt_duree());
-
         Glide.with(context).load(p.getImg_prod()).into(holder.image);
     }
 

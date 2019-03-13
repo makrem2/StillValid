@@ -27,7 +27,7 @@ public class Duree_garantie extends AppCompatActivity {
         setContentView(R.layout.activity_duree_garantie);
         duree_garentie = findViewById(R.id.sp_duree_garentie);
 
-        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
 
         btn_menu = findViewById(R.id.img_menu);
@@ -70,12 +70,14 @@ public class Duree_garantie extends AppCompatActivity {
 
     public void valid_duree_garantie(View view) {
 
-        editors.putString("duree garentie", duree_garentie.getText().toString());
-        editors.commit();
-//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(getApplicationContext(), Ajouter_Photo_Produit.class);
-        startActivity(intent);
+        String enseigne = duree_garentie.getText().toString();
+        if (!enseigne.isEmpty()) {
+            editors.putString("duree garentie", enseigne);
+            editors.apply();
+            startActivity(new Intent(this, recapitulatife_Produit.class));
+        } else {
+            duree_garentie.setError("Champ obligatoire");
+        }
 
     }
 

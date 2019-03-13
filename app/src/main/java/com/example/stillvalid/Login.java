@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Login extends AppCompatActivity {
-    public static final String LOGIN_URL = "http://192.168.1.21/StillValid/login.php";
+    public static final String LOGIN_URL = "http://192.168.1.16/StillValid/login.php";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     String email,password;

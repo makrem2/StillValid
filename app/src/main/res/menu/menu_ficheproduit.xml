@@ -5,10 +5,12 @@
     <item
         android:id="@+id/txt_modifier"
         android:orderInCategory="100"
-        android:title="MODIFIER"/>
+        android:title="MODIFIER"
+        android:onClick="modifer"/>
     <item
         android:id="@+id/txt_supprimer"
         android:orderInCategory="100"
-        android:title="SUPPRIMER" />
+        android:title="SUPPRIMER"
+        android:onClick="supprimer"/>
 
 </menu>

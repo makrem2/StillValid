@@ -1,18 +1,28 @@
 package com.example.stillvalid;
 
 public class PostProduit {
+    int id_prod;
     String txt_prod;
     String txt_duree;
     String img_prod;
 
-    public PostProduit(String nom, String dAchat, String photo, String dFin){
 
+    public PostProduit() {
     }
 
-    public PostProduit(String txt_prod, String txt_duree, String img_prod) {
+    public PostProduit(int id_prod, String txt_prod, String txt_duree, String img_prod) {
+        this.id_prod = id_prod;
         this.txt_prod = txt_prod;
         this.txt_duree = txt_duree;
         this.img_prod = img_prod;
+    }
+
+    public int getId_prod() {
+        return id_prod;
+    }
+
+    public void setId_prod(int id_prod) {
+        this.id_prod = id_prod;
     }
 
     public String getTxt_prod() {

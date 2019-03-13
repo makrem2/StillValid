@@ -24,8 +24,7 @@ public class Nom_Produit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nom__produit);
         nomproduit = findViewById(R.id.edit_nom_prod);
-
-        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
 
 
@@ -53,18 +52,16 @@ public class Nom_Produit extends AppCompatActivity {
     }
 
     public void valid_Article (View view){
-        editors.putString("nomproduit", nomproduit.getText().toString());
-        editors.commit();
-//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(getApplicationContext(), Date_achat.class);
-        startActivity(intent);
-
+        String enseigne = nomproduit.getText().toString();
+        if (!enseigne.isEmpty()) {
+            editors.putString("Nom_Produit", enseigne);
+            editors.apply();
+            startActivity(new Intent(this, Duree_garantie.class));
+        } else {
+            nomproduit.setError("Champ obligatoire");
+        }
     }
 
-    public void vers_date_achat (View view){
-        startActivity(new Intent(this,Date_achat.class));
-    }
 
     public void return_marque_prod (View view){
         startActivity(new Intent(this,Marque_Produit.class));
@@ -73,14 +70,7 @@ public class Nom_Produit extends AppCompatActivity {
         startActivity(new Intent(this,Accueil.class));}
 
     public void btn_efface(View view) {
-        String Text = nomproduit.getText().toString();
-        if (Text.isEmpty()){
-            Toast.makeText(getApplicationContext(),"Already Empty!!!",Toast.LENGTH_SHORT);
-        }else{
-            nomproduit.setText("");
-        }
-
-
+        nomproduit.setText("");
     }
 
 }

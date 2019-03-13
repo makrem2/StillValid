@@ -9,6 +9,7 @@ import android.widget.PopupMenu;
 
 public class Ajouter_photo_contrat extends AppCompatActivity {
     ImageView btn_menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,19 +19,23 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(Ajouter_photo_contrat.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(Ajouter_photo_contrat.this, btn_menu);
+                popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
                 popupMenu.show();
             }
         });
 
     }
-    public void valid_photo_cont (View view){
-        startActivity(new Intent(this,Recapulatif_contrat.class));
+
+    public void valid_photo_cont(View view) {
+        startActivity(new Intent(this, Recapulatif_contrat.class));
     }
-    public void return_date_echance (View view){
-        startActivity(new Intent(this,Date_echence.class));
+
+    public void return_date_echance(View view) {
+        startActivity(new Intent(this, Date_echence.class));
     }
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
+
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
 }

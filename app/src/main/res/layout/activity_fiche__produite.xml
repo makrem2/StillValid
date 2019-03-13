@@ -31,7 +31,10 @@
             android:onClick="btn_edit"/>
 
         <TextView
-            android:id="@+id/user_id"
+            android:id="@+id/txt_user_id"
+            android:layout_marginTop="450dp"
+            android:layout_marginLeft="260dp"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -77,17 +80,17 @@
 
         <ImageView
             android:id="@+id/img_fiche_prod"
-            android:layout_width="250dp"
+            android:layout_width="135dp"
             android:layout_height="140dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="115dp" />
 
         <TextView
             android:id="@+id/txt_nom_prod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="270dp"
             android:textSize="20sp"
             android:textStyle="italic|normal"  />
 
@@ -96,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="330dp"
             android:textSize="20sp"
             android:textStyle="italic|normal"  />
 
@@ -105,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="390dp"
             android:textSize="20sp"
             android:textStyle="italic|normal" />
 
@@ -114,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="430dp"
+            android:layout_marginTop="440dp"
             android:textSize="20sp"
             android:textStyle="italic|normal" />
 
@@ -124,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="480dp"
+            android:layout_marginTop="490dp"
             android:textColor="#FF5722"
             android:textSize="20sp"
             android:textStyle="italic|normal" />
@@ -134,7 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="290dp"
-            android:layout_marginTop="480dp"
+            android:layout_marginTop="490dp"
             android:textColor="#FF5722"
             android:textSize="20sp"
             android:textStyle="italic|normal"  />
@@ -144,7 +147,7 @@
             android:layout_width="180dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="530dp"
+            android:layout_marginTop="550dp"
             android:background="@drawable/orange_btn"
             android:text="Contacter le vendeur"
             android:textColor="@android:color/white" />
@@ -153,7 +156,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="345dp"
-            android:layout_marginTop="485dp"
+            android:layout_marginTop="495dp"
             android:background="@drawable/eurofiche"
             android:src="@drawable/euro" />
 
@@ -161,14 +164,14 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="385dp"
+            android:layout_marginTop="395dp"
             android:src="@drawable/phone_mini" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="435dp"
+            android:layout_marginTop="445dp"
             android:background="@drawable/mail" />
 
         <ImageView
@@ -176,7 +179,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="485dp"
+            android:layout_marginTop="495dp"
             android:background="@drawable/placemarker" />
 
     </android.support.v7.widget.CardView>

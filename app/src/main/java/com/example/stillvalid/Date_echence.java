@@ -31,7 +31,7 @@ public class Date_echence extends AppCompatActivity {
         setContentView(R.layout.activity_date_echence);
 
 
-        prefs = getSharedPreferences("enseigneachat", MODE_PRIVATE);
+        prefs = getSharedPreferences("ajoutercontart", MODE_PRIVATE);
         editors = prefs.edit();
 
         btn_menu = findViewById(R.id.img_menu);
@@ -64,11 +64,11 @@ public class Date_echence extends AppCompatActivity {
     }
 
     public void valid_echeance(View view) {
-        editors.putString("duree dateechance", Date.getText().toString());
+        editors.putString("dateecheance", Date.getText().toString());
         editors.commit();
 //      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(getApplicationContext(), Ajouter_photo_contrat.class);
+        Intent intent = new Intent(getApplicationContext(), Recapulatif_contrat.class);
         startActivity(intent);
 
 
