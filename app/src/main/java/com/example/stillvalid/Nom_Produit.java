@@ -52,11 +52,11 @@ public class Nom_Produit extends AppCompatActivity {
     }
 
     public void valid_Article (View view){
-        String enseigne = nomproduit.getText().toString();
-        if (!enseigne.isEmpty()) {
-            editors.putString("Nom_Produit", enseigne);
+        String NOMPRODUIT = nomproduit.getText().toString();
+        if (!NOMPRODUIT.isEmpty()) {
+            editors.putString("Nom_Produit", NOMPRODUIT);
             editors.apply();
-            startActivity(new Intent(this, Duree_garantie.class));
+            startActivity(new Intent(this, Date_achat.class));
         } else {
             nomproduit.setError("Champ obligatoire");
         }
@@ -73,4 +73,14 @@ public class Nom_Produit extends AppCompatActivity {
         nomproduit.setText("");
     }
 
+    public void vers_date_achat(View view) {
+        String NOMPRODUIT = nomproduit.getText().toString();
+        if (!NOMPRODUIT.isEmpty()) {
+            editors.putString("Nom_Produit", NOMPRODUIT);
+            editors.apply();
+            startActivity(new Intent(this, Date_achat.class));
+        } else {
+            nomproduit.setError("Champ obligatoire");
+        }
+    }
 }

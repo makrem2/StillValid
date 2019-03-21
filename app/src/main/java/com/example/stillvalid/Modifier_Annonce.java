@@ -1,5 +1,6 @@
 package com.example.stillvalid;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +18,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,9 +36,11 @@ public class Modifier_Annonce extends AppCompatActivity {
     Spinner categoriee;
     EditText titree, descriptionn, prixx, villee, telphone;
     ArrayAdapter<String> Adapter;
-    ArrayList<String> List_Marque = new ArrayList<>();
+    ArrayList<String> List_Categorie = new ArrayList<>();
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
+    ImageView image;
+    public static final String ID_ANNONCE = "id_annonce";
     public static final String CATEGORIE = "categorie";
     public static final String TITRE = "titre";
     public static final String DESCRIPTION = "description";
@@ -44,14 +50,16 @@ public class Modifier_Annonce extends AppCompatActivity {
 
     String categorie, titre, description, prix, ville, numtel, id_annonce;
 
-    public static final String DATA_URL = "http://192.168.1.20/StillValid/GetALLMarque.php";
-    public static final String Modif_URL = "http://192.168.1.20/StillValid/test.php?id_annonce=";
+    public static final String DATA_URL = "http://192.168.1.18/StillValid/GetALLCategorie.php";
+    public static final String Modif_URL = "http://192.168.1.18/StillValid/Modifier_annonceById.php";
+    public String url = "http://192.168.1.18/StillValid/boutiqueById.php?id_annonce=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier__annonce);
 
+        image = findViewById(R.id.profile_image);
         categoriee = findViewById(R.id.sp_categorie);
         titree = findViewById(R.id.edit_Titre);
         descriptionn = findViewById(R.id.edit_description);
@@ -59,21 +67,18 @@ public class Modifier_Annonce extends AppCompatActivity {
         villee = findViewById(R.id.edit_ville);
         telphone = findViewById(R.id.edit_tel);
 
-        prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
-        String restoredid = prefs.getString("Id_Annonce", null);
-        if (restoredid != null) {
-            id_annonce = restoredid;
-            //  Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
-        }
 
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
+
+        prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
+
+        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
                     for (int i = 0; i < response.length(); i++) {
-                        List_Marque.add(response.getJSONObject(i).getString("libelle"));
+                        List_Categorie.add(response.getJSONObject(i).getString("libelle"));
                     }
-                    Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, List_Marque);
+                    Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, List_Categorie);
                     categoriee.setAdapter(Adapter);
 
                 } catch (JSONException e) {
@@ -86,11 +91,54 @@ public class Modifier_Annonce extends AppCompatActivity {
                 Toast.makeText(Modifier_Annonce.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
+        RequestQueue queue2 = Volley.newRequestQueue(this);
+        queue2.add(request2);
 
+
+
+        String restoredid = prefs.getString("Id_Annonce", null);
+        if (restoredid != null) {
+            id_annonce = restoredid;
+            //  Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
+
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_annonce, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    try {
+
+                        titree.setText(response.getJSONObject(0).getString("titre"));
+                        telphone.setText(response.getJSONObject(0).getString("numtel"));
+                        categoriee.setSelection(TrouverIndice(response.getJSONObject(0).getString("categorie")));
+                        villee.setText(response.getJSONObject(0).getString("ville"));
+                        prixx.setText(response.getJSONObject(0).getString("prix"));
+                        descriptionn.setText(response.getJSONObject(0).getString("description"));
+                        //Id_user.setText(response.getInt("user_id"));
+
+                    Picasso.get()
+                            .load(response.getJSONObject(0).getString("photoProduit"))
+                            .resize(400, 500)
+                            .into(image);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+//                if (List.get(0).getUser_id().equals(Id_user)) {
+//                    editbnt.setVisibility(View.VISIBLE);
+//                } else {
+//                    editbnt.setVisibility(View.INVISIBLE);
+//                }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            RequestQueue queue = Volley.newRequestQueue(this);
+            queue.add(request);
+        }
     }
-
 
     public void valid_modif_annonce(View view) {
 
@@ -102,8 +150,7 @@ public class Modifier_Annonce extends AppCompatActivity {
         ville = villee.getText().toString().trim();
         numtel = telphone.getText().toString().trim();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Modif_URL + id_annonce, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Modif_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
@@ -122,6 +169,7 @@ public class Modifier_Annonce extends AppCompatActivity {
         }) {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put(ID_ANNONCE, id_annonce);
                 params.put(CATEGORIE, categorie);
                 params.put(TITRE, titre);
                 params.put(DESCRIPTION, description);
@@ -131,9 +179,20 @@ public class Modifier_Annonce extends AppCompatActivity {
                 return params;
             }
         };
-
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+    }
+
+    public int TrouverIndice(String itemCt) {
+        int i = 0;
+        for (String item : List_Categorie) {
+            if (item.equals(itemCt)) {
+                return i;
+            }
+            i++;
+        }
+        return 0;
     }
 }
 

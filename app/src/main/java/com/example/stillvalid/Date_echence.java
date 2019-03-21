@@ -4,9 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,7 +23,8 @@ import java.util.Locale;
 
 public class Date_echence extends AppCompatActivity {
     EditText Date;
-    DatePickerDialog datePickerDialog;
+    private static final String TAG = "Date_echence";
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
     ImageView btn_menu;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
@@ -44,32 +48,40 @@ public class Date_echence extends AppCompatActivity {
             }
         });
         Date = findViewById(R.id.sp_date_echeance);
+
         Date.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                final int year = calendar.get(Calendar.YEAR);
-                final int month = calendar.get(Calendar.MONTH);
-                final int day = calendar.get(Calendar.DAY_OF_MONTH);
-                datePickerDialog = new DatePickerDialog(Date_echence.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        Date.setText(day + "-" + (month + 1) + "-" + year);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(Date_echence.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateSetListener,year,month,day);
+                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
             }
         });
-
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month+1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/"+year);
+                String date = month + "/" + day + "/" + year;
+                Date.setText(date);
+            }
+        };
     }
 
     public void valid_echeance(View view) {
-        editors.putString("dateecheance", Date.getText().toString());
-        editors.commit();
-//      Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(getApplicationContext(), Recapulatif_contrat.class);
-        startActivity(intent);
+        String date = Date.getText().toString();
+        if (!date.isEmpty()) {
+            editors.putString("dateecheance", date);
+            editors.apply();
+            startActivity(new Intent(this, Ajouter_photo_contrat.class));
+        } else {
+            Date.setError("Champ obligatoire");
+        }
 
 
     }

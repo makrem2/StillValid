@@ -4,8 +4,10 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.speech.RecognizerIntent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,22 +15,43 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class Duree_garantie extends AppCompatActivity {
     ImageView btn_menu;
     EditText duree_garentie;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
+    private TextInputLayout textInputgrantie;
+    String Dateeachat,Duree;
+    static String Dfin;
+    Calendar cal;
+
+    private static final Pattern Duree_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +        //at least 1 digit
+                    //"(?=.*[a-z])" +        //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +        //at least 1 upper case letter
+                    //"(?=.*[a-zA-Z])" +       //any letter
+                    //"(?=.*[@#$%^&+=])" +   //at least 1 special character
+                    //"(?=\\S+$)" +            //no white spaces
+                    ".{1,}" +                //at least 1 characters
+                    "$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_duree_garantie);
-        duree_garentie = findViewById(R.id.sp_duree_garentie);
 
+        duree_garentie = findViewById(R.id.sp_duree_garentie);
+        textInputgrantie = findViewById(R.id.text_input_garentie);
         prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
+
+        Dateeachat = prefs.getString("dateachat", null);
 
         btn_menu = findViewById(R.id.img_menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +63,20 @@ public class Duree_garantie extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean validateDuree() {
+        String grantieInput = textInputgrantie.getEditText().getText().toString().trim();
+        if (grantieInput.isEmpty()) {
+            textInputgrantie.setError("Field can't be empty");
+            return false;
+        } else if (!Duree_PATTERN.matcher(grantieInput).matches()) {
+            textInputgrantie.setError("must be number");
+            return false;
+        } else {
+            textInputgrantie.setError(null);
+            return true;
+        }
     }
 
     public void vocale(View view) {
@@ -70,11 +107,13 @@ public class Duree_garantie extends AppCompatActivity {
 
     public void valid_duree_garantie(View view) {
 
-        String enseigne = duree_garentie.getText().toString();
-        if (!enseigne.isEmpty()) {
-            editors.putString("duree garentie", enseigne);
+        String dureegrantie = duree_garentie.getText().toString();
+        if (!validateDuree()) {
+            return;
+        } else if (!dureegrantie.isEmpty()) {
+            editors.putString("duree garentie", dureegrantie);
             editors.apply();
-            startActivity(new Intent(this, recapitulatife_Produit.class));
+            startActivity(new Intent(this, Ajouter_Photo_Produit.class));
         } else {
             duree_garentie.setError("Champ obligatoire");
         }
@@ -99,4 +138,12 @@ public class Duree_garantie extends AppCompatActivity {
 
 
     }
+
+    public static Date addMonth(int dureegrantie, String Dateeachat) {
+        Calendar cal = Calendar.getInstance();
+        // cal.setTime(dureegrantie);
+        cal.add(Calendar.MONTH, Integer.parseInt(Dateeachat));
+        return cal.getTime();
+    }
+
 }

@@ -23,17 +23,22 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class Marque_Produit extends AppCompatActivity {
     ImageView btn_menu;
     Spinner marqueprod;
     ArrayAdapter<String> Adapter;
+    List<marque> listMarques = new ArrayList<>();
     ArrayList<String> List_Marque = new ArrayList<>();
-    SharedPreferences prefs;
-    SharedPreferences.Editor editors;
+    ArrayList<String> sav = new ArrayList<>();
+    SharedPreferences prefs, prefss;
+    SharedPreferences.Editor editors, editorss;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,23 +49,32 @@ public class Marque_Produit extends AppCompatActivity {
         prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
 
+        prefss = getSharedPreferences("sav", MODE_PRIVATE);
+        editorss = prefss.edit();
+
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(Marque_Produit.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(Marque_Produit.this, btn_menu);
+                popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
                 popupMenu.show();
             }
         });
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.16/StillValid/GetALLMarque.php", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLMarque.php", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         List_Marque.add(response.getJSONObject(i).getString("libelle"));
+                        //sav.add(response.getJSONObject(i).getString("sav"));
+                        listMarques.add(new marque(response.getJSONObject(i).getString("id"),
+                                response.getJSONObject(i).getString("libelle"),
+                                response.getJSONObject(i).getString("sav"),
+                                response.getJSONObject(i).getString("support")));
+
                     }
-                    Adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_item, List_Marque);
+                    Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, List_Marque);
                     marqueprod.setAdapter(Adapter);
 
                 } catch (JSONException e) {
@@ -78,8 +92,14 @@ public class Marque_Produit extends AppCompatActivity {
         marqueprod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                editors.putString("Marque", marqueprod.getAdapter().toString());
+                editors.putString("Marque", Adapter.getItem(i));
                 editors.apply();
+                editorss.putString("marquesav", listMarques.get(i).getSav());
+                editorss.apply();
+
+                Toast.makeText(Marque_Produit.this, Adapter.getItem(i)+"", Toast.LENGTH_SHORT).show();
+
+
             }
 
             @Override
@@ -89,15 +109,18 @@ public class Marque_Produit extends AppCompatActivity {
         });
 
     }
-    public void valid_marque (View view){
-        startActivity(new Intent(this,Nom_Produit.class));
+
+    public void valid_marque(View view) {
+        startActivity(new Intent(this, Nom_Produit.class));
     }
 
-    public void return_ens_achat (View view){
-        startActivity(new Intent(this,enseigne_achat.class));
+    public void return_ens_achat(View view) {
+        startActivity(new Intent(this, enseigne_achat.class));
     }
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
+
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
 
 
     public void btn_efface(View view) {

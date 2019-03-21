@@ -40,7 +40,7 @@ public class Type_contrat extends AppCompatActivity {
         typecontrat = findViewById(R.id.spinner2);
         prefs = getSharedPreferences("ajoutercontart", MODE_PRIVATE);
         editors = prefs.edit();
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.16/StillValid/GetALLTypes.php", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLTypes.php", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -65,7 +65,7 @@ public class Type_contrat extends AppCompatActivity {
         typecontrat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                editors.putString("typecontrat", typecontrat.getAdapter().toString());
+                editors.putString("typecontrat", Adapter.getItem(i));
                 editors.apply();
             }
 

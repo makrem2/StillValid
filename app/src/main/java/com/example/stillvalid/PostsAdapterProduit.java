@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -51,7 +52,12 @@ public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProdui
         holder.name_prod.setText(p.getTxt_prod());
         holder.id_produit.setText(String.valueOf(p.getId_prod()));
         holder.duree.setText(p.getTxt_duree());
-        Glide.with(context).load(p.getImg_prod()).into(holder.image);
+        //Glide.with(context).load(p.getImg_prod()).into(holder.image);
+        System.out.print(p.getImg_prod()+"");
+        Picasso.get()
+                .load(p.getImg_prod())
+                .resize(400, 500)
+                .into(holder.image);
     }
 
     @Override

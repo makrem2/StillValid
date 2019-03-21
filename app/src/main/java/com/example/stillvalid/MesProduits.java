@@ -36,16 +36,16 @@ public class MesProduits extends AppCompatActivity {
     private PostsAdapterProduit postsAdapterProduit;
     List<PostProduit> postList = new ArrayList<>();
 
-    private  PostsAdaptercadremesproduit postsAdaptercadremesproduit;
-    List<Postcadremesproduit>postcadremesproduits = new ArrayList<>();
+    private PostsAdaptercadremesproduit postsAdaptercadremesproduit;
+    List<Postcadremesproduit> postcadremesproduits = new ArrayList<>();
 
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     SharedPreferences prefscontart;
     SharedPreferences.Editor editorscontart;
 
-    public static final String Produit_URL = "http://192.168.1.20/StillValid/mesproduit.php";
-    public static final String Contrat_URL = "http://192.168.1.20/StillValid/mescontrat.php";
+    public static final String Produit_URL = "http://192.168.1.18/StillValid/mesproduit.php";
+    public static final String Contrat_URL = "http://192.168.1.18/StillValid/mescontrat.php";
     ImageView btn_menu;
 
     @Override
@@ -109,7 +109,7 @@ public class MesProduits extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view, int position) {
                                             TextView text = view.findViewById(R.id.id_prod);
-                                            editors.putString("id_produit", text.getText().toString());
+                                            editors.putString("Id_Produit", text.getText().toString());
                                             editors.commit();
 //                                            Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(getApplicationContext(), DetaileProduits.class);
@@ -138,55 +138,54 @@ public class MesProduits extends AppCompatActivity {
         startActivity(new Intent(this, Accueil.class));
     }
 
-        public void loadContart(){
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, Contrat_URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONArray contart = new JSONArray(response);
-                        for (int i = 0; i < contart.length(); i++) {
+    public void loadContart() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Contrat_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray contart = new JSONArray(response);
+                    for (int i = 0; i < contart.length(); i++) {
 
-                            JSONObject contartObject = contart.getJSONObject(i);
-                            int ID_CONTRAT = contartObject.getInt("id");
-                            int ID_USER = contartObject.getInt("user_id");
+                        JSONObject contartObject = contart.getJSONObject(i);
+                        int ID_CONTRAT = contartObject.getInt("id");
+                        int ID_USER = contartObject.getInt("user_id");
+                        String name_con = contartObject.getString("type");
+                        String duree_con = contartObject.getString("dEcheance");
+                        String image_con = contartObject.getString("photo");
 
-                            String name_con = contartObject.getString("type");
-                            String duree_con = contartObject.getString("dEcheance");
-                            String image_con = contartObject.getString("photo");
-
-                            Postcadremesproduit Contart = new Postcadremesproduit(ID_CONTRAT,ID_USER,name_con,duree_con,image_con);
-                            postcadremesproduits.add(Contart);
-                        }
-                        postsAdaptercadremesproduit = new PostsAdaptercadremesproduit(MesProduits.this, postcadremesproduits);
-                        recyclerView_contrat.setAdapter(postsAdaptercadremesproduit);
-                        recyclerView_contrat.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView_contrat,
-                                new RecyclerViewClickListener() {
-                                    @Override
-                                    public void onClick(View view, int position) {
-                                        TextView txt = view.findViewById(R.id.id_contrat);
-                                        editorscontart.putString("id_contrat", txt.getText().toString());
-                                        editorscontart.commit();
-//                                            Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), Detail_Contrat.class);
-                                        startActivity(intent);
-                                    }
-
-                                    @Override
-                                    public void onLongClick(View view, int position) {
-                                    }
-                                }));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        Postcadremesproduit Contart = new Postcadremesproduit(ID_CONTRAT, ID_USER, name_con, duree_con, image_con);
+                        postcadremesproduits.add(Contart);
                     }
+                    postsAdaptercadremesproduit = new PostsAdaptercadremesproduit(MesProduits.this, postcadremesproduits);
+                    recyclerView_contrat.setAdapter(postsAdaptercadremesproduit);
+                    recyclerView_contrat.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView_contrat,
+                            new RecyclerViewClickListener() {
+                                @Override
+                                public void onClick(View view, int position) {
+                                    TextView txt = view.findViewById(R.id.id_contrat);
+                                    editorscontart.putString("id_contrat", txt.getText().toString());
+                                    editorscontart.commit();
+//                                  Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), Detail_Contrat.class);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void onLongClick(View view, int position) {
+                                }
+                            }));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(MesProduits.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            Volley.newRequestQueue(this).add(stringRequest);
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MesProduits.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
 
 }
 

@@ -36,7 +36,7 @@ public class Boutique extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     List<Post> postList = new ArrayList<>();
-    public static final String Boutique_URL = "http://192.168.1.20/StillValid/Boutique.php";
+    public static final String Boutique_URL = "http://192.168.1.18/StillValid/Boutique.php";
     ImageView btn_menu;
     int id_annonce;
 
@@ -64,11 +64,12 @@ public class Boutique extends AppCompatActivity {
                             for (int i = 0; i < produit.length(); i++) {
                                 JSONObject produitobject = produit.getJSONObject(i);
                                 int id_annonce = produitobject.getInt("id");
+                                int id_user = produitobject.getInt("user_id");
                                 String nom_produit = produitobject.getString("titre");
                                 String lieu = produitobject.getString("ville");
                                 String image = produitobject.getString("photoProduit");
                                 String prix = produitobject.getString("prix");
-                                Post product = new Post(id_annonce, nom_produit, lieu, image, prix);
+                                Post product = new Post(id_annonce,id_user, nom_produit, lieu, image, prix);
                                 postList.add(product);
                             }
                             postsAdapter = new PostsAdapter(Boutique.this, postList);
@@ -106,9 +107,6 @@ public class Boutique extends AppCompatActivity {
     public void acueil(View view) {
         startActivity(new Intent(this, Accueil.class));
     }
-    /*public void btn_fiche_prod (View view){
-
-        startActivity(new Intent(this,Fiche_Produite.class));}*/
 
     public void getMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(Boutique.this, btn_menu);

@@ -91,6 +91,12 @@ public class enseigne_achat extends AppCompatActivity {
 
 
     public void btn_efface(View view) {
-        Enseigne.setText("");
+        String Text = Enseigne.getText().toString();
+        if (Text.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Already Empty!!!", Toast.LENGTH_SHORT);
+        } else {
+            Enseigne.setText("");
+        }
+
     }
 }

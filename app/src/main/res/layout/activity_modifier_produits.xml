@@ -122,7 +122,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="99dp"
+            android:layout_width="155dp"
             android:layout_height="78dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
@@ -220,8 +220,8 @@
             app:layout_constraintTop_toBottomOf="@+id/img_still"
             app:layout_constraintVertical_bias="1.0" />
 
-        <Spinner
-            android:id="@+id/sp_ensegine_achat"
+        <EditText
+            android:id="@+id/edit_ensegine_achat"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="170dp"
@@ -303,11 +303,13 @@
             android:src="@drawable/plus" />
 
         <TextView
+            android:id="@+id/modifierphoto"
             android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="400dp"
             android:text="Modifier Photo"
+            android:onClick="modifphoto"
             android:textSize="18sp"
             android:textStyle="bold|normal" />
 
@@ -320,11 +322,13 @@
             android:src="@drawable/plus" />
 
         <TextView
+            android:id="@+id/modifierfacture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="400dp"
             android:text="Modifier Facture"
+            android:onClick="modiffacture"
             android:textSize="18sp"
             android:textStyle="bold|normal" />
 

@@ -20,23 +20,29 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Fiche_Produite extends AppCompatActivity {
-    String id_annonce;
-    SharedPreferences prefs;
+    String id_annonce,Id_user;
+    SharedPreferences prefs,prefs2;
     ImageView imgproduit;
     Context context;
     ImageView editbnt;
+    List<Post> postList = new ArrayList<>();
     TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
-    //TextView Id_user;
-    public String url = "http://192.168.1.20/StillValid/boutiqueById.php?id_annonce=";
+    public String url = "http://192.168.1.18/StillValid/boutiqueById.php?id_annonce=";
+    public static final String sup_URL = "http://192.168.1.18/StillValid/Supprimer_annonceById.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,6 @@ public class Fiche_Produite extends AppCompatActivity {
         setContentView(R.layout.activity_fiche__produite);
         context = this;
 
-        //Id_user = findViewById(R.id.txt_user_id);
         imgproduit = findViewById(R.id.img_fiche_prod);
         nomproduit = findViewById(R.id.txt_nom_prod);
         textdescription = findViewById(R.id.txt_categorie);
@@ -55,43 +60,47 @@ public class Fiche_Produite extends AppCompatActivity {
         editbnt = findViewById(R.id.editbnt);
 
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
+        prefs2 = getSharedPreferences("login", MODE_PRIVATE);
         String restoredid = prefs.getString("Id_Annonce", null);
+        String restoredid_user = prefs2.getString("id", null);
+        if (restoredid_user != null) {
+            Id_user = restoredid_user;
+            //Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
+        }
         if (restoredid != null) {
             id_annonce = restoredid;
             loadboutique();
-            //  Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
+              //Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void loadboutique() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url + id_annonce, null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_annonce, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
-
+            public void onResponse(JSONArray response) {
                 try {
 
-                    nomproduit.setText(response.getString("titre"));
-                    telphone.setText(response.getString("numtel"));
-                    textemail.setText(response.getString("email"));
-                    textville.setText(response.getString("ville"));
-                    textprix.setText(response.getString("prix"));
-                    textdescription.setText(response.getString("description"));
-                    //Id_user.setText(response.getInt("user_id"));
+                    nomproduit.setText(response.getJSONObject(0).getString("titre"));
+                    telphone.setText(response.getJSONObject(0).getString("numtel"));
+                    textemail.setText(response.getJSONObject(0).getString("email"));
+                    textville.setText(response.getJSONObject(0).getString("ville"));
+                    textprix.setText(response.getJSONObject(0).getString("prix"));
+                    textdescription.setText(response.getJSONObject(0).getString("description"));
 
                     Picasso.get()
-                            .load(response.getString("photoProduit"))
+                            .load(response.getJSONObject(0).getString("photoProduit"))
                             .resize(400, 500)
                             .into(imgproduit);
 
-
+                    if (Id_user.equals(response.getJSONObject(0).getString("user_id"))) {
+                        editbnt.setVisibility(View.VISIBLE);
+                    } else {
+                        editbnt.setVisibility(View.INVISIBLE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                if (List.get(0).getUser_id().equals(Id_user)) {
-//                    editbnt.setVisibility(View.VISIBLE);
-//                } else {
-//                    editbnt.setVisibility(View.INVISIBLE);
-//                }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -118,6 +127,25 @@ public class Fiche_Produite extends AppCompatActivity {
     }
 
     public void supprimer(MenuItem item) {
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, sup_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()) {
+                    Toast.makeText(Fiche_Produite.this, response, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(Fiche_Produite.this, "error", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Fiche_Produite.this, error.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
 
     }
 }

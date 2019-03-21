@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +8,11 @@
     tools:ignore="ContentDescription"
     android:background="#D9D9D9"
     tools:context=".recapitulatife_Produit">
-
-
-    <LinearLayout
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D9D9D9">
+<LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,18 +109,6 @@
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_date_achatt" />
-
-    <EditText
-        android:id="@+id/edit_photo"
-        android:layout_width="335dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/add_layout"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_photo" />
 
     <TextView
         android:id="@+id/txt_recapitulatif"
@@ -229,41 +220,139 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_duree_garentie" />
 
+    <LinearLayout
+        android:id="@+id/line_photoproduit"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/white"
+        android:layout_marginRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_photo">>
+
+        <LinearLayout
+            android:id="@+id/lin_prod"
+            android:layout_width="125dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="140dp"
+            tools:layout_editor_absoluteY="433dp">
+
+            <TextView
+                android:id="@+id/txt_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:text="Photo Produit"
+                android:textColor="@color/noir"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/img_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageView
+                android:id="@+id/echec_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                tools:ignore="VectorDrawableCompat" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/white"
+        android:layout_marginRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_photoproduit">
+
+        <LinearLayout
+            android:id="@+id/lin_fac"
+            android:layout_width="125dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="140dp"
+            tools:layout_editor_absoluteY="433dp">
+
+            <TextView
+                android:id="@+id/txt_facture"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:text="Photo Facture"
+                android:textColor="@color/noir"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/img_facture"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp" />
+            <ImageView
+                android:id="@+id/echec_fact"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                tools:ignore="VectorDrawableCompat" />
+
+        </LinearLayout>
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/img_return"
         android:layout_width="60dp"
         android:layout_height="50dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:onClick="return_ajou_ph_prod"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/valid"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_photo"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/left" />
 
     <Button
         android:id="@+id/valid"
         android:layout_width="176dp"
         android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/orange_btn"
         android:onClick="valid_recap"
         android:text="@string/va"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_return"
-        app:layout_constraintTop_toBottomOf="@+id/edit_photo"
-        app:layout_constraintVertical_bias="0.462" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
