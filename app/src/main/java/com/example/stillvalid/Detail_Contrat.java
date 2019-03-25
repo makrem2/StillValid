@@ -27,12 +27,13 @@ import java.util.List;
 public class Detail_Contrat extends AppCompatActivity {
     ImageView btn_menu;
     List<Post> postList = new ArrayList<>();
-    TextView Fiche_Contrat,dEcheance,TypeContart;
+    TextView Fiche_Contrat, dEcheance, TypeContart;
     ImageView imagecontrat;
     String id_contrat;
     SharedPreferences prefscontart;
 
     public String url = "http://192.168.1.18/StillValid/ContratById.php?id_contrat=";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +41,12 @@ public class Detail_Contrat extends AppCompatActivity {
 
         Fiche_Contrat = findViewById(R.id.txt_fiche_contrat);
         dEcheance = findViewById(R.id.txt_Dat);
-        TypeContart= findViewById(R.id.typecontart);
-        imagecontrat= findViewById(R.id.profile_image);
+        TypeContart = findViewById(R.id.typecontart);
+        imagecontrat = findViewById(R.id.profile_image);
 
         prefscontart = getSharedPreferences("mescontart", MODE_PRIVATE);
 
-        String restoredid = prefscontart.getString("id_contrat", null);
+        String restoredid = prefscontart.getString("Id_Contrat", null);
 
         if (restoredid != null) {
             id_contrat = restoredid;
@@ -57,50 +58,52 @@ public class Detail_Contrat extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(Detail_Contrat.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(Detail_Contrat.this, btn_menu);
+                popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
                 popupMenu.show();
             }
         });
     }
 
-    public void loadcontrat(){ JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_contrat, null, new Response.Listener<JSONArray>() {
-        @Override
-        public void onResponse(JSONArray response) {
-            try {
+    public void loadcontrat() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_contrat, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
 
-                Fiche_Contrat.setText(response.getJSONObject(0).getString("id"));
-                dEcheance.setText(response.getJSONObject(0).getString("dEcheance"));
-                TypeContart.setText(response.getJSONObject(0).getString("type"));
+                    dEcheance.setText(response.getJSONObject(0).getString("dEcheance"));
+                    TypeContart.setText(response.getJSONObject(0).getString("type"));
 
+                    Picasso.get()
+                            .load(response.getJSONObject(0).getString("photo"))
+                            .resize(400, 500)
+                            .into(imagecontrat);
 
-                Picasso.get()
-                        .load(response.getJSONObject(0).getString("photo"))
-                        .resize(400, 500)
-                        .into(imagecontrat);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-        }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-
-        }
-    });
+            }
+        });
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
 
 
-    public void  bn_return_Mes_Produit (View view){
-        startActivity(new Intent(this,MesProduits.class));
+    public void bn_return_Mes_Produit(View view) {
+        startActivity(new Intent(this, MesProduits.class));
     }
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
 
-    public void EditContrat (View view){
-        startActivity(new Intent(this,modifier_contrat.class));}
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
+
+    public void EditContrat(View view) {
+        startActivity(new Intent(this, modifier_contrat.class));
+    }
 }

@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +54,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
     @Override
     public void onBindViewHolder(@NonNull PostsAdapter.ViewHolder holder, int position) {
-
+        Toast.makeText(context, ""+posts.get(position).getImg_nom_produit(), Toast.LENGTH_SHORT).show();
         holder.ID_USER.setText(String.valueOf(posts.get(position).getIdUser()));
         holder.nom_produit.setText(posts.get(position).getNom_produit());
         holder.lieu.setText(posts.get(position).getLieu());
         holder.id.setText(String.valueOf(posts.get(position).getId()));
-        Glide.with(context)
+        Picasso.get()
                 .load(posts.get(position).getImg_nom_produit())
+                .resize(400,400)
                 .into(holder.image);
         holder.prix.setText(posts.get(position).getPrix());
     }

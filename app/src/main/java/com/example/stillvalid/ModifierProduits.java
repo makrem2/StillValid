@@ -1,13 +1,18 @@
 package com.example.stillvalid;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -27,11 +32,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ModifierProduits extends AppCompatActivity {
     ImageView btn_menu, profile_image;
     SharedPreferences prefs;
+    private static final String TAG = "Date_echence";
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
     EditText ensegineproduit, dureegrantie, nomproduit, date_achat;
     TextView modifierphoto, modifierfacture;
     Spinner marquee;
@@ -55,6 +63,8 @@ public class ModifierProduits extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_produits);
 
+
+
         ensegineproduit = findViewById(R.id.edit_ensegine_achat);
         dureegrantie = findViewById(R.id.edit_garantie);
         nomproduit = findViewById(R.id.edit_produit);
@@ -63,6 +73,29 @@ public class ModifierProduits extends AppCompatActivity {
         modifierfacture = findViewById(R.id.modifierfacture);
         marquee = findViewById(R.id.sp_marque);
         profile_image = findViewById(R.id.profile_image);
+
+        date_achat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(ModifierProduits.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateSetListener,year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month+1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/"+year);
+                String date = month + "/" + day + "/" + year;
+                date_achat.setText(date);
+            }
+        };
 
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +107,19 @@ public class ModifierProduits extends AppCompatActivity {
             }
         });
 
-        prefs = getSharedPreferences("mesproduit", MODE_PRIVATE);
 
-        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLMarque.php", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         List_Marque.add(response.getJSONObject(i).getString("libelle"));
+                        //sav.add(response.getJSONObject(i).getString("sav"));
+                        listMarques.add(new marque(response.getJSONObject(i).getString("id"),
+                                response.getJSONObject(i).getString("libelle"),
+                                response.getJSONObject(i).getString("sav"),
+                                response.getJSONObject(i).getString("support")));
+
                     }
                     Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, List_Marque);
                     marquee.setAdapter(Adapter);
@@ -98,13 +136,29 @@ public class ModifierProduits extends AppCompatActivity {
         });
         RequestQueue queue2 = Volley.newRequestQueue(this);
         queue2.add(request2);
+        marquee.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Adapter.getItem(i);
+                listMarques.get(i).getSav();
 
 
+                Toast.makeText(ModifierProduits.this, Adapter.getItem(i) + "", Toast.LENGTH_SHORT).show();
 
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        prefs = getSharedPreferences("mesproduit", MODE_PRIVATE);
         String restoredid = prefs.getString("Id_Produit", null);
         if (restoredid != null) {
             id_produit = restoredid;
-           Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_produit, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
@@ -115,9 +169,7 @@ public class ModifierProduits extends AppCompatActivity {
                         marquee.setSelection(TrouverIndice(response.getJSONObject(0).getString("marque")));
                         nomproduit.setText(response.getJSONObject(0).getString("nom"));
                         date_achat.setText(response.getJSONObject(0).getString("dAchat"));
-
-
-                        Toast.makeText(ModifierProduits.this, date_achat+"", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ModifierProduits.this, date_achat+"", Toast.LENGTH_SHORT).show();
 
                         Picasso.get()
                                 .load(response.getJSONObject(0).getString("photo"))
@@ -128,11 +180,6 @@ public class ModifierProduits extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-//                if (List.get(0).getUser_id().equals(Id_user)) {
-//                    editbnt.setVisibility(View.VISIBLE);
-//                } else {
-//                    editbnt.setVisibility(View.INVISIBLE);
-//                }
                 }
             }, new Response.ErrorListener() {
                 @Override

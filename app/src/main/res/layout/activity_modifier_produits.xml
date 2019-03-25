@@ -98,13 +98,13 @@
     </LinearLayout>
 
     <android.support.v7.widget.CardView
-        android:layout_width="387dp"
-        android:layout_height="535dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_width="0dp"
+        android:layout_height="596dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,9 +115,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="320dp"
             android:text="Date d'achat"
-            android:textSize="20sp"
+            android:textSize="15dp"
             android:textStyle="bold|normal" />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -149,7 +149,7 @@
             android:id="@+id/view2"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="170dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -164,7 +164,7 @@
             android:id="@+id/view4"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="220dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -179,7 +179,7 @@
             android:id="@+id/view5"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="300dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -194,7 +194,7 @@
             android:id="@+id/view6"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="370dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -209,7 +209,7 @@
             android:id="@+id/view7"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="450dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -222,9 +222,9 @@
 
         <EditText
             android:id="@+id/edit_ensegine_achat"
-            android:layout_width="170dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="170dp"
+            android:layout_marginLeft="130dp"
             android:layout_marginTop="110dp" />
 
         <TextView
@@ -232,9 +232,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="120dp"
             android:text="Enseigne d'achat"
-            android:textSize="20sp"
+            android:textSize="15dp"
             android:textStyle="bold|normal" />
 
         <TextView
@@ -242,9 +242,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="180dp"
             android:text="Marque"
-            android:textSize="20sp"
+            android:textSize="15dp"
             android:textStyle="bold|normal" />
 
         <TextView
@@ -252,9 +252,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="250dp"
             android:text="Produit"
-            android:textSize="20sp"
+            android:textSize="15dp"
             android:textStyle="bold|normal" />
 
         <TextView
@@ -262,44 +262,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="340dp"
+            android:layout_marginTop="400dp"
             android:text="Garantie"
-            android:textSize="20sp"
+            android:textSize="15dp"
             android:textStyle="bold|normal" />
 
         <Spinner
             android:id="@+id/sp_marque"
-            android:layout_width="170dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="160dp" />
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="180dp" />
 
         <EditText
             android:id="@+id/edit_date_achat"
-            android:layout_width="170dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="280dp" />
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="310dp" />
 
         <EditText
             android:id="@+id/edit_garantie"
-            android:layout_width="170dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="340dp" />
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="390dp" />
 
         <EditText
             android:id="@+id/edit_produit"
-            android:layout_width="170dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="220dp" />
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="240dp" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="400dp"
+            android:layout_marginTop="480dp"
             android:src="@drawable/plus" />
 
         <TextView
@@ -307,9 +307,9 @@
             android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="400dp"
-            android:text="Modifier Photo"
+            android:layout_marginTop="480dp"
             android:onClick="modifphoto"
+            android:text="Modifier Photo"
             android:textSize="18sp"
             android:textStyle="bold|normal" />
 
@@ -318,7 +318,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="180dp"
-            android:layout_marginTop="400dp"
+            android:layout_marginTop="480dp"
             android:src="@drawable/plus" />
 
         <TextView
@@ -326,9 +326,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
-            android:layout_marginTop="400dp"
-            android:text="Modifier Facture"
+            android:layout_marginTop="480dp"
             android:onClick="modiffacture"
+            android:text="Modifier Facture"
             android:textSize="18sp"
             android:textStyle="bold|normal" />
 
@@ -339,13 +339,13 @@
             android:layout_below="@+id/etpassword"
             android:layout_marginStart="80dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="450dp"
+            android:layout_marginTop="530dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/orange_btn"
             android:onClick="valid_Modif_prod"
             android:text="@string/va"
             android:textColor="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@+id/plus_facture"/>
+            app:layout_constraintTop_toBottomOf="@+id/plus_facture" />
 
     </android.support.v7.widget.CardView>
 

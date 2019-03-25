@@ -109,12 +109,12 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="541dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_height="510dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/layout_four_corners"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -250,6 +250,15 @@
             android:textSize="18sp"
             android:textStyle="bold|normal" />
 
+        <ImageView
+            android:id="@+id/img_cont_modif"
+            android:layout_width="194dp"
+            android:layout_height="69dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="380dp"
+            android:src="@drawable/logo"
+            android:visibility="invisible"/>
+
         <Button
             android:id="@+id/main_login"
             android:layout_width="174dp"
@@ -257,7 +266,7 @@
             android:layout_below="@+id/etpassword"
             android:layout_marginStart="80dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="400dp"
+            android:layout_marginTop="460dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/orange_btn"
             android:gravity="center"

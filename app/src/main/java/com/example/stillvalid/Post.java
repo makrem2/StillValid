@@ -2,11 +2,11 @@ package com.example.stillvalid;
 
 public class Post {
     int id;
-    int idUser;
-    String nom_produit;
-    String lieu;
-    String img_nom_produit;
-    String prix;
+    private int idUser;
+    private String nom_produit;
+    private String lieu;
+    private String img_nom_produit;
+    private String prix;
 
     public Post() {
     }

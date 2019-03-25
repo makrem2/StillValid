@@ -114,8 +114,9 @@ public class DetaileProduits extends AppCompatActivity {
         startActivity(new Intent(this, ModifierProduits.class));
     }
 
-    public void btn_vente(View view) {
+
+    public void annonce(View view) {
+
         startActivity(new Intent(this, DeposerAnonnce.class));
     }
-
 }

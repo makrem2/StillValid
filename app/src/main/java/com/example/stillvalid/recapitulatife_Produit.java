@@ -40,7 +40,7 @@ public class recapitulatife_Produit extends AppCompatActivity {
     TextView btn_menu;
     ImageView img_prod, img_facture, echec_prod, echec_fact;
     SharedPreferences prefs, prefs1, prefss;
-    String Enseigne, Marqueshared, Marque,NomProduit, Dateeachat, Dureegrantie, userid, Facture, Article, Sav, Dfin;
+    String Enseigne, Marqueshared, Marque, NomProduit, Dateeachat, Dureegrantie, userid, Facture, Article, Sav, Dfin;
     String insertProduit = "http://192.168.1.18/StillValid/AjouterProduit.php";
     Spinner marquee;
     ArrayAdapter<String> Adapter;
@@ -103,7 +103,11 @@ public class recapitulatife_Produit extends AppCompatActivity {
         prefss = getSharedPreferences("sav", MODE_PRIVATE);
         Sav = prefss.getString("marquesav", null);
 
-        Toast.makeText(recapitulatife_Produit.this, Marqueshared, Toast.LENGTH_SHORT).show();
+
+        Dfin = prefs.getString("date_fin", null);
+        if (Dfin != null) {
+            Toast.makeText(recapitulatife_Produit.this, "fa8aaaaaaaaaaaa", Toast.LENGTH_SHORT).show();
+        }
 
         if ((Article != null)) {
             img_prod.setImageResource(R.drawable.ic_checked);
@@ -152,8 +156,8 @@ public class recapitulatife_Produit extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 listMarques.get(i).getSav();
-                Marque=Adapter.getItem(i);
-                Toast.makeText(recapitulatife_Produit.this, Marque + ""+listMarques.get(i).getSav(), Toast.LENGTH_SHORT).show();
+                Marque = Adapter.getItem(i);
+                //Toast.makeText(recapitulatife_Produit.this, Marque + ""+listMarques.get(i).getSav(), Toast.LENGTH_SHORT).show();
 
             }
 

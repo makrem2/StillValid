@@ -1,8 +1,9 @@
 package com.example.stillvalid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class Boutique extends AppCompatActivity {
     public static final String Boutique_URL = "http://192.168.1.18/StillValid/Boutique.php";
     ImageView btn_menu;
     int id_annonce;
+    Context contex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class Boutique extends AppCompatActivity {
         btn_menu = findViewById(R.id.menu);
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
         editors = prefs.edit();
+        contex = this;
     }
 
     private void loadboutique() {
@@ -69,10 +72,12 @@ public class Boutique extends AppCompatActivity {
                                 String lieu = produitobject.getString("ville");
                                 String image = produitobject.getString("photoProduit");
                                 String prix = produitobject.getString("prix");
-                                Post product = new Post(id_annonce,id_user, nom_produit, lieu, image, prix);
+                                Post product = new Post(id_annonce, id_user, nom_produit, lieu, image, prix);
                                 postList.add(product);
                             }
-                            postsAdapter = new PostsAdapter(Boutique.this, postList);
+                            postsAdapter = new PostsAdapter(contex, postList);
+                            postsAdapter.notifyDataSetChanged();
+
                             recyclerView.setAdapter(postsAdapter);
                             recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView,
                                     new RecyclerViewClickListener() {

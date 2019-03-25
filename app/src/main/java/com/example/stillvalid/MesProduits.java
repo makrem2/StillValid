@@ -163,7 +163,7 @@ public class MesProduits extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view, int position) {
                                     TextView txt = view.findViewById(R.id.id_contrat);
-                                    editorscontart.putString("id_contrat", txt.getText().toString());
+                                    editorscontart.putString("Id_Contrat", txt.getText().toString());
                                     editorscontart.commit();
 //                                  Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Detail_Contrat.class);

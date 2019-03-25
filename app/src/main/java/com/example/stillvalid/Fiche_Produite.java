@@ -60,12 +60,16 @@ public class Fiche_Produite extends AppCompatActivity {
         editbnt = findViewById(R.id.editbnt);
 
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
+
         prefs2 = getSharedPreferences("login", MODE_PRIVATE);
+
         String restoredid = prefs.getString("Id_Annonce", null);
         String restoredid_user = prefs2.getString("id", null);
+
+        //Toast.makeText(this, restoredid_user, Toast.LENGTH_SHORT).show();
         if (restoredid_user != null) {
             Id_user = restoredid_user;
-            //Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, Id_user, Toast.LENGTH_SHORT).show();
         }
         if (restoredid != null) {
             id_annonce = restoredid;
