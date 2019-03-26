@@ -119,4 +119,9 @@ public class DetaileProduits extends AppCompatActivity {
 
         startActivity(new Intent(this, DeposerAnonnce.class));
     }
+
+    public void VoirFacture(View view) {
+
+        startActivity(new Intent(this, Voir_Facture.class));
+    }
 }

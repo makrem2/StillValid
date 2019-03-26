@@ -46,20 +46,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeposerAnonnce extends AppCompatActivity {
-    String description_anc, categorie_anc, titre_anc, prix_anc, ville_anc, numtel_anc, email_anc;
+    String description_anc, categorie_anc, titre_anc, prix_anc, photo,ville_anc, numtel_anc, email_anc;
     ImageView btn_menu;
     Spinner categorie;
     EditText annonce, description_annonce, prix, ville, email, tel;
     ImageView photoprod;
-    String id_produit, Id_user;
-    SharedPreferences prefs, prefss;
+    String id_produit, Id_user, photo_produit;
+    SharedPreferences prefs, prefss, prefsphotoprod;
     ArrayAdapter<String> Adapter;
-    private static final int REQUEST_PERMISSION = 1;
-    public static final int REQUEST_IMAGE = 300;
-    public static final int REQUEST_IMAGE_imp = 100;
-    Bitmap bitmapContaratimp;
-    static Bitmap PHOTO;
-    Uri imageContratimport;
     ArrayList<String> List_Categorie = new ArrayList<>();
     public static final String CATEGORIE = "categorie";
     public static final String DESCRIPTION = "description";
@@ -73,7 +67,7 @@ public class DeposerAnonnce extends AppCompatActivity {
 
     public static final String DATA_URL = "http://192.168.1.18/StillValid/GetALLCategorie.php";
     public String url = "http://192.168.1.18/StillValid/ProduitById.php?id_produit=";
-    public String Deposer_annonce = "http://192.168.1.18/StillValid/DeposeAnnonce.php?id_produit=";
+    public String Deposer_annonce = "http://192.168.1.18/StillValid/DeposeAnnonce.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,37 +77,30 @@ public class DeposerAnonnce extends AppCompatActivity {
         categorie = findViewById(R.id.edit_categorie);
         annonce = findViewById(R.id.edit_annonce);
         description_annonce = findViewById(R.id.edit_annonce);
-        prix = findViewById(R.id.edit_prix);
+        prix = findViewById(R.id.editprix);
         ville = findViewById(R.id.edit_ville);
         email = findViewById(R.id.edit_email);
         tel = findViewById(R.id.btn_tel);
         photoprod = findViewById(R.id.still_valid1);
         btn_menu = findViewById(R.id.menu);
 
-
-        photoprod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DEPOSERPHOTO();
-            }
-        });
-
         prefs = getSharedPreferences("login", MODE_PRIVATE);
 
         Id_user = prefs.getString("id", null);
+        //Toast.makeText(this, Id_user, Toast.LENGTH_SHORT).show();
         prefss = getSharedPreferences("mesproduit", MODE_PRIVATE);
 
         String restoredid = prefss.getString("Id_Produit", null);
 
+        prefsphotoprod = getSharedPreferences("photo_produit", MODE_PRIVATE);
 
+        photo_produit = prefsphotoprod.getString("photoprod", null);
 
         if (restoredid != null) {
             id_produit = restoredid;
             loadproduit();
-            Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
         }
-        checkpermission();
-
 
         JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
             @Override
@@ -165,7 +152,7 @@ public class DeposerAnonnce extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    Picasso.get()
+                     Picasso.get()
                             .load(response.getJSONObject(0).getString("photo"))
                             .resize(400, 500)
                             .into(photoprod);
@@ -190,7 +177,6 @@ public class DeposerAnonnce extends AppCompatActivity {
     }
 
     public void valid_Deposer_annonce(View view) {
-        categorie_anc = categorie.getSelectedItem().toString();
         description_anc = description_annonce.getText().toString().trim();
         titre_anc = annonce.getText().toString().trim();
         prix_anc = prix.getText().toString().trim();
@@ -221,14 +207,17 @@ public class DeposerAnonnce extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<>();
+
+
                 param.put(CATEGORIE, categorie_anc);
                 param.put(DESCRIPTION, description_anc);
                 param.put(TITRE, titre_anc);
                 param.put(USER_ID, Id_user);
                 param.put(VILLE, ville_anc);
                 param.put(TELEPHONE, numtel_anc);
+                param.put(PRIX, prix_anc);
                 param.put(EMAIL, email_anc);
-                param.put(PHOTOPRODUIT, getStringImage(Ajouter_photo_contrat.PHOTO));
+                param.put(PHOTOPRODUIT, photo_produit);
 
 
                 return param;
@@ -237,103 +226,8 @@ public class DeposerAnonnce extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
     }
-    public void checkpermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_PERMISSION);
-        }
-    }
-    private void DEPOSERPHOTO(){
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(intent, REQUEST_IMAGE_imp);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_imp && resultCode == RESULT_OK) {
-            imageContratimport = data.getData();
-            try {
-                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageContratimport);
-                getRealPathFromURI(imageContratimport);
-                bitmapContaratimp = rotationImage(thumbnail, getRealPathFromURI(imageContratimport));
-
-
-                photoprod.setImageBitmap(bitmapContaratimp);
-                PHOTO = bitmapContaratimp;
-
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == REQUEST_PERMISSION && grantResults.length > 0) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Thanks for granting Permission", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    public String getRealPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-    public Bitmap rotationImage(Bitmap bitmap, String imageUri) throws IOException {
-        ExifInterface exifInterface = new ExifInterface(imageUri);
-        int oreintation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-        switch (oreintation) {
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                return rotate(bitmap, 90);
-
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                return rotate(bitmap, 180);
-
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                return rotate(bitmap, 270);
-
-            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                return flip(bitmap, true, false);
-
-            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                return flip(bitmap, false, true);
-            default:
-                return bitmap;
-        }
-    }
-
-    private Bitmap flip(Bitmap bitmap, boolean horizontal, boolean verticale) {
-        Matrix matrix = new Matrix();
-        matrix.postScale(horizontal ? -1 : 1, verticale ? -1 : 1);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-    }
-
-    private Bitmap rotate(Bitmap bitmap, float degrees) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(degrees);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-    }
-
-    public String getStringImage(Bitmap bitmap) {
-        Log.i("MyHitesh", "" + bitmap);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String temp = Base64.encodeToString(b, Base64.DEFAULT);
-
-
-        return temp;
-    }
-    /*public void btn_efface(View view) {
+    public void btn_efface(View view) {
         String txtannonce = annonce.getText().toString();
         String txt_desc_ann = description_annonce.getText().toString();
         String txt_prix = prix.getText().toString();
@@ -348,5 +242,5 @@ public class DeposerAnonnce extends AppCompatActivity {
             ville.setText("");
             email.setText("");
         }
-    }*/
+    }
 }

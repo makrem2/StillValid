@@ -99,10 +99,10 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="596dp"
+        android:layout_height="720dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="405dp"
             android:text="Date d'achat"
             android:textSize="15dp"
             android:textStyle="bold|normal" />
@@ -123,18 +123,18 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="155dp"
-            android:layout_height="78dp"
+            android:layout_height="153dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/logo" />
 
         <View
             android:id="@+id/view"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="180dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -149,7 +149,7 @@
             android:id="@+id/view2"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="250dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -164,7 +164,7 @@
             android:id="@+id/view4"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="310dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -179,7 +179,7 @@
             android:id="@+id/view5"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="380dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -194,7 +194,7 @@
             android:id="@+id/view6"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="370dp"
+            android:layout_marginTop="440dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -209,7 +209,7 @@
             android:id="@+id/view7"
             android:layout_width="380dp"
             android:layout_height="1dp"
-            android:layout_marginTop="450dp"
+            android:layout_marginTop="500dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:background="@android:color/black"
@@ -225,14 +225,14 @@
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="110dp" />
+            android:layout_marginTop="190dp" />
 
         <TextView
             android:id="@+id/txt_ensigne_achat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="200dp"
             android:text="Enseigne d'achat"
             android:textSize="15dp"
             android:textStyle="bold|normal" />
@@ -242,7 +242,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="280dp"
             android:text="Marque"
             android:textSize="15dp"
             android:textStyle="bold|normal" />
@@ -252,7 +252,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="335dp"
             android:text="Produit"
             android:textSize="15dp"
             android:textStyle="bold|normal" />
@@ -262,7 +262,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="400dp"
+            android:layout_marginTop="460dp"
             android:text="Garantie"
             android:textSize="15dp"
             android:textStyle="bold|normal" />
@@ -272,34 +272,34 @@
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="180dp" />
+            android:layout_marginTop="280dp" />
 
         <EditText
             android:id="@+id/edit_date_achat"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="310dp" />
+            android:layout_marginTop="390dp" />
 
         <EditText
             android:id="@+id/edit_garantie"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="390dp" />
+            android:layout_marginTop="445dp" />
 
         <EditText
             android:id="@+id/edit_produit"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="240dp" />
+            android:layout_marginTop="325dp" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="480dp"
+            android:layout_marginTop="530dp"
             android:src="@drawable/plus" />
 
         <TextView
@@ -307,8 +307,7 @@
             android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="480dp"
-            android:onClick="modifphoto"
+            android:layout_marginTop="530dp"
             android:text="Modifier Photo"
             android:textSize="18sp"
             android:textStyle="bold|normal" />
@@ -318,7 +317,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="180dp"
-            android:layout_marginTop="480dp"
+            android:layout_marginTop="530dp"
             android:src="@drawable/plus" />
 
         <TextView
@@ -326,11 +325,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
-            android:layout_marginTop="480dp"
-            android:onClick="modiffacture"
+            android:layout_marginTop="530dp"
             android:text="Modifier Facture"
             android:textSize="18sp"
             android:textStyle="bold|normal" />
+
+        <ImageView
+            android:id="@+id/modif_art"
+            android:layout_width="120dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="580dp"
+            android:src="@drawable/logo"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/modif_fact"
+            android:layout_width="120dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="580dp"
+            android:src="@drawable/logo"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/main_login"
@@ -339,13 +354,14 @@
             android:layout_below="@+id/etpassword"
             android:layout_marginStart="80dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="530dp"
+            android:layout_marginTop="660dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/orange_btn"
             android:onClick="valid_Modif_prod"
             android:text="@string/va"
             android:textColor="@android:color/white"
             app:layout_constraintTop_toBottomOf="@+id/plus_facture" />
+
 
     </android.support.v7.widget.CardView>
 

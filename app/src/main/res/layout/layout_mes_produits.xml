@@ -2,11 +2,18 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="200dp"
     android:background="@color/bgColor">
 
+    <TextView
+        android:id="@+id/ddd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="123"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtgarantie"
@@ -52,7 +59,7 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/logo"
         app:civ_border_color="@color/cercle_color"
-        app:civ_border_width="5dp"
+        app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtgarantie" />
 

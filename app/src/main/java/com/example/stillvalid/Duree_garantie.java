@@ -30,8 +30,6 @@ public class Duree_garantie extends AppCompatActivity {
     SharedPreferences.Editor editors;
     private TextInputLayout textInputgrantie;
     String Dateeachat;
-    String Duree;
-    String Dfin;
     Calendar cal;
 
     private static final Pattern Duree_PATTERN =
@@ -54,11 +52,8 @@ public class Duree_garantie extends AppCompatActivity {
         textInputgrantie = findViewById(R.id.text_input_garentie);
         prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
-        dddd = findViewById(R.id.dddd);
-
 
         Dateeachat = prefs.getString("dateachat", null);
-        Duree = Dateeachat;
 
 
         btn_menu = findViewById(R.id.img_menu);
@@ -70,37 +65,6 @@ public class Duree_garantie extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-//qfsqfsqqsfqfqsfqsfqfqfqfqfqfqfqfsqf
-
-        Calendar cal = Calendar.getInstance();
-        String oldDate = "2017-01-29";
-//        int mYear = c.get(Calendar.YEAR);
-//        int mMonth = c.get(Calendar.MONTH);
-//        int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        // display the current date
-//        String CurrentDate = mYear + "/" + mMonth + "/" + mDay;
-        //DatePickerDialog datePickerDialog;
-        //String dateInString = Duree; // Start date
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            cal.setTime(sdf.parse(oldDate));
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        cal.add(Calendar.MONTH, 1);//insert the number of month
-
-        sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date resultdate = new Date(cal.getTimeInMillis());
-        Duree = sdf.format(resultdate);
-
-        //Display the Result in the Edit Text or Text View your Choice
-
-        dddd.setText(Duree);
-
-        //qfsqsfsqfsqfqsfqsfqsfsqfsqfsqfsqfsq
     }
 
 
@@ -162,24 +126,6 @@ public class Duree_garantie extends AppCompatActivity {
         }
 
     }
-
-//    private void addMonth(String dureegrantie) {
-//
-//        //Duree = String.valueOf(cal.get(Calendar.DAY_OF_MONTH)+cal.get(Calendar.YEAR)+cal.get(Calendar.MONTH));
-//        //String dt = Dateeachat;  // Start date
-//        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        cal.getInstance();
-//
-//        cal.add(Calendar.MONTH, Integer.parseInt(dureegrantie)); // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
-//
-//
-//        cal.getTime();
-//        Toast.makeText(this, "" + cal.getTime(), Toast.LENGTH_SHORT).show();
-//       /* SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
-//        Dfin = sdf1.format(c.getTime());
-//        Toast.makeText(this, ""+Dfin, Toast.LENGTH_SHORT).show();*/
-//
-//    }
 
     public void return_ajou_date_achat(View view) {
         startActivity(new Intent(this, Date_achat.class));

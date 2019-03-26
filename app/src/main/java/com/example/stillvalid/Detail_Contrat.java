@@ -106,4 +106,10 @@ public class Detail_Contrat extends AppCompatActivity {
     public void EditContrat(View view) {
         startActivity(new Intent(this, modifier_contrat.class));
     }
+
+    public void VoirContrat(View view) {
+
+        startActivity(new Intent(this, Voir_Contrat.class));
+
+    }
 }

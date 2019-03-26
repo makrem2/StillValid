@@ -17,13 +17,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProduit.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name_prod, duree , id_produit;
+        TextView name_prod, duree , id_produit,dddd;
         CircleImageView image;
         public ViewHolder(View itemView) {
             super(itemView);
 
             name_prod = itemView.findViewById(R.id.txtDat);
             duree = itemView.findViewById(R.id.txtgarantie);
+            dddd= itemView.findViewById(R.id.ddd);
             image = itemView.findViewById(R.id.profile_image);
             id_produit = itemView.findViewById(R.id.id_prod);
 
@@ -52,8 +53,7 @@ public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProdui
         holder.name_prod.setText(p.getTxt_prod());
         holder.id_produit.setText(String.valueOf(p.getId_prod()));
         holder.duree.setText(p.getTxt_duree());
-        //Glide.with(context).load(p.getImg_prod()).into(holder.image);
-        System.out.print(p.getImg_prod()+"");
+        holder.dddd.setText(p.getTxt());
         Picasso.get()
                 .load(p.getImg_prod())
                 .resize(400, 500)

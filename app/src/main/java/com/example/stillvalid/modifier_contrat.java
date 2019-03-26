@@ -70,6 +70,7 @@ public class modifier_contrat extends AppCompatActivity {
     static Bitmap PHOTO;
     Uri imageContratimport;
     public static final String TYPECONTRAT = "type";
+    public static final String ID_CONTRAT = "id_contrat";
     public static final String DATEECHANCE = "dEcheance";
     public static final String IMPORT_PHOTO = "photo";
     public static final String DATA_URL = "http://192.168.1.18/StillValid/GetALLTypes.php";
@@ -306,7 +307,7 @@ public class modifier_contrat extends AppCompatActivity {
     public void valid_modif_c(View view) {
         type_contrat =  Type_contrat .getSelectedItem().toString();
         date_echeance = Date_Echeance.getText().toString().trim();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, modifcontrat+id_contrat, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, modifcontrat, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
@@ -326,7 +327,7 @@ public class modifier_contrat extends AppCompatActivity {
         }) {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-
+                params.put(ID_CONTRAT, id_contrat);
                 params.put(TYPECONTRAT, type_contrat);
                 params.put(DATEECHANCE, date_echeance);
                 params.put(IMPORT_PHOTO, getStringImage(PHOTO));

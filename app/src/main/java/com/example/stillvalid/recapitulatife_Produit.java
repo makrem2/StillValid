@@ -1,8 +1,11 @@
 package com.example.stillvalid;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -10,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -30,7 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,9 +46,11 @@ import java.util.Map;
 public class recapitulatife_Produit extends AppCompatActivity {
     EditText enseigneachatt, produitt, dateeachat, dureeegarantie;
     TextView btn_menu;
+    private static final String TAG = "Date_achat";
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
     ImageView img_prod, img_facture, echec_prod, echec_fact;
     SharedPreferences prefs, prefs1, prefss;
-    String Enseigne, Marqueshared, Marque, NomProduit, Dateeachat, Dureegrantie, userid, Facture, Article, Sav, Dfin;
+    String Enseigne, Marqueshared, Marque, NomProduit, Dateeachat, Dureegrantie, userid, Facture, Article, Sav, Dfin,Duree;
     String insertProduit = "http://192.168.1.18/StillValid/AjouterProduit.php";
     Spinner marquee;
     ArrayAdapter<String> Adapter;
@@ -81,6 +91,31 @@ public class recapitulatife_Produit extends AppCompatActivity {
                 popupMenu.show();
             }
         });
+
+        dateeachat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(recapitulatife_Produit.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: dd/mm/yyy: " + day + "/" + month + "/" + year);
+                String date =  day+ "/" + month + "/" + year;
+                dateeachat.setText(date);
+            }
+        };
+
+
         prefs1 = getSharedPreferences("login", MODE_PRIVATE);
         userid = prefs1.getString("id", null);
         prefs = getSharedPreferences("Produit", MODE_PRIVATE);
@@ -121,9 +156,6 @@ public class recapitulatife_Produit extends AppCompatActivity {
         } else {
             echec_fact.setImageResource(R.drawable.ic_x);
         }
-
-        //Toast.makeText(this, "" + Ajouter_Photo_Produit.PHOTOARTICLE + Ajouter_Photo_Produit.PHOTOFACTURE, Toast.LENGTH_SHORT).show();
-
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLMarque.php", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -157,14 +189,29 @@ public class recapitulatife_Produit extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 listMarques.get(i).getSav();
                 Marque = Adapter.getItem(i);
-                //Toast.makeText(recapitulatife_Produit.this, Marque + ""+listMarques.get(i).getSav(), Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        //qfsqfsqqsfqfqsfqsfqfqfqfqfqfqfqfsqf
+        Calendar cal = Calendar.getInstance();
+        String oldDate = Dateeachat;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            cal.setTime(sdf.parse(oldDate));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        cal.add(Calendar.MONTH, Integer.parseInt(Dureegrantie));//insert the number of month
+        sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date resultdate = new Date(cal.getTimeInMillis());
+        Duree = sdf.format(resultdate);
+        Toast.makeText(this, ""+Duree, Toast.LENGTH_SHORT).show();
+        //qfsqsfsqfsqfqsfqsfqsfsqfsqfsqfsqfsq
     }
 
     public void return_ajou_ph_prod(View view) {
@@ -214,9 +261,9 @@ public class recapitulatife_Produit extends AppCompatActivity {
                 param.put(GARANTIE, Dureegrantie);
                 param.put(MARQUE, Marque);
                 param.put(SAV, Sav);
-                param.put(DFIN, "");
-                param.put(ARTICLE, getStringImage(Ajouter_Photo_Produit.PHOTOARTICLE));
+                param.put(DFIN, Duree);
                 param.put(FACTURE, getStringImage(Ajouter_Photo_Produit.PHOTOFACTURE));
+                param.put(ARTICLE, getStringImage(Ajouter_Photo_Produit.PHOTOARTICLE));
 
 
                 return param;

@@ -25,26 +25,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MesProduits extends AppCompatActivity {
     private RecyclerView recyclerView, recyclerView_contrat;
-
     private PostsAdapterProduit postsAdapterProduit;
     List<PostProduit> postList = new ArrayList<>();
-
     private PostsAdaptercadremesproduit postsAdaptercadremesproduit;
     List<Postcadremesproduit> postcadremesproduits = new ArrayList<>();
-
-    SharedPreferences prefs;
-    SharedPreferences.Editor editors;
-    SharedPreferences prefscontart;
-    SharedPreferences.Editor editorscontart;
-
-    public static final String Produit_URL = "http://192.168.1.18/StillValid/mesproduit.php";
+    String id_user, dddd;
+    Calendar cal;
+    SharedPreferences prefs, prefss, prefsphotoprod, prefscontart;
+    SharedPreferences.Editor editors, editorsphotoprod, editorscontart;
+    public static final String Produit_URL = "http://192.168.1.18/StillValid/mesproduit.php?id_user=";
     public static final String Contrat_URL = "http://192.168.1.18/StillValid/mescontrat.php";
     ImageView btn_menu;
 
@@ -58,13 +59,15 @@ public class MesProduits extends AppCompatActivity {
         recyclerView_contrat.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView_contrat.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
         prefs = getSharedPreferences("mesproduit", MODE_PRIVATE);
         editors = prefs.edit();
-
+        prefss = getSharedPreferences("login", MODE_PRIVATE);
+        id_user = prefss.getString("id", null);
         prefscontart = getSharedPreferences("mescontart", MODE_PRIVATE);
         editorscontart = prefscontart.edit();
 
+        prefsphotoprod = getSharedPreferences("photo_produit", MODE_PRIVATE);
+        editorsphotoprod = prefsphotoprod.edit();
 
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -80,28 +83,39 @@ public class MesProduits extends AppCompatActivity {
     }
 
     private void loadProduit() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Produit_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Produit_URL + id_user,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONArray produits = new JSONArray(response);
-
                             for (int i = 0; i < produits.length(); i++) {
-
                                 JSONObject produitsObject = produits.getJSONObject(i);
                                 int id_produit = produitsObject.getInt("id");
                                 String name_prod = produitsObject.getString("nom");
-                                String duree = produitsObject.getString("dAchat");
+                                String getdatefin = produitsObject.getString("dFin");
+                                long oneDay = 1000 * 60 * 60 * 24;
+                                Date today = new Date();
+                                String sDate1 = getdatefin;
+                                try {
+                                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+                                    long val = date1.getTime() - today.getTime();
+                                    long res = val / oneDay;
+
+                                    dddd = res + "";
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+
                                 String image = produitsObject.getString("photo");
-                                //String dFin = produitsObject.getString("dFin");
-                                //int res = Integer.parseInt(dFin);
-                                //PostProduit produit = new PostProduit(nom,dAchat,photo,dFin);
-                                PostProduit produit = new PostProduit(id_produit, name_prod, duree, image);
+
+                                editorsphotoprod.putString("photoprod", image);
+                                editorsphotoprod.apply();
+
+                                PostProduit produit = new PostProduit(id_produit, name_prod, dddd, image, "");
                                 postList.add(produit);
                             }
-
                             postsAdapterProduit = new PostsAdapterProduit(MesProduits.this, postList);
                             recyclerView.setAdapter(postsAdapterProduit);
                             recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView,
@@ -165,7 +179,6 @@ public class MesProduits extends AppCompatActivity {
                                     TextView txt = view.findViewById(R.id.id_contrat);
                                     editorscontart.putString("Id_Contrat", txt.getText().toString());
                                     editorscontart.commit();
-//                                  Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Detail_Contrat.class);
                                     startActivity(intent);
                                 }
