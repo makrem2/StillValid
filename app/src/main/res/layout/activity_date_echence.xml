@@ -166,8 +166,10 @@
         android:layout_marginRight="15dp"
         android:focusableInTouchMode="false"
         android:focusable="false"
+        android:hint="07/02/2019"
+        android:inputType="date"
+        android:onClick="getDate"
         android:background="@drawable/add_layout"
-        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/mic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_data_echeance" />

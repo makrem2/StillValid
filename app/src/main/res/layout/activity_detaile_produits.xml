@@ -135,15 +135,24 @@
 
             <TextView
                 android:id="@+id/txtgarantie"
-                android:layout_width="68dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="88dp"
-                android:layout_marginRight="88dp"
-                android:text="6 Mois"
-                android:textColor="@android:color/black"
+                android:layout_width="23dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="5dp"
+                android:text="6"
+                android:textColor="@color/noir"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/view3"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+            <TextView
+                android:id="@+id/Mois"
+                android:layout_width="93dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="5dp"
+                android:text="Mois"
+                android:textColor="@color/noir"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/view3"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
             <LinearLayout
@@ -204,12 +213,12 @@
                 android:id="@+id/imageView7"
                 android:layout_width="41dp"
                 android:layout_height="37dp"
-                android:layout_marginEnd="90dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginRight="80dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-                app:srcCompat="@drawable/check_produits"
-                android:layout_marginRight="90dp" />
+                app:srcCompat="@drawable/check_produits" />
 
             <TextView
                 android:id="@+id/txtDat"
@@ -220,8 +229,8 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="25/05/2019"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textColor="@color/noir"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_image" />
@@ -235,7 +244,7 @@
                 android:gravity="center"
                 android:textAllCaps="true"
                 android:text="test"
-                android:textColor="@android:color/black"
+                android:textColor="@color/noir"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -310,6 +319,7 @@
                     android:layout_marginRight="15dp"
                     android:background="@drawable/layout_four_corners"
                     android:orientation="vertical"
+                    android:onClick="getSupport"
                     tools:layout_editor_absoluteX="268dp"
                     tools:layout_editor_absoluteY="351dp">
 

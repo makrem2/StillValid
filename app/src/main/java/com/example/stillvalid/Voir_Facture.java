@@ -1,8 +1,10 @@
 package com.example.stillvalid;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,16 +20,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class Voir_Facture extends AppCompatActivity {
-ImageView img_fact;
+    ImageView img_fact;
     SharedPreferences prefs;
     String id_produit;
     public String voirfacture = "http://192.168.1.18/StillValid/ProduitById.php?id_produit=";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voir__facture);
 
-        img_fact= findViewById(R.id.img_facture);
+        img_fact = findViewById(R.id.img_facture);
 
         prefs = getSharedPreferences("mesproduit", MODE_PRIVATE);
         String restoredid = prefs.getString("Id_Produit", null);
@@ -59,5 +62,9 @@ ImageView img_fact;
             RequestQueue queue = Volley.newRequestQueue(this);
             queue.add(request);
         }
+    }
+
+    public void btnreturn(View view) {
+        startActivity(new Intent(this, DetaileProduits.class));
     }
 }

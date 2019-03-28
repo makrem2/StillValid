@@ -1,6 +1,7 @@
 package com.example.stillvalid;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,15 +19,17 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Date_echence extends AppCompatActivity {
     EditText Date;
-    private static final String TAG = "Date_echence";
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    DatePickerDialog picker;
+    Calendar myCalendar=Calendar.getInstance();
     ImageView btn_menu;
+    ProgressDialog progressDialog;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
 
@@ -48,29 +52,6 @@ public class Date_echence extends AppCompatActivity {
             }
         });
         Date = findViewById(R.id.sp_date_echeance);
-
-        Date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(Date_echence.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateSetListener,year,month,day);
-                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month+1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/"+year);
-                String date = month + "/" + day + "/" + year;
-                Date.setText(date);
-            }
-        };
     }
 
     public void valid_echeance(View view) {
@@ -131,4 +112,44 @@ public class Date_echence extends AppCompatActivity {
 
 
     }
+
+    public void getDate(View view) {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        picker = new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateLabel();
+            }
+        }, year, month, day);
+        picker.show();
+    }
+    private void updateLabel() {
+        String myFormat = "dd MMMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date.setText(sdf.format(myCalendar.getTime()));
+    }
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(Date_echence.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
 }

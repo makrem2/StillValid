@@ -1,6 +1,7 @@
 package com.example.stillvalid;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -26,6 +28,7 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
     ImageView btn_menu, prnd_photo_article, prnd_photo_facture;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
+    ProgressDialog progressDialog;
     private static final int REQUEST_PERMISSION = 1;
     public static final int REQUEST_IMAGE_ARTICLE = 300;
     public static final int REQUEST_IMAGE_FACTURE = 100;
@@ -192,4 +195,21 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
     public void acueil(View view) {
         startActivity(new Intent(this, Accueil.class));
     }
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(Ajouter_Photo_Produit.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
 }

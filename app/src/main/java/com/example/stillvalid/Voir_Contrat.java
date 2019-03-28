@@ -1,8 +1,10 @@
 package com.example.stillvalid;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -65,5 +67,8 @@ public class Voir_Contrat extends AppCompatActivity {
 
     }
 
+    public void btnreturn(View view) {
+        startActivity(new Intent(this, Detail_Contrat.class));
+    }
 }
 

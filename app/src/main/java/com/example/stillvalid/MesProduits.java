@@ -1,11 +1,13 @@
 package com.example.stillvalid;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,18 +37,20 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static java.lang.Thread.sleep;
+
 public class MesProduits extends AppCompatActivity {
     private RecyclerView recyclerView, recyclerView_contrat;
     private PostsAdapterProduit postsAdapterProduit;
+    ProgressDialog progressDialog;
     List<PostProduit> postList = new ArrayList<>();
     private PostsAdaptercadremesproduit postsAdaptercadremesproduit;
     List<Postcadremesproduit> postcadremesproduits = new ArrayList<>();
-    String id_user, dddd;
-    Calendar cal;
+    String id_user, nbjours_produit, nbjours_contrat;
     SharedPreferences prefs, prefss, prefsphotoprod, prefscontart;
     SharedPreferences.Editor editors, editorsphotoprod, editorscontart;
     public static final String Produit_URL = "http://192.168.1.18/StillValid/mesproduit.php?id_user=";
-    public static final String Contrat_URL = "http://192.168.1.18/StillValid/mescontrat.php";
+    public static final String Contrat_URL = "http://192.168.1.18/StillValid/mescontrat.php?id_user=";
     ImageView btn_menu;
 
     @Override
@@ -94,26 +98,12 @@ public class MesProduits extends AppCompatActivity {
                                 int id_produit = produitsObject.getInt("id");
                                 String name_prod = produitsObject.getString("nom");
                                 String getdatefin = produitsObject.getString("dFin");
-                                long oneDay = 1000 * 60 * 60 * 24;
-                                Date today = new Date();
-                                String sDate1 = getdatefin;
-                                try {
-                                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-                                    long val = date1.getTime() - today.getTime();
-                                    long res = val / oneDay;
-
-                                    dddd = res + "";
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-
-
                                 String image = produitsObject.getString("photo");
 
                                 editorsphotoprod.putString("photoprod", image);
                                 editorsphotoprod.apply();
 
-                                PostProduit produit = new PostProduit(id_produit, name_prod, dddd, image, "");
+                                PostProduit produit = new PostProduit(id_produit, name_prod, getdatefin, image, "");
                                 postList.add(produit);
                             }
                             postsAdapterProduit = new PostsAdapterProduit(MesProduits.this, postList);
@@ -123,7 +113,9 @@ public class MesProduits extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view, int position) {
                                             TextView text = view.findViewById(R.id.id_prod);
+                                            TextView jour = view.findViewById(R.id.txtgarantie);
                                             editors.putString("Id_Produit", text.getText().toString());
+                                            editors.putString("Nb_jours", jour.getText().toString());
                                             editors.commit();
 //                                            Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(getApplicationContext(), DetaileProduits.class);
@@ -153,21 +145,20 @@ public class MesProduits extends AppCompatActivity {
     }
 
     public void loadContart() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Contrat_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Contrat_URL + id_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray contart = new JSONArray(response);
                     for (int i = 0; i < contart.length(); i++) {
-
                         JSONObject contartObject = contart.getJSONObject(i);
                         int ID_CONTRAT = contartObject.getInt("id");
                         int ID_USER = contartObject.getInt("user_id");
                         String name_con = contartObject.getString("type");
-                        String duree_con = contartObject.getString("dEcheance");
+                        String getdatefin = contartObject.getString("dEcheance");
                         String image_con = contartObject.getString("photo");
 
-                        Postcadremesproduit Contart = new Postcadremesproduit(ID_CONTRAT, ID_USER, name_con, duree_con, image_con);
+                        Postcadremesproduit Contart = new Postcadremesproduit(ID_CONTRAT, ID_USER, name_con, getdatefin, image_con, "");
                         postcadremesproduits.add(Contart);
                     }
                     postsAdaptercadremesproduit = new PostsAdaptercadremesproduit(MesProduits.this, postcadremesproduits);
@@ -177,8 +168,13 @@ public class MesProduits extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view, int position) {
                                     TextView txt = view.findViewById(R.id.id_contrat);
+                                    TextView jourcontrat = view.findViewById(R.id.txt_duree_contrat);
                                     editorscontart.putString("Id_Contrat", txt.getText().toString());
                                     editorscontart.commit();
+
+                                    editorscontart.putString("Nb_joursconrat", jourcontrat.getText().toString());
+                                    editorscontart.commit();
+
                                     Intent intent = new Intent(getApplicationContext(), Detail_Contrat.class);
                                     startActivity(intent);
                                 }
@@ -199,6 +195,29 @@ public class MesProduits extends AppCompatActivity {
         });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }
+
+    public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }
+
+    public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(MesProduits.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
 
 }
 

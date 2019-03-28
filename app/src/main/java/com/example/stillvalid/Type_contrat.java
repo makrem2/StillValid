@@ -1,9 +1,11 @@
 package com.example.stillvalid;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 
 public class Type_contrat extends AppCompatActivity {
     ImageView btn_menu;
+    ProgressDialog progressDialog;
     Spinner typecontrat;
     ArrayAdapter<String> Adapter;
     ArrayList<String> List_Type = new ArrayList<>();
@@ -101,4 +104,21 @@ public class Type_contrat extends AppCompatActivity {
     public void acueil(View view) {
         startActivity(new Intent(this, Accueil.class));
     }
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(Type_contrat.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.stillvalid;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -47,20 +49,24 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ModifierProduits extends AppCompatActivity {
     ImageView btn_menu, profile_image, img_modif_fac, img_modif_art;
     SharedPreferences prefs;
-    private static final String TAG = "Date_echence";
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    DatePickerDialog picker;
+    Calendar myCalendar = Calendar.getInstance();
     EditText ensegineproduit, dureegrantie, nomproduit, date_achat;
     TextView modifierphoto, modifierfacture;
     Spinner marquee;
+    ProgressDialog progressDialog;
     private static final int REQUEST_PERMISSION = 1;
     public static final int REQUEST_IMAGE_ARTICLE = 300;
     public static final int REQUEST_IMAGE_FACTURE = 100;
@@ -77,10 +83,11 @@ public class ModifierProduits extends AppCompatActivity {
     public static final String DATE_ACHAT = "dAchat";
     public static final String MARQUE = "marque";
     public static final String SAV = "sav";
+    public static final String DFIN = "dFin";
     public static final String MPHOTOFAC = "facture";
     public static final String MPHOTOART = "photo";
 
-    String Ensegine, Nom, Garantie, DAchat, id_produit, Marque, sav;
+    String Ensegine, Nom, Garantie, DAchat, id_produit, Marque, sav, Date_Fin;
 
     public static final String DATA_URL = "http://192.168.1.18/StillValid/GetALLMarque.php";
     public static final String Modif_URL = "http://192.168.1.18/StillValid/Modifier_ProduitById.php";
@@ -117,29 +124,6 @@ public class ModifierProduits extends AppCompatActivity {
         });
         checkpermission();
 
-
-        date_achat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(ModifierProduits.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
-                String date = month + "/" + day + "/" + year;
-                date_achat.setText(date);
-            }
-        };
 
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +171,7 @@ public class ModifierProduits extends AppCompatActivity {
                 sav = listMarques.get(i).getSav();
 
 
-                Toast.makeText(ModifierProduits.this, Adapter.getItem(i) + "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ModifierProduits.this, Adapter.getItem(i) + "", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -198,11 +182,12 @@ public class ModifierProduits extends AppCompatActivity {
             }
         });
 
+
         prefs = getSharedPreferences("mesproduit", MODE_PRIVATE);
         String restoredid = prefs.getString("Id_Produit", null);
         if (restoredid != null) {
             id_produit = restoredid;
-            Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_produit, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
@@ -234,6 +219,30 @@ public class ModifierProduits extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(this);
             queue.add(request);
         }
+    }
+
+    public void getDate(View view) {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateLabel();
+            }
+        }, year, month, day);
+        picker.show();
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd MMMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        date_achat.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void checkpermission() {
@@ -354,13 +363,50 @@ public class ModifierProduits extends AppCompatActivity {
         return 0;
     }
 
+    private boolean Valider() {
+        boolean valide = true;
+        if (Ensegine.isEmpty()) {
+            ensegineproduit.setError("champs_obligatoir");
+            valide = false;
+        }
+        if (Nom.isEmpty()) {
+            nomproduit.setError("champs_obligatoir");
+            valide = false;
+        }
+        if (Garantie.isEmpty()) {
+            dureegrantie.setError("champs_obligatoir");
+            valide = false;
+        }
+        if (DAchat.isEmpty()) {
+            date_achat.setError("champs_obligatoir");
+            valide = false;
+        }
+        return valide;
+    }
+
+
     public void valid_Modif_prod(View view) {
         Ensegine = ensegineproduit.getText().toString().trim();
         Nom = nomproduit.getText().toString().trim();
         Garantie = dureegrantie.getText().toString().trim();
         Marque = marquee.getSelectedItem().toString();
         DAchat = date_achat.getText().toString().trim();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Modif_URL , new Response.Listener<String>() {
+
+        Calendar cal = Calendar.getInstance();
+        String myFormat = "dd MMMM yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        try {
+            cal.setTime(sdf.parse(DAchat));
+            cal.add(Calendar.MONTH, Integer.parseInt(Garantie));
+            Date_Fin = sdf.format(cal.getTime());
+            //Toast.makeText(this, "" + Date_Fin, Toast.LENGTH_SHORT).show();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Modif_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
@@ -390,6 +436,7 @@ public class ModifierProduits extends AppCompatActivity {
                 params.put(DATE_ACHAT, DAchat);
                 params.put(MPHOTOFAC, getStringImage(PHOTOFACTURE));
                 params.put(MPHOTOART, getStringImage(PHOTOARTICLE));
+                params.put(DFIN, Date_Fin);
                 return params;
 
             }
@@ -409,5 +456,22 @@ public class ModifierProduits extends AppCompatActivity {
 
         return temp;
     }
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(ModifierProduits.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
 }
 

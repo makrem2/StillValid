@@ -1,6 +1,7 @@
 package com.example.stillvalid;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,6 +50,7 @@ import java.util.Map;
 public class DeposerAnonnce extends AppCompatActivity {
     String description_anc, categorie_anc, titre_anc, prix_anc, photo,ville_anc, numtel_anc, email_anc;
     ImageView btn_menu;
+    ProgressDialog progressDialog;
     Spinner categorie;
     EditText annonce, description_annonce, prix, ville, email, tel;
     ImageView photoprod;
@@ -243,4 +246,21 @@ public class DeposerAnonnce extends AppCompatActivity {
             email.setText("");
         }
     }
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(DeposerAnonnce.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
 }

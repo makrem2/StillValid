@@ -6,16 +6,18 @@ public class Postcadremesproduit {
     String txt_nom_contrat;
     String txt_duree_contrat;
     String img_contrat;
+    String jours ;
 
     public Postcadremesproduit() {
     }
 
-    public Postcadremesproduit(int id, int idUser, String txt_nom_contrat, String txt_duree_contrat, String img_contrat) {
+    public Postcadremesproduit(int id, int idUser, String txt_nom_contrat, String txt_duree_contrat, String img_contrat, String jours) {
         this.id = id;
         this.idUser = idUser;
         this.txt_nom_contrat = txt_nom_contrat;
         this.txt_duree_contrat = txt_duree_contrat;
         this.img_contrat = img_contrat;
+        this.jours = jours;
     }
 
     public int getId() {
@@ -56,5 +58,13 @@ public class Postcadremesproduit {
 
     public void setImg_contrat(String img_contrat) {
         this.img_contrat = img_contrat;
+    }
+
+    public String getJours() {
+        return jours;
+    }
+
+    public void setJours(String jours) {
+        this.jours = jours;
     }
 }

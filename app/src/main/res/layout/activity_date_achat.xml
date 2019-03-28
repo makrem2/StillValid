@@ -166,6 +166,7 @@
         android:layout_marginRight="15dp"
         android:focusableInTouchMode="false"
         android:focusable="false"
+        android:onClick="getDate"
         android:background="@drawable/add_layout"
         android:hint="07/05/2017"
         app:layout_constraintEnd_toStartOf="@+id/mic"

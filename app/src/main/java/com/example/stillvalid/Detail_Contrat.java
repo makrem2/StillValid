@@ -1,9 +1,12 @@
 package com.example.stillvalid;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -24,12 +27,16 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Detail_Contrat extends AppCompatActivity {
     ImageView btn_menu;
     List<Post> postList = new ArrayList<>();
     TextView Fiche_Contrat, dEcheance, TypeContart;
-    ImageView imagecontrat;
+    CircleImageView imagecontrat;
     String id_contrat;
+    ProgressDialog progressDialog;
+    int jours;
     SharedPreferences prefscontart;
 
     public String url = "http://192.168.1.18/StillValid/ContratById.php?id_contrat=";
@@ -47,11 +54,24 @@ public class Detail_Contrat extends AppCompatActivity {
         prefscontart = getSharedPreferences("mescontart", MODE_PRIVATE);
 
         String restoredid = prefscontart.getString("Id_Contrat", null);
+        String restoredjour = prefscontart.getString("Nb_joursconrat", null);
+
+        if (restoredjour != null) {
+            jours = Integer.parseInt(restoredjour);
+            if (jours <= 0) {
+                imagecontrat.setBorderColor(Color.RED);
+
+            } else {
+                imagecontrat.setBorderColor(Color.parseColor("#358c42"));
+
+            }
+           // Toast.makeText(this, jours + "", Toast.LENGTH_SHORT).show();
+        }
 
         if (restoredid != null) {
             id_contrat = restoredid;
             loadcontrat();
-            Toast.makeText(this, id_contrat, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, id_contrat, Toast.LENGTH_SHORT).show();
         }
 
         btn_menu = findViewById(R.id.img_menu);
@@ -112,4 +132,28 @@ public class Detail_Contrat extends AppCompatActivity {
         startActivity(new Intent(this, Voir_Contrat.class));
 
     }
+
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }
+
+    public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }
+
+    public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(Detail_Contrat.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
 }

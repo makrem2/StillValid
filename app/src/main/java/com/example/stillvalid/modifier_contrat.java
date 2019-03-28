@@ -2,6 +2,7 @@ package com.example.stillvalid;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -46,23 +48,27 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class modifier_contrat extends AppCompatActivity {
-    private static final String TAG = "Date_echence";
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    DatePickerDialog picker;
+    Calendar myCalendar = Calendar.getInstance();
     private static final int REQUEST_PERMISSION = 1;
     public static final int REQUEST_IMAGE = 300;
     public static final int REQUEST_IMAGE_imp = 100;
-    ImageView btn_menu,image,photocontrat;
+    ImageView btn_menu, image, photocontrat;
+    ProgressDialog progressDialog;
     Spinner Type_contrat;
     EditText Date_Echeance;
     TextView Modifer_contrat;
-    String id_contrat,type_contrat,date_echeance;
+    String id_contrat, type_contrat, date_echeance;
     ArrayAdapter<String> Adapter;
+
     ArrayList<String> TypeContrat = new ArrayList<>();
     SharedPreferences prefscontart;
     SharedPreferences.Editor editors;
@@ -83,7 +89,7 @@ public class modifier_contrat extends AppCompatActivity {
         setContentView(R.layout.activity_modifier_contrat);
         checkpermission();
         image = findViewById(R.id.profile_image);
-        Type_contrat=findViewById(R.id.sp_type_contrat);
+        Type_contrat = findViewById(R.id.sp_type_contrat);
         Date_Echeance = findViewById(R.id.edit_date_echeance);
         Modifer_contrat = findViewById(R.id.modifer_contrat);
         photocontrat = findViewById(R.id.img_cont_modif);
@@ -95,42 +101,6 @@ public class modifier_contrat extends AppCompatActivity {
                 MODIFPHOTO();
             }
         });
-
-        Date_Echeance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(modifier_contrat.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateSetListener,year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month+1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/"+year);
-                String date = month + "/" + day + "/" + year;
-                Date_Echeance.setText(date);
-            }
-        };
-
-        btn_menu = findViewById(R.id.menu);
-        btn_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(modifier_contrat.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
-                popupMenu.show();
-            }
-        });
-
-
-
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -138,7 +108,7 @@ public class modifier_contrat extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         TypeContrat.add(response.getJSONObject(i).getString("libelle"));
                     }
-                    Adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_item, TypeContrat);
+                    Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, TypeContrat);
                     Type_contrat.setAdapter(Adapter);
 
                 } catch (JSONException e) {
@@ -180,7 +150,6 @@ public class modifier_contrat extends AppCompatActivity {
                     try {
 
                         Date_Echeance.setText(response.getJSONObject(0).getString("dEcheance"));
-
                         Type_contrat.setSelection(TrouverIndice(response.getJSONObject(0).getString("type")));
                         Picasso.get()
                                 .load(response.getJSONObject(0).getString("photo"))
@@ -203,6 +172,7 @@ public class modifier_contrat extends AppCompatActivity {
             queue2.add(request2);
         }
     }
+
     public void checkpermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -210,7 +180,8 @@ public class modifier_contrat extends AppCompatActivity {
                     REQUEST_PERMISSION);
         }
     }
-    private void MODIFPHOTO(){
+
+    private void MODIFPHOTO() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_IMAGE_imp);
     }
@@ -230,13 +201,13 @@ public class modifier_contrat extends AppCompatActivity {
                 PHOTO = bitmapContaratimp;
 
 
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -247,6 +218,7 @@ public class modifier_contrat extends AppCompatActivity {
             }
         }
     }
+
     public String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
@@ -254,6 +226,7 @@ public class modifier_contrat extends AppCompatActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
+
     public Bitmap rotationImage(Bitmap bitmap, String imageUri) throws IOException {
         ExifInterface exifInterface = new ExifInterface(imageUri);
         int oreintation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -290,8 +263,9 @@ public class modifier_contrat extends AppCompatActivity {
     }
 
 
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
 
     public int TrouverIndice(String itemCt) {
         int i = 0;
@@ -305,7 +279,7 @@ public class modifier_contrat extends AppCompatActivity {
     }
 
     public void valid_modif_c(View view) {
-        type_contrat =  Type_contrat .getSelectedItem().toString();
+        type_contrat = Type_contrat.getSelectedItem().toString();
         date_echeance = Date_Echeance.getText().toString().trim();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, modifcontrat, new Response.Listener<String>() {
             @Override
@@ -342,8 +316,6 @@ public class modifier_contrat extends AppCompatActivity {
     }
 
 
-
-
     public String getStringImage(Bitmap bitmap) {
         Log.i("MyHitesh", "" + bitmap);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -353,5 +325,52 @@ public class modifier_contrat extends AppCompatActivity {
 
 
         return temp;
+    }
+
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }
+
+    public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }
+
+    public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(modifier_contrat.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
+    public void getDate(View view) {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateLabel();
+            }
+        }, year, month, day);
+        picker.show();
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd MMMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date_Echeance.setText(sdf.format(myCalendar.getTime()));
     }
 }

@@ -118,7 +118,7 @@
         android:layout_weight="7"
         android:background="@drawable/add_layout"
         android:padding="8dp"
-        android:text="Mes produits"
+        android:text="Mes Produits"
         android:textColor="@color/noir"
         android:textSize="18sp"
         android:textStyle="italic|normal"

@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Inscription extends AppCompatActivity {
-    String URL="http://192.168.1.16/stillvalid/signup.php";
+    String URL="http://192.168.1.18/stillvalid/signup.php";
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     //"(?=.*[0-9])" +        //at least 1 digit

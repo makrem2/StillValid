@@ -2,35 +2,43 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="200dp"
     android:background="@color/bgColor">
 
     <TextView
-        android:id="@+id/ddd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="123"
+        android:id="@+id/txtgarantie"
+        android:layout_width="38dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center"
+        android:text="142"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtgarantie"
-        android:layout_width="0dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:gravity="center"
-        android:text="142 j "
+        android:id="@+id/jours"
+        android:layout_width="36dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:text="J"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="15sp"
-        android:textStyle="normal|italic"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtgarantie"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -63,15 +71,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtgarantie" />
 
-    <ImageView
-        android:id="@+id/img_check"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtgarantie"
-        app:srcCompat="@drawable/check_produits" />
 
     <TextView
         android:id="@+id/txtDat"

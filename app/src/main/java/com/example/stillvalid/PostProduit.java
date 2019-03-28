@@ -5,18 +5,18 @@ public class PostProduit {
     String txt_prod;
     String txt_duree;
     String img_prod;
-    String txt;
+    String jours ;
 
 
     public PostProduit() {
     }
 
-    public PostProduit(int id_prod, String txt_prod, String txt_duree, String img_prod, String txt) {
+    public PostProduit(int id_prod, String txt_prod, String txt_duree, String img_prod, String jours) {
         this.id_prod = id_prod;
         this.txt_prod = txt_prod;
         this.txt_duree = txt_duree;
         this.img_prod = img_prod;
-        this.txt = txt;
+        this.jours = jours;
     }
 
     public int getId_prod() {
@@ -51,11 +51,11 @@ public class PostProduit {
         this.img_prod = img_prod;
     }
 
-    public String getTxt() {
-        return txt;
+    public String getJours() {
+        return jours;
     }
 
-    public void setTxt(String txt) {
-        this.txt = txt;
+    public void setJours(String jours) {
+        this.jours = jours;
     }
 }

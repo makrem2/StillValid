@@ -279,11 +279,14 @@
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
+            android:onClick="getDate"
+            android:inputType="date"
             android:layout_marginTop="390dp" />
 
         <EditText
             android:id="@+id/edit_garantie"
             android:layout_width="190dp"
+            android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
             android:layout_marginTop="445dp" />

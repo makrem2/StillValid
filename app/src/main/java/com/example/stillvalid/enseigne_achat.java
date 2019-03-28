@@ -1,11 +1,13 @@
 package com.example.stillvalid;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ public class enseigne_achat extends AppCompatActivity {
     ImageView btn_menu;
     EditText Enseigne;
     SharedPreferences prefs;
+    ProgressDialog progressDialog;
     SharedPreferences.Editor editors;
 
     @Override
@@ -99,4 +102,28 @@ public class enseigne_achat extends AppCompatActivity {
         }
 
     }
+
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }
+
+    public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }
+
+    public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(enseigne_achat.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
 }

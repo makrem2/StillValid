@@ -1,5 +1,6 @@
 package com.example.stillvalid;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +43,7 @@ public class Fiche_Produite extends AppCompatActivity {
     List<Post> postList = new ArrayList<>();
     TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
     public String url = "http://192.168.1.18/StillValid/boutiqueById.php?id_annonce=";
-    public static final String sup_URL = "http://192.168.1.18/StillValid/Supprimer_annonceById.php";
+    public static final String sup_URL = "http://192.168.1.18/StillValid/Supprimer_annonceById.php?id_annonce=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,11 +132,12 @@ public class Fiche_Produite extends AppCompatActivity {
     }
 
     public void supprimer(MenuItem item) {
-        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, sup_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, sup_URL+id_annonce, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
                     Toast.makeText(Fiche_Produite.this, response, Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(),Boutique.class));
                 } else {
                     Toast.makeText(Fiche_Produite.this, "error", Toast.LENGTH_SHORT).show();
                 }
@@ -152,5 +154,6 @@ public class Fiche_Produite extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
 }
 

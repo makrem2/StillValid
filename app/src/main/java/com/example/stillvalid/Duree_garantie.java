@@ -1,6 +1,7 @@
 package com.example.stillvalid;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.speech.RecognizerIntent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,6 +30,7 @@ public class Duree_garantie extends AppCompatActivity {
     EditText duree_garentie, dddd;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
+    ProgressDialog progressDialog;
     private TextInputLayout textInputgrantie;
     String Dateeachat;
     Calendar cal;
@@ -52,8 +55,6 @@ public class Duree_garantie extends AppCompatActivity {
         textInputgrantie = findViewById(R.id.text_input_garentie);
         prefs = getSharedPreferences("Produit", MODE_PRIVATE);
         editors = prefs.edit();
-
-        Dateeachat = prefs.getString("dateachat", null);
 
 
         btn_menu = findViewById(R.id.img_menu);
@@ -145,5 +146,28 @@ public class Duree_garantie extends AppCompatActivity {
 
 
     }
+
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }
+
+    public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }
+
+    public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(Duree_garantie.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
 
 }

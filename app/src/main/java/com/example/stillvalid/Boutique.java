@@ -1,5 +1,6 @@
 package com.example.stillvalid;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -33,6 +35,7 @@ import java.util.List;
 public class Boutique extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PostsAdapter postsAdapter;
+    ProgressDialog progressDialog;
     private RecyclerView.LayoutManager layoutManager;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
@@ -118,4 +121,22 @@ public class Boutique extends AppCompatActivity {
         popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
         popupMenu.show();
     }
+    public void LISTE_DES_REMINDERS(MenuItem item) {
+
+        startActivity(new Intent(this, MesProduits.class));
+    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+
+        startActivity(new Intent(this, Ajouter_Produits.class));
+    }public void BOUTIQUE(MenuItem item) {
+
+        startActivity(new Intent(this, Boutique.class));
+    }public void DECONNEXION(MenuItem item) {
+        progressDialog = new ProgressDialog(Boutique.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+        startActivity(new Intent(this, Login.class));
+    }
+
+
+
 }
