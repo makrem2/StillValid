@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Login extends AppCompatActivity {
-    public static final String LOGIN_URL = "http://192.168.1.18/StillValid/login.php";
+    Config config;
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     String email,password;
@@ -80,21 +80,6 @@ public class Login extends AppCompatActivity {
         }
     }
 
-   /* private boolean validateUsername() {
-        String usernameInput = textInputUsername.getEditText().getText().toString().trim();
-
-        if (usernameInput.isEmpty()) {
-            textInputUsername.setError("Field can't be empty");
-            return false;
-        } else if (usernameInput.length() > 15) {
-            textInputUsername.setError("Username too long");
-            return false;
-        } else {
-            textInputUsername.setError(null);
-            return true;
-        }
-    }*/
-
     private boolean validatePassword() {
         String passwordInput = textInputPassword.getEditText().getText().toString().trim();
 
@@ -120,7 +105,7 @@ public class Login extends AppCompatActivity {
             return;
         }
         else {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     if (!response.isEmpty()) {

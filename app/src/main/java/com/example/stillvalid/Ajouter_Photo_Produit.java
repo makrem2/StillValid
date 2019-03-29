@@ -178,14 +178,13 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
     }
 
     public void valid_photo(View view) {
-       if ((Ajouter_Photo_Produit.PHOTOARTICLE != null)&&(Ajouter_Photo_Produit.PHOTOFACTURE != null)) {
-        Intent intent = new Intent(getApplicationContext(), recapitulatife_Produit.class);
-        startActivity(intent);
+        if ((Ajouter_Photo_Produit.PHOTOARTICLE != null) && (Ajouter_Photo_Produit.PHOTOFACTURE != null)) {
+            Intent intent = new Intent(getApplicationContext(), recapitulatife_Produit.class);
+            startActivity(intent);
 
-              } else {
+        } else {
             Toast.makeText(this, "choisissez une image", Toast.LENGTH_SHORT).show();
-         }
-       // Toast.makeText(this, ""+PHOTOARTICLE+PHOTOFACTURE, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void return_ajou_ph_prod(View view) {
@@ -195,16 +194,23 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
     public void acueil(View view) {
         startActivity(new Intent(this, Accueil.class));
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Ajouter_Photo_Produit.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

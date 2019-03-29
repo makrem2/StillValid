@@ -26,13 +26,13 @@ public class Accueil extends AppCompatActivity {
 
 
     }
-    public void mes_prod(View view) {
-        startActivity(new Intent(this,MesProduits.class));
-    }
     public void ajout_prod(View view) {startActivity(new Intent(this,Ajouter_Produits.class));
     }
 
     public void bou(View view) {
         startActivity(new Intent(this,Boutique.class));
+    }
+
+    public void mesprod(View view) {startActivity(new Intent(this,MesProduits.class));
     }
 }

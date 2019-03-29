@@ -34,7 +34,7 @@ public class Type_contrat extends AppCompatActivity {
     ArrayList<String> List_Type = new ArrayList<>();
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
-
+    Config config;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,7 @@ public class Type_contrat extends AppCompatActivity {
         typecontrat = findViewById(R.id.spinner2);
         prefs = getSharedPreferences("ajoutercontart", MODE_PRIVATE);
         editors = prefs.edit();
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLTypes.php", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.GetTypeContrat, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {

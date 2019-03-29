@@ -39,12 +39,10 @@ public class Fiche_Produite extends AppCompatActivity {
     SharedPreferences prefs,prefs2;
     ImageView imgproduit;
     Context context;
+    Config config;
     ImageView editbnt;
     List<Post> postList = new ArrayList<>();
     TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
-    public String url = "http://192.168.1.18/StillValid/boutiqueById.php?id_annonce=";
-    public static final String sup_URL = "http://192.168.1.18/StillValid/Supprimer_annonceById.php?id_annonce=";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +78,7 @@ public class Fiche_Produite extends AppCompatActivity {
     }
 
     private void loadboutique() {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_annonce, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.BoutiqueById + id_annonce, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -132,7 +130,7 @@ public class Fiche_Produite extends AppCompatActivity {
     }
 
     public void supprimer(MenuItem item) {
-        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, sup_URL+id_annonce, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, config.SUPPRIMER_BoutiqueById+id_annonce, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {

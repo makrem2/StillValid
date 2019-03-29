@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +33,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetaileProduits extends AppCompatActivity {
-    ImageView btn_menu, check;
+    ImageView btn_menu, check, menuItem;
     String id_produit, SAV, marque;
     SharedPreferences prefs, prefscontart;
     CircleImageView imageproduit;
@@ -40,7 +41,7 @@ public class DetaileProduits extends AppCompatActivity {
     ProgressDialog progressDialog;
     List<Post> postList = new ArrayList<>();
     TextView dureegrantie, txtdate, enseigne, nomproduit;
-    public String url = "http://192.168.1.18/StillValid/ProduitById.php?id_produit=";
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class DetaileProduits extends AppCompatActivity {
         txtdate = findViewById(R.id.txtDat);
         enseigne = findViewById(R.id.enseigne);
         nomproduit = findViewById(R.id.txtnom);
+        menuItem = findViewById(R.id.menuItem);
 
         prefs = getSharedPreferences("mesproduit", MODE_PRIVATE);
 
@@ -71,7 +73,7 @@ public class DetaileProduits extends AppCompatActivity {
                 imageproduit.setBorderColor(Color.parseColor("#358c42"));
                 check.setImageResource(R.drawable.check_produits);
             }
-            Toast.makeText(this, jours + "", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, jours + "", Toast.LENGTH_SHORT).show();
         }
         if (restoredid != null) {
             id_produit = restoredid;
@@ -93,7 +95,7 @@ public class DetaileProduits extends AppCompatActivity {
     }
 
     private void loadproduit() {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_produit, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Config.ProduitById + id_produit, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -134,7 +136,11 @@ public class DetaileProduits extends AppCompatActivity {
     }
 
     public void EditProduit(View view) {
-        startActivity(new Intent(this, ModifierProduits.class));
+        PopupMenu popupMenu = new PopupMenu(DetaileProduits.this, menuItem);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_ficheproduit, popupMenu.getMenu());
+        popupMenu.show();
+
+        //startActivity(new Intent(this, ModifierProduits.class));
     }
 
 
@@ -161,7 +167,7 @@ public class DetaileProduits extends AppCompatActivity {
 
     public void getSupport(View view) {
 
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetMarquesBySav.php?marque=" + marque, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.GetSav + marque, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -210,5 +216,32 @@ public class DetaileProduits extends AppCompatActivity {
         startActivity(new Intent(this, Login.class));
     }
 
+    public void modifer(MenuItem item) {
+        startActivity(new Intent(this, ModifierProduits.class));
+    }
+
+    public void supprimer(MenuItem item) {
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, config.SUPPRIMER_produitById + id_produit, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()) {
+                    Toast.makeText(DetaileProduits.this, response, Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), MesProduits.class));
+                } else {
+                    Toast.makeText(DetaileProduits.this, "error", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(DetaileProduits.this, error.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
 
 }

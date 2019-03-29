@@ -26,6 +26,7 @@
         app:layout_constraintVertical_chainStyle="spread"
         app:srcCompat="@drawable/logo" />
 
+
     <TextView
         android:id="@+id/txt_still"
         android:layout_width="200dp"

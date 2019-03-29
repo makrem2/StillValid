@@ -23,7 +23,8 @@ public class Voir_Contrat extends AppCompatActivity {
     SharedPreferences prefscontart;
     ImageView voircont;
     String id_contrat;
-    public String url = "http://192.168.1.18/StillValid/ContratById.php?id_contrat=";
+    Config config;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +37,8 @@ public class Voir_Contrat extends AppCompatActivity {
 
         if (restoredid != null) {
             id_contrat = restoredid;
-            Toast.makeText(this, id_contrat, Toast.LENGTH_SHORT).show();
 
-            JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, url + id_contrat, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, config.ContratById + id_contrat, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     try {

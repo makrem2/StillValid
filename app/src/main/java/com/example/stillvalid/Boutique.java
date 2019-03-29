@@ -36,13 +36,11 @@ public class Boutique extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PostsAdapter postsAdapter;
     ProgressDialog progressDialog;
-    private RecyclerView.LayoutManager layoutManager;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     List<Post> postList = new ArrayList<>();
-    public static final String Boutique_URL = "http://192.168.1.18/StillValid/Boutique.php";
+    Config config;
     ImageView btn_menu;
-    int id_annonce;
     Context contex;
 
     @Override
@@ -60,7 +58,7 @@ public class Boutique extends AppCompatActivity {
     }
 
     private void loadboutique() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Boutique_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, config.Boutique_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -89,7 +87,6 @@ public class Boutique extends AppCompatActivity {
                                             TextView txt = view.findViewById(R.id.id);
                                             editors.putString("Id_Annonce", txt.getText().toString());
                                             editors.commit();
-//                                            Toast.makeText(Boutique.this, txt.getText(), Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(getApplicationContext(), Fiche_Produite.class);
                                             startActivity(intent);
                                         }
@@ -121,22 +118,28 @@ public class Boutique extends AppCompatActivity {
         popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
         popupMenu.show();
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Boutique.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
         startActivity(new Intent(this, Login.class));
     }
-
 
 
 }

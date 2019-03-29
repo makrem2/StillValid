@@ -49,8 +49,7 @@ public class MesProduits extends AppCompatActivity {
     String id_user, nbjours_produit, nbjours_contrat;
     SharedPreferences prefs, prefss, prefsphotoprod, prefscontart;
     SharedPreferences.Editor editors, editorsphotoprod, editorscontart;
-    public static final String Produit_URL = "http://192.168.1.18/StillValid/mesproduit.php?id_user=";
-    public static final String Contrat_URL = "http://192.168.1.18/StillValid/mescontrat.php?id_user=";
+Config config;
     ImageView btn_menu;
 
     @Override
@@ -87,7 +86,7 @@ public class MesProduits extends AppCompatActivity {
     }
 
     private void loadProduit() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Produit_URL + id_user,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, config.Produit_URL + id_user,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -145,7 +144,7 @@ public class MesProduits extends AppCompatActivity {
     }
 
     public void loadContart() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Contrat_URL + id_user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, config.Contrat_URL + id_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

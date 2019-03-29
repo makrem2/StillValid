@@ -1,6 +1,7 @@
 package com.example.stillvalid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,9 +51,7 @@ public class Modifier_Annonce extends AppCompatActivity {
 
     String categorie, titre, description, prix, ville, numtel, id_annonce;
 
-    public static final String DATA_URL = "http://192.168.1.18/StillValid/GetALLCategorie.php";
-    public static final String Modif_URL = "http://192.168.1.18/StillValid/Modifier_annonceById.php";
-    public String url = "http://192.168.1.18/StillValid/boutiqueById.php?id_annonce=";
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +67,9 @@ public class Modifier_Annonce extends AppCompatActivity {
         telphone = findViewById(R.id.edit_tel);
 
 
-
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
 
-        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, config.GetAllGATEGORIE, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -95,13 +93,12 @@ public class Modifier_Annonce extends AppCompatActivity {
         queue2.add(request2);
 
 
-
         String restoredid = prefs.getString("Id_Annonce", null);
         if (restoredid != null) {
             id_annonce = restoredid;
             //  Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
 
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_annonce, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.BoutiqueById + id_annonce, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     try {
@@ -114,20 +111,15 @@ public class Modifier_Annonce extends AppCompatActivity {
                         descriptionn.setText(response.getJSONObject(0).getString("description"));
                         //Id_user.setText(response.getInt("user_id"));
 
-                    Picasso.get()
-                            .load(response.getJSONObject(0).getString("photoProduit"))
-                            .resize(400, 500)
-                            .into(image);
+                        Picasso.get()
+                                .load(response.getJSONObject(0).getString("photoProduit"))
+                                .resize(400, 500)
+                                .into(image);
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-//                if (List.get(0).getUser_id().equals(Id_user)) {
-//                    editbnt.setVisibility(View.VISIBLE);
-//                } else {
-//                    editbnt.setVisibility(View.INVISIBLE);
-//                }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -150,11 +142,13 @@ public class Modifier_Annonce extends AppCompatActivity {
         ville = villee.getText().toString().trim();
         numtel = telphone.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Modif_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, config.Modif_AnnonceById, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
                     Toast.makeText(Modifier_Annonce.this, response, Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), Fiche_Produite.class));
+
                 } else {
                     Toast.makeText(Modifier_Annonce.this, "error", Toast.LENGTH_SHORT).show();
                 }

@@ -47,20 +47,18 @@ public class Recapulatif_contrat extends AppCompatActivity {
     ProgressDialog progressDialog;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
+    Config config;
     String typecontrat, dateecheance, importphoto, userid;
     ArrayAdapter<String> Adapter;
     DatePickerDialog picker;
-    Calendar myCalendar=Calendar.getInstance();
-    String insertcontrat = "http://192.168.1.18/StillValid/AjouterContrat.php";
+    Calendar myCalendar = Calendar.getInstance();
     ArrayList<String> List_Marque = new ArrayList<>();
-    Bitmap bitmap;
     EditText Dateechance;
     Spinner Typecontrat;
 
     public static final String TYPECONTRAT = "type";
     public static final String DATEECHANCE = "dEcheance";
     public static final String IMPORT_PHOTO = "photo";
-   // public static final String PRENDRE_PHOTO = "prendre_photo";
     public static final String USER_ID = "user_id";
 
     @Override
@@ -91,7 +89,6 @@ public class Recapulatif_contrat extends AppCompatActivity {
 
 
         Dateechance.setText(dateecheance);
-        Toast.makeText(this, Ajouter_photo_contrat.PHOTO + "", Toast.LENGTH_SHORT).show();
 
         if (importphoto != null) {
             checkimg.setImageResource(R.drawable.ic_checked);
@@ -99,7 +96,7 @@ public class Recapulatif_contrat extends AppCompatActivity {
         } else {
             echec.setImageResource(R.drawable.ic_x);
         }
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLTypes.php", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.GetTypeContrat, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -139,49 +136,50 @@ public class Recapulatif_contrat extends AppCompatActivity {
         typecontrat = Typecontrat.getSelectedItem().toString();
         dateecheance = Dateechance.getText().toString().trim();
 
-        if (dateecheance.isEmpty()){
+        if (dateecheance.isEmpty()) {
 
             Toast.makeText(this, "champ(s) doit être(s) remplit(s) ", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
 
 
-        RequestQueue requestQueue = Volley.newRequestQueue(Recapulatif_contrat.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, insertcontrat, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (!response.isEmpty()) {
-                    Log.i("Myresponse", "" + response);
-                    Toast.makeText(Recapulatif_contrat.this, "" + response, Toast.LENGTH_SHORT).show();
-                    Ajouter_photo_contrat.PHOTO = null;
-                } else {
+            RequestQueue requestQueue = Volley.newRequestQueue(Recapulatif_contrat.this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, config.Insertcontrat, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (!response.isEmpty()) {
+                        Log.i("Myresponse", "" + response);
+                        Toast.makeText(Recapulatif_contrat.this, "" + response, Toast.LENGTH_SHORT).show();
+                        Ajouter_photo_contrat.PHOTO = null;
+                    } else {
 
-                    Toast.makeText(Recapulatif_contrat.this, "errr", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Recapulatif_contrat.this, "errr", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("Mysmart", "" + error);
+                    Toast.makeText(Recapulatif_contrat.this, "" + error, Toast.LENGTH_SHORT).show();
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("Mysmart", "" + error);
-                Toast.makeText(Recapulatif_contrat.this, "" + error, Toast.LENGTH_SHORT).show();
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param = new HashMap<>();
-                param.put(USER_ID, userid);
-                param.put(TYPECONTRAT, typecontrat);
-                param.put(DATEECHANCE, dateecheance);
-                param.put(IMPORT_PHOTO, getStringImage(Ajouter_photo_contrat.PHOTO));
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> param = new HashMap<>();
+                    param.put(USER_ID, userid);
+                    param.put(TYPECONTRAT, typecontrat);
+                    param.put(DATEECHANCE, dateecheance);
+                    param.put(IMPORT_PHOTO, getStringImage(Ajouter_photo_contrat.PHOTO));
 
 
-                return param;
-            }
-        };
+                    return param;
+                }
+            };
 
-        requestQueue.add(stringRequest);
-    }}
+            requestQueue.add(stringRequest);
+        }
+    }
 
     public String getStringImage(Bitmap bitmap) {
         Log.i("MyHitesh", "" + bitmap);
@@ -210,7 +208,7 @@ public class Recapulatif_contrat extends AppCompatActivity {
         int day = cldr.get(Calendar.DAY_OF_MONTH);
         int month = cldr.get(Calendar.MONTH);
         int year = cldr.get(Calendar.YEAR);
-        picker = new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
+        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
@@ -222,21 +220,29 @@ public class Recapulatif_contrat extends AppCompatActivity {
         }, year, month, day);
         picker.show();
     }
+
     private void updateLabel() {
         String myFormat = "dd MMMM yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         Dateechance.setText(sdf.format(myCalendar.getTime()));
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Recapulatif_contrat.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

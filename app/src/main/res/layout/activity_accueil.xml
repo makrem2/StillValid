@@ -19,7 +19,6 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:contentDescription="@string/logo"
-        android:onClick="pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +69,6 @@
                 android:layout_width="72dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:onClick="mes_prod"
                 android:paddingTop="5dp"
                 app:srcCompat="@drawable/produit"
                 tools:ignore="VectorDrawableCompat" />
@@ -94,6 +92,7 @@
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:onClick="ajout_prod"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="268dp"
             tools:layout_editor_absoluteY="351dp">
@@ -103,7 +102,6 @@
                 android:layout_width="79dp"
                 android:layout_height="78dp"
                 android:layout_weight="2"
-                android:onClick="ajout_prod"
                 android:paddingTop="5dp"
                 app:srcCompat="@drawable/ajoutproduit"
                 tools:ignore="VectorDrawableCompat" />
@@ -113,7 +111,6 @@
                 android:layout_width="94dp"
                 android:layout_height="65dp"
                 android:layout_weight="1"
-                android:onClick="ajou_prod"
                 android:paddingTop="3dp"
                 android:text="@string/ap"
                 android:textAlignment="center"
@@ -128,7 +125,7 @@
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:onClick="getSav"
+            android:onClick="bou"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="268dp"
             tools:layout_editor_absoluteY="351dp">
@@ -138,7 +135,6 @@
                 android:layout_width="72dp"
                 android:layout_height="64dp"
                 android:layout_weight="2"
-                android:onClick="bou"
                 android:paddingTop="5dp"
                 app:srcCompat="@drawable/botique"
                 tools:ignore="VectorDrawableCompat" />
@@ -169,11 +165,13 @@
         android:id="@+id/bas"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
+        android:textColor="@color/noir"
         android:textSize="12sp"
         android:textStyle="normal|italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 

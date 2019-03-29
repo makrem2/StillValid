@@ -27,13 +27,11 @@ import java.util.regex.Pattern;
 public class Duree_garantie extends AppCompatActivity {
 
     ImageView btn_menu;
-    EditText duree_garentie, dddd;
+    EditText duree_garentie;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     ProgressDialog progressDialog;
     private TextInputLayout textInputgrantie;
-    String Dateeachat;
-    Calendar cal;
 
     private static final Pattern Duree_PATTERN =
             Pattern.compile("^" +
@@ -110,16 +108,11 @@ public class Duree_garantie extends AppCompatActivity {
     }
 
     public void valid_duree_garantie(View view) {
-
         String dureegrantie = duree_garentie.getText().toString();
         if (!validateDuree()) {
             return;
         } else if (!dureegrantie.isEmpty()) {
             editors.putString("duree garentie", dureegrantie);
-
-            Toast.makeText(this, "" + duree_garentie.getText(), Toast.LENGTH_SHORT).show();
-            //editors.putString("date_fin",(addMonth(Dfin)));
-            //editors.apply();
             editors.apply();
             startActivity(new Intent(this, Ajouter_Photo_Produit.class));
         } else {

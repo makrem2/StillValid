@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
@@ -30,16 +31,17 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Detail_Contrat extends AppCompatActivity {
-    ImageView btn_menu;
+    ImageView btn_menu,menu_Item;
     List<Post> postList = new ArrayList<>();
     TextView Fiche_Contrat, dEcheance, TypeContart;
     CircleImageView imagecontrat;
     String id_contrat;
     ProgressDialog progressDialog;
     int jours;
+    Config config;
     SharedPreferences prefscontart;
 
-    public String url = "http://192.168.1.18/StillValid/ContratById.php?id_contrat=";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class Detail_Contrat extends AppCompatActivity {
         dEcheance = findViewById(R.id.txt_Dat);
         TypeContart = findViewById(R.id.typecontart);
         imagecontrat = findViewById(R.id.profile_image);
-
+        menu_Item = findViewById(R.id.menu_Item);
         prefscontart = getSharedPreferences("mescontart", MODE_PRIVATE);
 
         String restoredid = prefscontart.getString("Id_Contrat", null);
@@ -86,7 +88,7 @@ public class Detail_Contrat extends AppCompatActivity {
     }
 
     public void loadcontrat() {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_contrat, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.ContratById + id_contrat, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -124,7 +126,9 @@ public class Detail_Contrat extends AppCompatActivity {
     }
 
     public void EditContrat(View view) {
-        startActivity(new Intent(this, modifier_contrat.class));
+        PopupMenu popupMenu = new PopupMenu(Detail_Contrat.this, menu_Item);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_ficheproduit, popupMenu.getMenu());
+        popupMenu.show();
     }
 
     public void VoirContrat(View view) {
@@ -153,6 +157,33 @@ public class Detail_Contrat extends AppCompatActivity {
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
         startActivity(new Intent(this, Login.class));
+    }
+
+    public void modifer(MenuItem item) {
+        startActivity(new Intent(this, modifier_contrat.class));
+    }
+    public void supprimer(MenuItem item) {
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, config.SUPPRIMER_ContratById + id_contrat, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()) {
+                    Toast.makeText(Detail_Contrat.this, response, Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(),MesProduits.class));
+                } else {
+                    Toast.makeText(Detail_Contrat.this, "error", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Detail_Contrat.this, error.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 
 

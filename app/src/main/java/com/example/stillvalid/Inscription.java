@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Inscription extends AppCompatActivity {
-    String URL="http://192.168.1.18/stillvalid/signup.php";
+    Config config;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     //"(?=.*[0-9])" +        //at least 1 digit
@@ -115,7 +115,7 @@ public class Inscription extends AppCompatActivity {
         }
         else {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            StringRequest stringRequest=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            StringRequest stringRequest=new StringRequest(Request.Method.POST,config.INSCRIPTION, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     if(!response.isEmpty()){

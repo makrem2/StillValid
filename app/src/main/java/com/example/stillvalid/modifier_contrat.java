@@ -68,20 +68,18 @@ public class modifier_contrat extends AppCompatActivity {
     TextView Modifer_contrat;
     String id_contrat, type_contrat, date_echeance;
     ArrayAdapter<String> Adapter;
-
     ArrayList<String> TypeContrat = new ArrayList<>();
     SharedPreferences prefscontart;
     SharedPreferences.Editor editors;
     Bitmap bitmapContaratimp;
     static Bitmap PHOTO;
     Uri imageContratimport;
+    Config config;
     public static final String TYPECONTRAT = "type";
     public static final String ID_CONTRAT = "id_contrat";
     public static final String DATEECHANCE = "dEcheance";
     public static final String IMPORT_PHOTO = "photo";
-    public static final String DATA_URL = "http://192.168.1.18/StillValid/GetALLTypes.php";
-    public String url = "http://192.168.1.18/StillValid/ContratById.php?id_contrat=";
-    String modifcontrat = "http://192.168.1.18/StillValid/Modifier_contratById.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +99,7 @@ public class modifier_contrat extends AppCompatActivity {
                 MODIFPHOTO();
             }
         });
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.GetTypeContrat, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -142,9 +140,8 @@ public class modifier_contrat extends AppCompatActivity {
 
         if (restoredid != null) {
             id_contrat = restoredid;
-            Toast.makeText(this, id_contrat, Toast.LENGTH_SHORT).show();
 
-            JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, url + id_contrat, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, config.ContratById + id_contrat, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     try {
@@ -278,43 +275,55 @@ public class modifier_contrat extends AppCompatActivity {
         return 0;
     }
 
+    private boolean Valider() {
+        boolean valide = true;
+        if (date_echeance.isEmpty()) {
+            Date_Echeance.setError("champs_obligatoir");
+            valide = false;
+        }
+        return valide;
+    }
+
     public void valid_modif_c(View view) {
         type_contrat = Type_contrat.getSelectedItem().toString();
         date_echeance = Date_Echeance.getText().toString().trim();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, modifcontrat, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (!response.isEmpty()) {
-                    Toast.makeText(modifier_contrat.this, response, Toast.LENGTH_LONG).show();
 
-                } else {
-                    Toast.makeText(modifier_contrat.this, "error", Toast.LENGTH_SHORT).show();
+
+        if (Valider()) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, config.ModifContratById, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (!response.isEmpty()) {
+                        Toast.makeText(modifier_contrat.this, response, Toast.LENGTH_LONG).show();
+
+                    } else {
+                        Toast.makeText(modifier_contrat.this, "error", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(modifier_contrat.this, error.toString(), Toast.LENGTH_LONG).show();
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(modifier_contrat.this, error.toString(), Toast.LENGTH_LONG).show();
+                }
+            }) {
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(ID_CONTRAT, id_contrat);
+                    params.put(DATEECHANCE, date_echeance);
+                    params.put(TYPECONTRAT, type_contrat);
+                    params.put(IMPORT_PHOTO, getStringImage(PHOTO));
 
-            }
-        }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(ID_CONTRAT, id_contrat);
-                params.put(TYPECONTRAT, type_contrat);
-                params.put(DATEECHANCE, date_echeance);
-                params.put(IMPORT_PHOTO, getStringImage(PHOTO));
+                    return params;
 
-                return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
 
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
+        }
     }
-
 
     public String getStringImage(Bitmap bitmap) {
         Log.i("MyHitesh", "" + bitmap);

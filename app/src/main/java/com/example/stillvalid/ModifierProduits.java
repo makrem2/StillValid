@@ -86,12 +86,9 @@ public class ModifierProduits extends AppCompatActivity {
     public static final String DFIN = "dFin";
     public static final String MPHOTOFAC = "facture";
     public static final String MPHOTOART = "photo";
-
-    String Ensegine, Nom, Garantie, DAchat, id_produit, Marque, sav, Date_Fin;
-
-    public static final String DATA_URL = "http://192.168.1.18/StillValid/GetALLMarque.php";
-    public static final String Modif_URL = "http://192.168.1.18/StillValid/Modifier_ProduitById.php";
-    public String url = "http://192.168.1.18/StillValid/ProduitById.php?id_produit=";
+    String Ensegine, Nom, Garantie, DAchat, id_produit, Marque, sav, Date_Fin, Facture, Photo;
+    Config config;
+    boolean ClicFactur = false, ClicPhoto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +133,7 @@ public class ModifierProduits extends AppCompatActivity {
         });
 
 
-        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, DATA_URL, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, config.GetMarques, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -170,10 +167,6 @@ public class ModifierProduits extends AppCompatActivity {
                 Marque = Adapter.getItem(i);
                 sav = listMarques.get(i).getSav();
 
-
-                //Toast.makeText(ModifierProduits.this, Adapter.getItem(i) + "", Toast.LENGTH_SHORT).show();
-
-
             }
 
             @Override
@@ -188,7 +181,7 @@ public class ModifierProduits extends AppCompatActivity {
         if (restoredid != null) {
             id_produit = restoredid;
             //Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + id_produit, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Config.ProduitById + id_produit, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     try {
@@ -198,10 +191,11 @@ public class ModifierProduits extends AppCompatActivity {
                         marquee.setSelection(TrouverIndice(response.getJSONObject(0).getString("marque")));
                         nomproduit.setText(response.getJSONObject(0).getString("nom"));
                         date_achat.setText(response.getJSONObject(0).getString("dAchat"));
-
+                        Facture = response.getJSONObject(0).getString("facture");
+                        Photo = response.getJSONObject(0).getString("photo");
 
                         Picasso.get()
-                                .load(response.getJSONObject(0).getString("photo"))
+                                .load(Photo)
                                 .resize(400, 500)
                                 .into(profile_image);
 
@@ -275,6 +269,7 @@ public class ModifierProduits extends AppCompatActivity {
                 img_modif_fac.setVisibility(View.VISIBLE);
                 img_modif_fac.setImageBitmap(bitmapContratfact);
                 PHOTOFACTURE = bitmapContratfact;
+                ClicFactur = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -287,6 +282,7 @@ public class ModifierProduits extends AppCompatActivity {
                 img_modif_art.setVisibility(View.VISIBLE);
                 img_modif_art.setImageBitmap(bitmapContaratart);
                 PHOTOARTICLE = bitmapContaratart;
+                ClicPhoto = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -389,61 +385,70 @@ public class ModifierProduits extends AppCompatActivity {
         Ensegine = ensegineproduit.getText().toString().trim();
         Nom = nomproduit.getText().toString().trim();
         Garantie = dureegrantie.getText().toString().trim();
-        Marque = marquee.getSelectedItem().toString();
         DAchat = date_achat.getText().toString().trim();
-
         Calendar cal = Calendar.getInstance();
         String myFormat = "dd MMMM yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
-        try {
-            cal.setTime(sdf.parse(DAchat));
-            cal.add(Calendar.MONTH, Integer.parseInt(Garantie));
-            Date_Fin = sdf.format(cal.getTime());
-            //Toast.makeText(this, "" + Date_Fin, Toast.LENGTH_SHORT).show();
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        if (Valider()) {
 
+            try {
+                cal.setTime(sdf.parse(DAchat));
+                cal.add(Calendar.MONTH, Integer.parseInt(Garantie));
+                Date_Fin = sdf.format(cal.getTime());
+                //Toast.makeText(this, "" + Date_Fin, Toast.LENGTH_SHORT).show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Modif_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (!response.isEmpty()) {
-                    Toast.makeText(ModifierProduits.this, response, Toast.LENGTH_LONG).show();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-                } else {
-                    Toast.makeText(ModifierProduits.this, "error", Toast.LENGTH_SHORT).show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Modif_PRODById, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (!response.isEmpty()) {
+                        Toast.makeText(ModifierProduits.this, response, Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(),DetaileProduits.class));
+
+                    } else {
+                        Toast.makeText(ModifierProduits.this, "error", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(ModifierProduits.this, error.toString(), Toast.LENGTH_LONG).show();
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ModifierProduits.this, error.toString(), Toast.LENGTH_LONG).show();
+                }
+            }) {
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    if (ClicFactur) {
+                        ClicFactur=false;
+                        Facture = getStringImage(PHOTOFACTURE);
+                    }
+                    if (ClicPhoto) {
+                        ClicPhoto=false;
+                        Photo = getStringImage(PHOTOARTICLE);
+                    }
+                    params.put(ID_PRODUIT, id_produit);
+                    params.put(ENSEGINE, Ensegine);
+                    params.put(NOM_PRODUIT, Nom);
+                    params.put(GARANTIE, Garantie);
+                    params.put(MARQUE, Marque);
+                    params.put(SAV, sav);
+                    params.put(DATE_ACHAT, DAchat);
+                    params.put(MPHOTOFAC, Facture);
+                    params.put(MPHOTOART, Photo);
+                    params.put(DFIN, Date_Fin);
+                    return params;
 
-            }
-        }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
 
-                params.put(ID_PRODUIT, id_produit);
-                params.put(ENSEGINE, Ensegine);
-                params.put(NOM_PRODUIT, Nom);
-                params.put(GARANTIE, Garantie);
-                params.put(MARQUE, Marque);
-                params.put(SAV, sav);
-                params.put(DATE_ACHAT, DAchat);
-                params.put(MPHOTOFAC, getStringImage(PHOTOFACTURE));
-                params.put(MPHOTOART, getStringImage(PHOTOARTICLE));
-                params.put(DFIN, Date_Fin);
-                return params;
-
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
+        }
     }
 
     public String getStringImage(Bitmap bitmap) {
@@ -456,16 +461,23 @@ public class ModifierProduits extends AppCompatActivity {
 
         return temp;
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(ModifierProduits.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

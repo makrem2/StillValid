@@ -41,6 +41,7 @@ public class Marque_Produit extends AppCompatActivity {
     ArrayList<String> sav = new ArrayList<>();
     SharedPreferences prefs, prefss;
     SharedPreferences.Editor editors, editorss;
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +65,12 @@ public class Marque_Produit extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLMarque.php", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.GetMarques, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         List_Marque.add(response.getJSONObject(i).getString("libelle"));
-                        //sav.add(response.getJSONObject(i).getString("sav"));
                         listMarques.add(new marque(response.getJSONObject(i).getString("id"),
                                 response.getJSONObject(i).getString("libelle"),
                                 response.getJSONObject(i).getString("sav"),
@@ -99,9 +99,6 @@ public class Marque_Produit extends AppCompatActivity {
                 editors.apply();
                 editorss.putString("marquesav", listMarques.get(i).getSav());
                 editorss.apply();
-
-                Toast.makeText(Marque_Produit.this, Adapter.getItem(i)+"", Toast.LENGTH_SHORT).show();
-
 
             }
 
@@ -133,13 +130,19 @@ public class Marque_Produit extends AppCompatActivity {
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Marque_Produit.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

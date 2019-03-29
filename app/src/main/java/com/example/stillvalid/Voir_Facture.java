@@ -23,7 +23,7 @@ public class Voir_Facture extends AppCompatActivity {
     ImageView img_fact;
     SharedPreferences prefs;
     String id_produit;
-    public String voirfacture = "http://192.168.1.18/StillValid/ProduitById.php?id_produit=";
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class Voir_Facture extends AppCompatActivity {
 
         if (restoredid != null) {
             id_produit = restoredid;
-            Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, voirfacture + id_produit, null, new Response.Listener<JSONArray>() {
+            //Toast.makeText(this, id_produit, Toast.LENGTH_SHORT).show();
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.ProduitById + id_produit, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     try {

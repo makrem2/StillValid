@@ -49,6 +49,7 @@ import java.util.Map;
 public class recapitulatife_Produit extends AppCompatActivity {
     EditText enseigneachatt, produitt, dateeachat, dureeegarantie;
     TextView btn_menu;
+    Config config ;
     ProgressDialog progressDialog;
     DatePickerDialog picker;
     SharedPreferences.Editor editors;
@@ -56,7 +57,6 @@ public class recapitulatife_Produit extends AppCompatActivity {
     ImageView img_prod, img_facture, echec_prod, echec_fact;
     SharedPreferences prefs, prefs1, prefss;
     String Enseigne, Marqueshared, Marque, NomProduit, Dateeachat, Dureegrantie, userid, Facture, Article, Sav, Date_Fin;
-    String insertProduit = "http://192.168.1.18/StillValid/AjouterProduit.php";
     Spinner marquee;
     ArrayAdapter<String> Adapter;
     ArrayList<String> List_Marque = new ArrayList<>();
@@ -134,7 +134,7 @@ public class recapitulatife_Produit extends AppCompatActivity {
         } else {
             echec_fact.setImageResource(R.drawable.ic_x);
         }
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.18/StillValid/GetALLMarque.php", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, config.GetMarques, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -209,7 +209,7 @@ public class recapitulatife_Produit extends AppCompatActivity {
             } else {
 
                 RequestQueue requestQueue = Volley.newRequestQueue(recapitulatife_Produit.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, insertProduit, new Response.Listener<String>() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, config.InsertProduit, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         if (!response.isEmpty()) {
