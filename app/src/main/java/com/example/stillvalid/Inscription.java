@@ -34,28 +34,30 @@ public class Inscription extends AppCompatActivity {
                     "(?=\\S+$)" +            //no white spaces
                     ".{4,}" +                //at least 4 characters
                     "$");
-    Button bregister,blogin;
+    Button bregister, blogin;
     EditText etName, etemail, etpassword;
-    String email,password,name;
+    String email, password, name;
 
-    public static final String NAME="name";
-    public static final String EMAIL="email";
-    public static final String PASSWORD="password";
+    public static final String NAME = "name";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputUsername;
     private TextInputLayout textInputPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
-        etName = (EditText) findViewById(R.id.etName);
-        etemail = (EditText) findViewById(R.id.etemail);
-        etpassword = (EditText) findViewById(R.id.etpassword);
+        etName = findViewById(R.id.etName);
+        etemail = findViewById(R.id.etemail);
+        etpassword = findViewById(R.id.etpassword);
 
         textInputEmail = findViewById(R.id.text_input_email);
         textInputUsername = findViewById(R.id.text_input_username);
         textInputPassword = findViewById(R.id.text_input_password);
     }
+
     private boolean validateEmail() {
         String emailInput = textInputEmail.getEditText().getText().toString().trim();
 
@@ -102,29 +104,24 @@ public class Inscription extends AppCompatActivity {
     }
 
     public void login_login(View view) {
-        Intent intent = new Intent(this,Login.class);
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
 
     public void register_register(View view) {
-        name=etName.getText().toString().trim();
-        email=etemail.getText().toString().trim();
-        password=etpassword.getText().toString().trim();
+        name = etName.getText().toString().trim();
+        email = etemail.getText().toString().trim();
+        password = etpassword.getText().toString().trim();
         if (!validateEmail() | !validateUsername() | !validatePassword()) {
             return;
-        }
-        else {
+        } else {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            StringRequest stringRequest=new StringRequest(Request.Method.POST,config.INSCRIPTION, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, config.INSCRIPTION, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    if(!response.isEmpty()){
+                    if (!response.isEmpty()) {
                         Toast.makeText(Inscription.this, response, Toast.LENGTH_LONG).show();
-                        //Intent intent = new Intent(Register.this,Home.class);
-                        //startActivity(intent);
-                        //Toast.makeText(MainActivity.this, "tttttt", Toast.LENGTH_SHORT).show();
-
-                    }else {
+                    } else {
                         Toast.makeText(Inscription.this, "errr", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -134,19 +131,16 @@ public class Inscription extends AppCompatActivity {
                     Toast.makeText(Inscription.this, error.toString(), Toast.LENGTH_LONG).show();
 
                 }
-            })
-
-            {
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String>params=new HashMap<String, String>();
-                    params.put(NAME,name);
-                    params.put(EMAIL,email);
-                    params.put(PASSWORD,password);
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(NAME, name);
+                    params.put(EMAIL, email);
+                    params.put(PASSWORD, password);
                     return params;
                 }
             };
-
             requestQueue.add(stringRequest);
 
         }

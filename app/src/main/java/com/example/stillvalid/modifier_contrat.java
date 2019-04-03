@@ -66,7 +66,7 @@ public class modifier_contrat extends AppCompatActivity {
     Spinner Type_contrat;
     EditText Date_Echeance;
     TextView Modifer_contrat;
-    String id_contrat, type_contrat, date_echeance;
+    String id_contrat, type_contrat, date_echeance,PhotoContrat;
     ArrayAdapter<String> Adapter;
     ArrayList<String> TypeContrat = new ArrayList<>();
     SharedPreferences prefscontart;
@@ -80,7 +80,7 @@ public class modifier_contrat extends AppCompatActivity {
     public static final String DATEECHANCE = "dEcheance";
     public static final String IMPORT_PHOTO = "photo";
 
-
+    boolean ClicContrat = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +148,8 @@ public class modifier_contrat extends AppCompatActivity {
 
                         Date_Echeance.setText(response.getJSONObject(0).getString("dEcheance"));
                         Type_contrat.setSelection(TrouverIndice(response.getJSONObject(0).getString("type")));
+                        PhotoContrat = response.getJSONObject(0).getString("photo");
+
                         Picasso.get()
                                 .load(response.getJSONObject(0).getString("photo"))
                                 .resize(400, 500)
@@ -196,7 +198,7 @@ public class modifier_contrat extends AppCompatActivity {
                 photocontrat.setVisibility(View.VISIBLE);
                 photocontrat.setImageBitmap(bitmapContaratimp);
                 PHOTO = bitmapContaratimp;
-
+                ClicContrat = true;
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -295,6 +297,7 @@ public class modifier_contrat extends AppCompatActivity {
                 public void onResponse(String response) {
                     if (!response.isEmpty()) {
                         Toast.makeText(modifier_contrat.this, response, Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(),Detail_Contrat.class));
 
                     } else {
                         Toast.makeText(modifier_contrat.this, "error", Toast.LENGTH_SHORT).show();
@@ -310,10 +313,14 @@ public class modifier_contrat extends AppCompatActivity {
             }) {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
+                    if (ClicContrat) {
+                        ClicContrat=false;
+                        PhotoContrat = getStringImage(PHOTO);
+                    }
                     params.put(ID_CONTRAT, id_contrat);
                     params.put(DATEECHANCE, date_echeance);
                     params.put(TYPECONTRAT, type_contrat);
-                    params.put(IMPORT_PHOTO, getStringImage(PHOTO));
+                    params.put(IMPORT_PHOTO, PhotoContrat);
 
                     return params;
 
