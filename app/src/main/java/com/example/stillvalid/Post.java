@@ -5,8 +5,9 @@ public class Post {
     private int idUser;
     private String nom_produit;
     private String lieu;
-    private String img_nom_produit;
     private String prix;
+    private String img_nom_produit;
+
 
     public Post() {
     }

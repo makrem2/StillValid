@@ -43,6 +43,7 @@ public class Boutique extends AppCompatActivity {
     ImageView btn_menu;
     Context contex;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,28 @@ public class Boutique extends AppCompatActivity {
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
         editors = prefs.edit();
         contex = this;
+
+        sdfsdfsdfs();
     }
+
+    private void sdfsdfsdfs(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "dsfdsfsdfsdfsf", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+
+            }
+        });
+
+    }
+
 
     private void loadboutique() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, config.Boutique_URL,

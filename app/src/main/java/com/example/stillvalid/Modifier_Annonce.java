@@ -41,6 +41,7 @@ public class Modifier_Annonce extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     ImageView image;
+
     public static final String ID_ANNONCE = "id_annonce";
     public static final String CATEGORIE = "categorie";
     public static final String TITRE = "titre";
@@ -109,8 +110,6 @@ public class Modifier_Annonce extends AppCompatActivity {
                         villee.setText(response.getJSONObject(0).getString("ville"));
                         prixx.setText(response.getJSONObject(0).getString("prix"));
                         descriptionn.setText(response.getJSONObject(0).getString("description"));
-                        //Id_user.setText(response.getInt("user_id"));
-
                         Picasso.get()
                                 .load(response.getJSONObject(0).getString("photoProduit"))
                                 .resize(400, 500)
@@ -133,26 +132,21 @@ public class Modifier_Annonce extends AppCompatActivity {
     }
 
     public void valid_modif_annonce(View view) {
-
-
         categorie = categoriee.getSelectedItem().toString();
         titre = titree.getText().toString().trim();
         description = descriptionn.getText().toString().trim();
         prix = prixx.getText().toString().trim();
         ville = villee.getText().toString().trim();
         numtel = telphone.getText().toString().trim();
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, config.Modif_AnnonceById, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
                     Toast.makeText(Modifier_Annonce.this, response, Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getApplicationContext(), Fiche_Produite.class));
-
                 } else {
                     Toast.makeText(Modifier_Annonce.this, "error", Toast.LENGTH_SHORT).show();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override

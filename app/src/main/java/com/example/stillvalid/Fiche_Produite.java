@@ -35,20 +35,20 @@ import java.util.List;
 
 
 public class Fiche_Produite extends AppCompatActivity {
-    String id_annonce,Id_user;
-    SharedPreferences prefs,prefs2;
+    String id_annonce, Id_user;
+    SharedPreferences prefs, prefs2;
     ImageView imgproduit;
     Context context;
     Config config;
     ImageView editbnt;
     List<Post> postList = new ArrayList<>();
     TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fiche__produite);
         context = this;
-
         imgproduit = findViewById(R.id.img_fiche_prod);
         nomproduit = findViewById(R.id.txt_nom_prod);
         textdescription = findViewById(R.id.txt_categorie);
@@ -73,8 +73,23 @@ public class Fiche_Produite extends AppCompatActivity {
         if (restoredid != null) {
             id_annonce = restoredid;
             loadboutique();
-              //Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
         }
+        fdfdhdfh();
+    }
+    private  void fdfdhdfh(){
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.43.88/StillValid/AjouterProduit.php", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
     }
 
     private void loadboutique() {
@@ -130,12 +145,12 @@ public class Fiche_Produite extends AppCompatActivity {
     }
 
     public void supprimer(MenuItem item) {
-        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, config.SUPPRIMER_BoutiqueById+id_annonce, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, config.SUPPRIMER_BoutiqueById + id_annonce, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
                     Toast.makeText(Fiche_Produite.this, response, Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(),Boutique.class));
+                    startActivity(new Intent(getApplicationContext(), Boutique.class));
                 } else {
                     Toast.makeText(Fiche_Produite.this, "error", Toast.LENGTH_SHORT).show();
                 }
