@@ -49,7 +49,7 @@ import java.util.Map;
 public class recapitulatife_Produit extends AppCompatActivity {
     EditText enseigneachatt, produitt, dateeachat, dureeegarantie;
     TextView btn_menu;
-    Config config ;
+    Config config;
     ProgressDialog progressDialog;
     DatePickerDialog picker;
     SharedPreferences.Editor editors;
@@ -193,66 +193,64 @@ public class recapitulatife_Produit extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         String myFormat = "dd MMMM yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
-            try {
-                cal.setTime(sdf.parse(Dateeachat));
-                cal.add(Calendar.MONTH, Integer.parseInt(Dureegrantie));
-                Date_Fin = sdf.format(cal.getTime());
-                editors.putString("duree garentie", Dureegrantie);
-                editors.putString("Date_Fin", sdf.format(cal.getTime()));
-                editors.apply();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            if (Enseigne.isEmpty() || (NomProduit.isEmpty()) || (Dateeachat.isEmpty()) || (Dureegrantie.isEmpty())) {
-
-                Toast.makeText(this, "champ(s) doit être(s) remplit(s) ", Toast.LENGTH_SHORT).show();
-            } else {
-
-                RequestQueue requestQueue = Volley.newRequestQueue(recapitulatife_Produit.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, config.InsertProduit, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (!response.isEmpty()) {
-                            Log.i("Myresponse", "Successfully ADD" + response);
-                            Toast.makeText(recapitulatife_Produit.this, "" + response, Toast.LENGTH_SHORT).show();
-                            Ajouter_Photo_Produit.PHOTOFACTURE = null;
-                            Ajouter_Photo_Produit.PHOTOARTICLE = null;
-                        } else {
-
-                            Toast.makeText(recapitulatife_Produit.this, "errr", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("Mysmart", "" + error);
-                        Toast.makeText(recapitulatife_Produit.this, "" + error, Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> param = new HashMap<>();
-                        param.put(USER_ID, userid);
-                        param.put(ENSEIGNE, Enseigne);
-                        param.put(NOM, NomProduit);
-                        param.put(DACHAT, Dateeachat);
-                        param.put(GARANTIE, Dureegrantie);
-                        param.put(MARQUE, Marque);
-                        param.put(SAV, Sav);
-                        param.put(DFIN, Date_Fin);
-                        param.put(FACTURE, getStringImage(Ajouter_Photo_Produit.PHOTOFACTURE));
-                        param.put(ARTICLE, getStringImage(Ajouter_Photo_Produit.PHOTOARTICLE));
-
-
-                        return param;
-                    }
-                };
-
-                requestQueue.add(stringRequest);
-            }
+        try {
+            cal.setTime(sdf.parse(Dateeachat));
+            cal.add(Calendar.MONTH, Integer.parseInt(Dureegrantie));
+            Date_Fin = sdf.format(cal.getTime());
+            editors.putString("duree garentie", Dureegrantie);
+            editors.putString("Date_Fin", sdf.format(cal.getTime()));
+            editors.apply();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        if (Enseigne.isEmpty() || (NomProduit.isEmpty()) || (Dateeachat.isEmpty()) || (Dureegrantie.isEmpty())) {
+
+            Toast.makeText(this, "champ(s) doit être(s) remplit(s) ", Toast.LENGTH_SHORT).show();
+        } else {
+
+            RequestQueue requestQueue = Volley.newRequestQueue(recapitulatife_Produit.this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, config.InsertProduit, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (!response.isEmpty()) {
+                        Log.i("Myresponse", "Successfully ADD" + response);
+                        Toast.makeText(recapitulatife_Produit.this, "" + response, Toast.LENGTH_SHORT).show();
+                        Ajouter_Photo_Produit.PHOTOFACTURE = null;
+                        Ajouter_Photo_Produit.PHOTOARTICLE = null;
+                    } else {
+
+                        Toast.makeText(recapitulatife_Produit.this, "errr", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("Mysmart", "" + error);
+                    Toast.makeText(recapitulatife_Produit.this, "" + error, Toast.LENGTH_SHORT).show();
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> param = new HashMap<>();
+                    param.put(USER_ID, userid);
+                    param.put(ENSEIGNE, Enseigne);
+                    param.put(NOM, NomProduit);
+                    param.put(DACHAT, Dateeachat);
+                    param.put(GARANTIE, Dureegrantie);
+                    param.put(MARQUE, Marque);
+                    param.put(SAV, Sav);
+                    param.put(DFIN, Date_Fin);
+                    param.put(FACTURE, getStringImage(Ajouter_Photo_Produit.PHOTOFACTURE));
+                    param.put(ARTICLE, getStringImage(Ajouter_Photo_Produit.PHOTOARTICLE));
+                    return param;
+                }
+            };
+
+            requestQueue.add(stringRequest);
+        }
+    }
 
 
     public String getStringImage(Bitmap bitmap) {
@@ -301,16 +299,23 @@ public class recapitulatife_Produit extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         dateeachat.setText(sdf.format(myCalendar.getTime()));
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(recapitulatife_Produit.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

@@ -64,7 +64,6 @@ public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProdui
         Calendar calendar = Calendar.getInstance();
         Calendar calendar_Inst = Calendar.getInstance();
         Calendar calendar_final = Calendar.getInstance();
-
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         calendar_Inst.add(Calendar.DAY_OF_MONTH, -1);
         try {

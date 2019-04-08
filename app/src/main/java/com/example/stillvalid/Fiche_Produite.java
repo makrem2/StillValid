@@ -4,11 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import android.widget.PopupMenu;
@@ -43,6 +45,8 @@ public class Fiche_Produite extends AppCompatActivity {
     ImageView editbnt;
     List<Post> postList = new ArrayList<>();
     TextView nomproduit, textdescription, telphone, textemail, textville, textprix;
+    String telphonee;
+    Button contactervendeur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class Fiche_Produite extends AppCompatActivity {
         textville = findViewById(R.id.txt_ville_vendeur);
         textprix = findViewById(R.id.txt_prix_prod);
         editbnt = findViewById(R.id.editbnt);
-
+        contactervendeur = findViewById(R.id.btn_contacter_le_vendeur);
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
 
         prefs2 = getSharedPreferences("login", MODE_PRIVATE);
@@ -75,21 +79,6 @@ public class Fiche_Produite extends AppCompatActivity {
             loadboutique();
             //Toast.makeText(this, id_annonce, Toast.LENGTH_SHORT).show();
         }
-        fdfdhdfh();
-    }
-    private  void fdfdhdfh(){
-
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://192.168.43.88/StillValid/AjouterProduit.php", null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
     }
 
     private void loadboutique() {
@@ -112,8 +101,12 @@ public class Fiche_Produite extends AppCompatActivity {
 
                     if (Id_user.equals(response.getJSONObject(0).getString("user_id"))) {
                         editbnt.setVisibility(View.VISIBLE);
+                        contactervendeur.setVisibility(View.INVISIBLE);
+
                     } else {
                         editbnt.setVisibility(View.INVISIBLE);
+                        contactervendeur.setVisibility(View.VISIBLE);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -168,5 +161,17 @@ public class Fiche_Produite extends AppCompatActivity {
 
     }
 
-}
+    public void contacter_vendeur(View view) {
+        telphonee = telphone.getText().toString().trim();
+        if (!telphonee.isEmpty()) {
 
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+            callIntent.setData(Uri.parse("tel:" + telphonee));
+            startActivity(callIntent);
+        } else {
+            Toast.makeText(this, "Il n'a pas de telphone disponible!", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+}

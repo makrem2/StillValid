@@ -31,7 +31,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Detail_Contrat extends AppCompatActivity {
-    ImageView btn_menu,menu_Item;
+    ImageView btn_menu, menu_Item;
     List<Post> postList = new ArrayList<>();
     TextView Fiche_Contrat, dEcheance, TypeContart;
     CircleImageView imagecontrat;
@@ -40,7 +40,6 @@ public class Detail_Contrat extends AppCompatActivity {
     int jours;
     Config config;
     SharedPreferences prefscontart;
-
 
 
     @Override
@@ -67,7 +66,7 @@ public class Detail_Contrat extends AppCompatActivity {
                 imagecontrat.setBorderColor(Color.parseColor("#358c42"));
 
             }
-           // Toast.makeText(this, jours + "", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, jours + "", Toast.LENGTH_SHORT).show();
         }
 
         if (restoredid != null) {
@@ -95,7 +94,6 @@ public class Detail_Contrat extends AppCompatActivity {
 
                     dEcheance.setText(response.getJSONObject(0).getString("dEcheance"));
                     TypeContart.setText(response.getJSONObject(0).getString("type"));
-
                     Picasso.get()
                             .load(response.getJSONObject(0).getString("photo"))
                             .resize(400, 500)
@@ -162,13 +160,14 @@ public class Detail_Contrat extends AppCompatActivity {
     public void modifer(MenuItem item) {
         startActivity(new Intent(this, modifier_contrat.class));
     }
+
     public void supprimer(MenuItem item) {
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, config.SUPPRIMER_ContratById + id_contrat, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
                     Toast.makeText(Detail_Contrat.this, response, Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(),MesProduits.class));
+                    startActivity(new Intent(getApplicationContext(), MesProduits.class));
                 } else {
                     Toast.makeText(Detail_Contrat.this, "error", Toast.LENGTH_SHORT).show();
                 }

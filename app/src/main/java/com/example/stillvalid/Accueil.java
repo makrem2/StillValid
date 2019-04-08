@@ -22,9 +22,6 @@ public class Accueil extends AppCompatActivity {
         String str =Integer.toString(currentYear);
         TextView textView = findViewById(R.id.bas);
         textView.setText("COPYRGHIT StillValid All RIGHTS RESERVED - " + str );
-
-
-
     }
     public void ajout_prod(View view) {startActivity(new Intent(this,Ajouter_Produits.class));
     }

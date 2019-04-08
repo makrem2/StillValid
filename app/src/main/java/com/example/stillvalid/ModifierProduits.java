@@ -185,7 +185,6 @@ public class ModifierProduits extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONArray response) {
                     try {
-
                         ensegineproduit.setText(response.getJSONObject(0).getString("enseigne"));
                         dureegrantie.setText(response.getJSONObject(0).getString("garantie"));
                         marquee.setSelection(TrouverIndice(response.getJSONObject(0).getString("marque")));
@@ -193,13 +192,10 @@ public class ModifierProduits extends AppCompatActivity {
                         date_achat.setText(response.getJSONObject(0).getString("dAchat"));
                         Facture = response.getJSONObject(0).getString("facture");
                         Photo = response.getJSONObject(0).getString("photo");
-
                         Picasso.get()
                                 .load(Photo)
                                 .resize(400, 500)
                                 .into(profile_image);
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -389,25 +385,20 @@ public class ModifierProduits extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         String myFormat = "dd MMMM yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
-
         if (Valider()) {
-
             try {
                 cal.setTime(sdf.parse(DAchat));
                 cal.add(Calendar.MONTH, Integer.parseInt(Garantie));
                 Date_Fin = sdf.format(cal.getTime());
-                //Toast.makeText(this, "" + Date_Fin, Toast.LENGTH_SHORT).show();
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Modif_PRODById, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     if (!response.isEmpty()) {
                         Toast.makeText(ModifierProduits.this, response, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(),DetaileProduits.class));
+                        startActivity(new Intent(getApplicationContext(), DetaileProduits.class));
 
                     } else {
                         Toast.makeText(ModifierProduits.this, "error", Toast.LENGTH_SHORT).show();
@@ -418,17 +409,16 @@ public class ModifierProduits extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(ModifierProduits.this, error.toString(), Toast.LENGTH_LONG).show();
-
                 }
             }) {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     if (ClicFactur) {
-                        ClicFactur=false;
+                        ClicFactur = false;
                         Facture = getStringImage(PHOTOFACTURE);
                     }
                     if (ClicPhoto) {
-                        ClicPhoto=false;
+                        ClicPhoto = false;
                         Photo = getStringImage(PHOTOARTICLE);
                     }
                     params.put(ID_PRODUIT, id_produit);

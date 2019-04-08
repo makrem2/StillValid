@@ -25,13 +25,13 @@ public class PostsAdaptercadremesproduit extends RecyclerView.Adapter<PostsAdapt
     int jour = 0;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name_con, duree_con,ID_USER,ID_CONTRAT,jours;
+        TextView name_con, duree_con, ID_USER, ID_CONTRAT, jours;
         RoundedImageView image_con;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ID_USER = itemView.findViewById(R.id.iduser_contrat);
-            ID_CONTRAT=itemView.findViewById(R.id.id_contrat);
+            ID_CONTRAT = itemView.findViewById(R.id.id_contrat);
             name_con = itemView.findViewById(R.id.txt_nom_contrat);
             duree_con = itemView.findViewById(R.id.txt_duree_contrat);
             image_con = itemView.findViewById(R.id.img_contart);
@@ -74,11 +74,11 @@ public class PostsAdaptercadremesproduit extends RecyclerView.Adapter<PostsAdapt
             calendar_final.setTimeInMillis(calendar.getTimeInMillis() - calendar_Inst.getTimeInMillis());
             jour = (int) (calendar_final.getTimeInMillis() / 86400000);
             holder.duree_con.setText(String.valueOf(jour));
-            if (jour<=0){
+            if (jour <= 0) {
                 holder.duree_con.setTextColor(Color.RED);
                 holder.image_con.setBorderColor(Color.RED);
                 holder.jours.setTextColor(Color.RED);
-            }else {
+            } else {
                 holder.duree_con.setTextColor(Color.parseColor("#358c42"));
                 holder.jours.setTextColor(Color.parseColor("#358c42"));
                 holder.image_con.setBorderColor(Color.parseColor("#358c42"));
@@ -91,7 +91,7 @@ public class PostsAdaptercadremesproduit extends RecyclerView.Adapter<PostsAdapt
         holder.ID_USER.setText(String.valueOf(p.getIdUser()));
         holder.ID_CONTRAT.setText(String.valueOf(p.getId()));
         holder.name_con.setText(p.getTxt_nom_contrat());
-       //holder.duree_con.setText(p.getTxt_duree_contrat());
+        //holder.duree_con.setText(p.getTxt_duree_contrat());
 
 
         Picasso.get()

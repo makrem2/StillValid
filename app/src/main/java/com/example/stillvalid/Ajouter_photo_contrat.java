@@ -51,6 +51,7 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         import_photocontrat = findViewById(R.id.img_import_photo_contrat);
         prefs = getSharedPreferences("ajoutercontart", MODE_PRIVATE);
         editors = prefs.edit();
+
         btn_menu = findViewById(R.id.menu);
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,14 +95,12 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageContratcam);
         startActivityForResult(intent, REQUEST_IMAGE);
-
     }
 
     private void IMPORTPHOTO() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_IMAGE_imp);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -131,9 +130,19 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
+
+
+    public void valid_photo_cont(View view) {
+        if (Ajouter_photo_contrat.PHOTO != null) {
+            Intent intent = new Intent(getApplicationContext(), Recapulatif_contrat.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "choisissez une image", Toast.LENGTH_SHORT).show();
+        }
+
+    }
     public String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
@@ -141,18 +150,6 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-
-    public void valid_photo_cont(View view) {
-        if (Ajouter_photo_contrat.PHOTO != null) {
-            Intent intent = new Intent(getApplicationContext(), Recapulatif_contrat.class);
-            startActivity(intent);
-
-        } else {
-            Toast.makeText(this, "choisissez une image", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
     public void return_date_echance(View view) {
         startActivity(new Intent(this, Date_echence.class));
     }
@@ -207,16 +204,23 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
             }
         }
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Ajouter_photo_contrat.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

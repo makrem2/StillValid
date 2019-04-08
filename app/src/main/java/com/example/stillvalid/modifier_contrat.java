@@ -66,7 +66,7 @@ public class modifier_contrat extends AppCompatActivity {
     Spinner Type_contrat;
     EditText Date_Echeance;
     TextView Modifer_contrat;
-    String id_contrat, type_contrat, date_echeance,PhotoContrat;
+    String id_contrat, type_contrat, date_echeance, PhotoContrat;
     ArrayAdapter<String> Adapter;
     ArrayList<String> TypeContrat = new ArrayList<>();
     SharedPreferences prefscontart;
@@ -81,6 +81,7 @@ public class modifier_contrat extends AppCompatActivity {
     public static final String IMPORT_PHOTO = "photo";
 
     boolean ClicContrat = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,13 +150,10 @@ public class modifier_contrat extends AppCompatActivity {
                         Date_Echeance.setText(response.getJSONObject(0).getString("dEcheance"));
                         Type_contrat.setSelection(TrouverIndice(response.getJSONObject(0).getString("type")));
                         PhotoContrat = response.getJSONObject(0).getString("photo");
-
                         Picasso.get()
                                 .load(response.getJSONObject(0).getString("photo"))
                                 .resize(400, 500)
                                 .into(image);
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -170,6 +168,31 @@ public class modifier_contrat extends AppCompatActivity {
             RequestQueue queue2 = Volley.newRequestQueue(this);
             queue2.add(request2);
         }
+    }
+
+
+    public void getDate(View view) {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateLabel();
+            }
+        }, year, month, day);
+        picker.show();
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd MMMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date_Echeance.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void checkpermission() {
@@ -194,7 +217,6 @@ public class modifier_contrat extends AppCompatActivity {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageContratimport);
                 getRealPathFromURI(imageContratimport);
                 bitmapContaratimp = rotationImage(thumbnail, getRealPathFromURI(imageContratimport));
-
                 photocontrat.setVisibility(View.VISIBLE);
                 photocontrat.setImageBitmap(bitmapContaratimp);
                 PHOTO = bitmapContaratimp;
@@ -297,7 +319,7 @@ public class modifier_contrat extends AppCompatActivity {
                 public void onResponse(String response) {
                     if (!response.isEmpty()) {
                         Toast.makeText(modifier_contrat.this, response, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(),Detail_Contrat.class));
+                        startActivity(new Intent(getApplicationContext(), Detail_Contrat.class));
 
                     } else {
                         Toast.makeText(modifier_contrat.this, "error", Toast.LENGTH_SHORT).show();
@@ -314,7 +336,7 @@ public class modifier_contrat extends AppCompatActivity {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     if (ClicContrat) {
-                        ClicContrat=false;
+                        ClicContrat = false;
                         PhotoContrat = getStringImage(PHOTO);
                     }
                     params.put(ID_CONTRAT, id_contrat);
@@ -366,27 +388,4 @@ public class modifier_contrat extends AppCompatActivity {
     }
 
 
-    public void getDate(View view) {
-        final Calendar cldr = Calendar.getInstance();
-        int day = cldr.get(Calendar.DAY_OF_MONTH);
-        int month = cldr.get(Calendar.MONTH);
-        int year = cldr.get(Calendar.YEAR);
-        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                updateLabel();
-            }
-        }, year, month, day);
-        picker.show();
-    }
-
-    private void updateLabel() {
-        String myFormat = "dd MMMM yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
-        Date_Echeance.setText(sdf.format(myCalendar.getTime()));
-    }
 }

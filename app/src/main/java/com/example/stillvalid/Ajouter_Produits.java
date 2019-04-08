@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 public class Ajouter_Produits extends AppCompatActivity {
     ProgressDialog progressDialog;
     ImageView btn_menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,34 +22,42 @@ public class Ajouter_Produits extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(Ajouter_Produits.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(Ajouter_Produits.this, btn_menu);
+                popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
                 popupMenu.show();
             }
         });
 
     }
 
-    public void ajou_produit (View view){
-        startActivity(new Intent(this,enseigne_achat.class));
+    public void ajou_produit(View view) {
+        startActivity(new Intent(this, enseigne_achat.class));
     }
 
-    public void ajou_contrat (View view){
-        startActivity(new Intent(this,Type_contrat.class));
+    public void ajou_contrat(View view) {
+        startActivity(new Intent(this, Type_contrat.class));
     }
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
+
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
 
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Ajouter_Produits.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
