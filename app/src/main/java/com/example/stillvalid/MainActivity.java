@@ -2,36 +2,40 @@ package com.example.stillvalid;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Please Wait");
-        progressDialog.show();
-        Thread thread=new Thread(){
-            @Override
-            public  void  run(){
-                try {
+
+        init();
+        progressBar.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+                                      @Override
+                                      public void run() {
+                                          //progressBar.setVisibility(View.GONE);
+                                          Intent intent = new Intent(getApplicationContext(), Login.class);
+                                          startActivity(intent);
+                                          finish();
+                                      }
+                                  }, 4000
 
 
+        );
 
-                    sleep(2000);
-                    Intent intent =new Intent(getApplicationContext(),Login.class);
-                    startActivity(intent);
-                    finish();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
 
+    }
+
+    private void init() {
+        this.progressBar = findViewById(R.id.progressBar);
     }
 }

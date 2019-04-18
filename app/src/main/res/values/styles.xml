@@ -10,8 +10,10 @@
     
     
     <style name="customlistmenu">
-        <item name="android:background">@android:color/holo_orange_light</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:color">@color/orange</item>
+
     </style>
+
+
 
 </resources>

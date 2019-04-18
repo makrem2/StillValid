@@ -1,7 +1,7 @@
 package com.example.stillvalid;
 
 public class Config {
-    public static final String addressip = "http://192.168.1.35";
+    public static final String addressip = "http://192.168.1.46";
 
 
     public static final String InsertProduit = addressip + "/StillValid/AjouterProduit.php";
