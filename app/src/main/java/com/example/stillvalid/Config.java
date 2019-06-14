@@ -1,8 +1,9 @@
 package com.example.stillvalid;
 
 public class Config {
-    public static final String addressip = "http://192.168.1.46";
 
+
+    public static final String addressip = "http://192.168.1.6";
 
     public static final String InsertProduit = addressip + "/StillValid/AjouterProduit.php";
     public static final String GetMarques = addressip + "/StillValid/GetALLMarque.php";
@@ -25,4 +26,5 @@ public class Config {
     public static final String SUPPRIMER_produitById = addressip + "/StillValid/Supprimer_ProduitById.php?id_produit=";
     public static final String SUPPRIMER_BoutiqueById = addressip + "/StillValid/Supprimer_annonceById.php?id_annonce=";
     public static final String SUPPRIMER_ContratById = addressip + "/StillValid/Supprimer_ContratById.php?id_contrat=";
+
 }

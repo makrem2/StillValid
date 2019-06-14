@@ -4,30 +4,26 @@
 
     <item
         android:id="@+id/txt_list_rem"
-        android:icon="@drawable/fleches"
+        android:onClick="LISTE_DES_REMINDERS"
         android:orderInCategory="100"
         android:title="LISTE DES REMINDERS"
-        android:onClick="LISTE_DES_REMINDERS"
         app:showAsAction="never" />
     <item
         android:id="@+id/txt_ajou_remd"
-        android:icon="@drawable/plus"
-        android:orderInCategory="100"
         android:onClick="AJOUTER_UN_REMINDER"
+        android:orderInCategory="100"
         android:title="AJOUTER UN REMINDER"
         app:showAsAction="never" />
     <item
         android:id="@+id/txt_boutique"
-        android:icon="@drawable/dollar"
-        android:orderInCategory="100"
         android:onClick="BOUTIQUE"
+        android:orderInCategory="100"
         android:title="BOUTIQUE"
         app:showAsAction="never" />
     <item
         android:id="@+id/txt_deconnexion"
-        android:icon="@drawable/door_exit"
-        android:orderInCategory="100"
         android:onClick="DECONNEXION"
+        android:orderInCategory="100"
         android:title="DECONNEXION"
         app:showAsAction="never" />
 

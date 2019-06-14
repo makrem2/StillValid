@@ -49,6 +49,7 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         checkpermission();
         prendre_photocontrat = findViewById(R.id.img_prendre_photo_contrat);
         import_photocontrat = findViewById(R.id.img_import_photo_contrat);
+
         prefs = getSharedPreferences("ajoutercontart", MODE_PRIVATE);
         editors = prefs.edit();
 
@@ -84,6 +85,16 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_PERMISSION);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_PERMISSION && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Thanks for granting Permission", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -132,8 +143,6 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         }
     }
 
-
-
     public void valid_photo_cont(View view) {
         if (Ajouter_photo_contrat.PHOTO != null) {
             Intent intent = new Intent(getApplicationContext(), Recapulatif_contrat.class);
@@ -141,7 +150,6 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         } else {
             Toast.makeText(this, "choisissez une image", Toast.LENGTH_SHORT).show();
         }
-
     }
     public String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
@@ -194,16 +202,7 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == REQUEST_PERMISSION && grantResults.length > 0) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Thanks for granting Permission", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     public void LISTE_DES_REMINDERS(MenuItem item) {
 

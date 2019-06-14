@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +8,9 @@
     tools:ignore="ContentDescription"
     android:background="@color/bgColor"
     tools:context=".Date_echence">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:id="@+id/modif_supp_btn"
         android:layout_width="232dp"
@@ -120,40 +124,40 @@
         app:layout_constraintTop_toBottomOf="@+id/line_acc_men" />
 
 
-    <Button
-        android:id="@+id/valid"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginRight="108dp"
-        android:background="@drawable/orange_btn"
-        android:gravity="center"
-        android:onClick="valid_echeance"
-        android:text="@string/va"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/efface" />
+        <Button
+            android:id="@+id/valid"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/orange_btn"
+            android:gravity="center"
+            android:onClick="valid_echeance"
+            android:text="@string/va"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/efface" />
 
-    <Button
-        android:id="@+id/efface"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/valid"
-        android:layout_marginStart="110dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginRight="110dp"
-        android:background="@drawable/button_noir"
-        android:gravity="center"
-        android:onClick="btn_efface"
-        android:text="@string/e"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_date_echeance" />
+        <Button
+            android:id="@+id/efface"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/valid"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/button_noir"
+            android:gravity="center"
+            android:onClick="btn_efface"
+            android:text="@string/e"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_date_echeance" />
 
     <EditText
         android:id="@+id/sp_date_echeance"
@@ -208,3 +212,4 @@
         app:srcCompat="@drawable/left" />
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

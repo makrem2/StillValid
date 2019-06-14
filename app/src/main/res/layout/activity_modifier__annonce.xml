@@ -145,7 +145,7 @@
                 android:id="@+id/edit_description"
                 android:layout_width="240dp"
                 android:layout_height="80dp"
-                android:layout_marginLeft="130dp"
+                android:layout_marginLeft="140dp"
                 android:layout_marginTop="325dp"
                 android:background="@drawable/add_layout"
                 android:ems="10"
@@ -236,7 +236,10 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="130dp"
                 android:layout_marginTop="190dp"
-                android:background="@drawable/add_layout" />
+                android:gravity="center"
+                android:background="@drawable/item_list"
+                android:textColor="@color/noir"
+                android:textColorHint="@color/noir" />
 
             <EditText
                 android:id="@+id/edit_Titre"

@@ -1,8 +1,10 @@
 package com.example.stillvalid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -32,7 +34,7 @@ public class Login extends AppCompatActivity {
     Config config;
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
-    String email,password;
+    String email, password;
     private EditText etemail;
     private EditText etpassword;
     SharedPreferences prefs;
@@ -49,7 +51,6 @@ public class Login extends AppCompatActivity {
                     "$");
 
     private TextInputLayout textInputEmail;
-    //private TextInputLayout textInputUsername;
     private TextInputLayout textInputPassword;
 
     @Override
@@ -59,7 +60,7 @@ public class Login extends AppCompatActivity {
 
         textInputEmail = findViewById(R.id.text_input_email);
         textInputPassword = findViewById(R.id.text_input_password);
-        etemail =findViewById(R.id.txt_email);
+        etemail = findViewById(R.id.txt_email);
         etpassword = findViewById(R.id.txt_password);
         prefs = getSharedPreferences("login", MODE_PRIVATE);
         editors = prefs.edit();
@@ -69,10 +70,10 @@ public class Login extends AppCompatActivity {
         String emailInput = textInputEmail.getEditText().getText().toString().trim();
 
         if (emailInput.isEmpty()) {
-            textInputEmail.setError("Field can't be empty");
+            textInputEmail.setError("Le champ ne peut pas être vide");
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            textInputEmail.setError("Please enter a valid email address");
+            textInputEmail.setError("S'il vous plaît, mettez une adresse email valide");
             return false;
         } else {
             textInputEmail.setError(null);
@@ -84,10 +85,10 @@ public class Login extends AppCompatActivity {
         String passwordInput = textInputPassword.getEditText().getText().toString().trim();
 
         if (passwordInput.isEmpty()) {
-            textInputPassword.setError("Field can't be empty");
+            textInputPassword.setError("Le champ ne peut pas être vide");
             return false;
         } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            textInputPassword.setError("Password too weak");
+            textInputPassword.setError("mot de passe trop faible");
             return false;
         } else {
             textInputPassword.setError(null);
@@ -96,15 +97,13 @@ public class Login extends AppCompatActivity {
     }
 
 
-
     public void main_login(View view) {
-        email=etemail.getText().toString();
-        password=etpassword.getText().toString();
+        email = etemail.getText().toString();
+        password = etpassword.getText().toString();
 
         if (!validateEmail() | !validatePassword()) {
             return;
-        }
-        else {
+        } else {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -112,7 +111,7 @@ public class Login extends AppCompatActivity {
                         try {
                             JSONArray produit = new JSONArray(response);
                             JSONObject produitobject = produit.getJSONObject(0);
-                           // Toast.makeText(getApplicationContext(),produitobject.getString("id")+"", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getApplicationContext(),produitobject.getString("id")+"", Toast.LENGTH_SHORT).show();
                             editors.putString("id", produitobject.getString("id"));
                             editors.commit();
                         } catch (JSONException e) {
@@ -121,10 +120,22 @@ public class Login extends AppCompatActivity {
                         Intent intent = new Intent(Login.this, Accueil.class);
                         startActivity(intent);
 
-                       // Toast.makeText(getApplicationContext(),response+"", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getApplicationContext(),response+"", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(Login.this, "Adresse e-mail ou mot de passe invalide", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Login.this, "Adresse e-mail ou mot de passe invalide", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+                        builder.setTitle("Authentification échouée");
+                        builder.setMessage("Email ou mot de passe incorrect");
+                        builder.setCancelable(false);
+                        builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
                     }
 
                 }

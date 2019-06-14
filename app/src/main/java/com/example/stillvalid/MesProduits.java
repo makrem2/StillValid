@@ -49,7 +49,7 @@ public class MesProduits extends AppCompatActivity {
     String id_user, nbjours_produit, nbjours_contrat;
     SharedPreferences prefs, prefss, prefsphotoprod, prefscontart;
     SharedPreferences.Editor editors, editorsphotoprod, editorscontart;
-Config config;
+    Config config;
     ImageView btn_menu;
 
     @Override

@@ -224,8 +224,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
+                android:background="@drawable/item_list"
                 android:ems="10"
+                android:gravity="center"
+                android:textColor="@color/noir"
+                android:textColorHint="@color/noir"
                 android:hint="assurance sante"
                 android:inputType="textPersonName"
                 android:padding="10dp" />

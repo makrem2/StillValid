@@ -80,9 +80,12 @@
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="2dp"
-        android:background="@drawable/add_layout"
+        android:background="@drawable/item_list"
         android:inputType="text"
+        android:gravity="center"
 
+        android:textColor="@color/noir"
+        android:textColorHint="@color/noir"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_marque" />
 

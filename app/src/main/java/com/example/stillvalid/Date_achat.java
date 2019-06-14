@@ -58,7 +58,7 @@ public class Date_achat extends AppCompatActivity {
     public void valid_date_achat(View view) {
         String date_achat = Date.getText().toString();
         if (!date_achat.isEmpty()) {
-            Toast.makeText(this, date_achat, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, date_achat, Toast.LENGTH_SHORT).show();
             editors.putString("dateachat", date_achat);
             editors.apply();
             startActivity(new Intent(this, Duree_garantie.class));
@@ -125,7 +125,7 @@ public class Date_achat extends AppCompatActivity {
         picker.show();
     }
     private void updateLabel() {
-        String myFormat = "dd MMMM yyyy"; //In which you need put here
+        String myFormat = "dd MMMM yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         Date.setText(sdf.format(myCalendar.getTime()));
     }

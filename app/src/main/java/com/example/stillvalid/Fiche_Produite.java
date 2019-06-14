@@ -62,6 +62,7 @@ public class Fiche_Produite extends AppCompatActivity {
         textprix = findViewById(R.id.txt_prix_prod);
         editbnt = findViewById(R.id.editbnt);
         contactervendeur = findViewById(R.id.btn_contacter_le_vendeur);
+
         prefs = getSharedPreferences("Boutique", MODE_PRIVATE);
 
         prefs2 = getSharedPreferences("login", MODE_PRIVATE);

@@ -1,13 +1,17 @@
 package com.example.stillvalid;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuPopupHelper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+
+import java.lang.reflect.Field;
 
 public class Ajouter_Produits extends AppCompatActivity {
     ProgressDialog progressDialog;

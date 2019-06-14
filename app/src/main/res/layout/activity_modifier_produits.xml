@@ -100,11 +100,11 @@
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
         android:layout_height="720dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -272,24 +272,28 @@
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="280dp" />
+            android:layout_marginTop="280dp"
+            android:background="@drawable/item_list"
+            android:gravity="center"
+            android:textColor="@color/noir"
+            android:textColorHint="@color/noir" />
 
         <EditText
             android:id="@+id/edit_date_achat"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:onClick="getDate"
+            android:layout_marginTop="390dp"
             android:inputType="date"
-            android:layout_marginTop="390dp" />
+            android:onClick="getDate" />
 
         <EditText
             android:id="@+id/edit_garantie"
             android:layout_width="190dp"
-            android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="445dp" />
+            android:layout_marginTop="445dp"
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/edit_produit"
@@ -309,7 +313,7 @@
             android:id="@+id/modifierphoto"
             android:layout_width="141dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="530dp"
             android:text="Modifier Photo"
             android:textSize="18sp"
@@ -325,7 +329,7 @@
 
         <TextView
             android:id="@+id/modifierfacture"
-            android:layout_width="wrap_content"
+            android:layout_width="188dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="530dp"
@@ -340,7 +344,8 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="580dp"
             android:src="@drawable/logo"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
+
         <ImageView
             android:id="@+id/modif_fact"
             android:layout_width="120dp"
@@ -348,7 +353,7 @@
             android:layout_marginLeft="200dp"
             android:layout_marginTop="580dp"
             android:src="@drawable/logo"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/main_login"

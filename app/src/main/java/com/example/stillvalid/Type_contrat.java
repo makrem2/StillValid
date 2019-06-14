@@ -35,6 +35,7 @@ public class Type_contrat extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
     Config config;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,7 @@ public class Type_contrat extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         List_Type.add(response.getJSONObject(i).getString("libelle"));
                     }
-                    Adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_item, List_Type);
+                    Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, List_Type);
                     typecontrat.setAdapter(Adapter);
 
                 } catch (JSONException e) {
@@ -93,8 +94,6 @@ public class Type_contrat extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Date_echence.class);
         startActivity(intent);
-
-
     }
 
     public void return_ajouterproduit(View view) {
@@ -104,21 +103,30 @@ public class Type_contrat extends AppCompatActivity {
     public void acueil(View view) {
         startActivity(new Intent(this, Accueil.class));
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Type_contrat.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
         startActivity(new Intent(this, Login.class));
     }
 
-
+    public void btn_efface(View view) {
+        typecontrat.setSelection(0);
+    }
 }

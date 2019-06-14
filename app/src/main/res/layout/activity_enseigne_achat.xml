@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,13 +8,16 @@
     tools:ignore="ContentDescription"
     android:background="@color/bgColor"
     tools:context=".enseigne_achat">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/modif_supp_btn"
         android:layout_width="232dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,10 +26,10 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_height="24dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="32dp"
         android:gravity="center"
         android:text="@string/ap"
         android:textAllCaps="true"
@@ -42,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -103,13 +107,13 @@
 
     <TextView
         android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginLeft="90dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginRight="90dp"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/ve"
         android:textSize="20sp"
@@ -123,8 +127,8 @@
     <Button
         android:id="@+id/valid"
         android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="108dp"
         android:layout_marginRight="108dp"
         android:background="@drawable/orange_btn"
@@ -138,17 +142,17 @@
     <Button
         android:id="@+id/efface"
         android:layout_width="170dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@+id/valid"
         android:layout_marginStart="110dp"
         android:layout_marginLeft="110dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="110dp"
         android:layout_marginRight="110dp"
         android:background="@drawable/button_noir"
         android:gravity="center"
-        android:text="@string/e"
         android:onClick="btn_efface"
+        android:text="@string/e"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -157,13 +161,13 @@
 
     <EditText
         android:id="@+id/enseigne"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/add_layout"
         android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/mic"
@@ -174,14 +178,17 @@
         android:id="@+id/mic"
         android:layout_width="50dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:layout_weight="0.2"
-        android:onClick="vocale"
         android:background="@drawable/edit_round"
+        android:onClick="vocale"
         android:src="@drawable/microphone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/enseigne"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <ImageView
@@ -190,7 +197,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="70dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="90dp"
@@ -204,3 +211,4 @@
         app:srcCompat="@drawable/left" />
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

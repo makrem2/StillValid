@@ -59,6 +59,8 @@ public class DeposerAnonnce extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deposer_anonnce);
+
+
         categorie = findViewById(R.id.edit_categorie);
         annonce = findViewById(R.id.edit_annonce);
         description_annonce = findViewById(R.id.edit_annonce);
