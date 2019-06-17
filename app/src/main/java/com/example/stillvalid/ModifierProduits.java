@@ -166,7 +166,6 @@ public class ModifierProduits extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Marque = Adapter.getItem(i);
                 sav = listMarques.get(i).getSav();
-
             }
 
             @Override
@@ -447,8 +446,6 @@ public class ModifierProduits extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         String temp = Base64.encodeToString(b, Base64.DEFAULT);
-
-
         return temp;
     }
 

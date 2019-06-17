@@ -72,14 +72,13 @@ public class Inscription extends AppCompatActivity {
             return true;
         }
     }
-
     private boolean validateUsername() {
         String usernameInput = textInputUsername.getEditText().getText().toString().trim();
 
         if (usernameInput.isEmpty()) {
             textInputUsername.setError("Field can't be empty");
             return false;
-        } else if (usernameInput.length() > 15) {
+        } else if (usernameInput.length() > 20) {
             textInputUsername.setError("Username too long");
             return false;
         } else {

@@ -59,7 +59,7 @@ public class modifier_contrat extends AppCompatActivity {
     DatePickerDialog picker;
     Calendar myCalendar = Calendar.getInstance();
     private static final int REQUEST_PERMISSION = 1;
-    public static final int REQUEST_IMAGE = 300;
+//    public static final int REQUEST_IMAGE = 300;
     public static final int REQUEST_IMAGE_imp = 100;
     ImageView btn_menu, image, photocontrat;
     ProgressDialog progressDialog;

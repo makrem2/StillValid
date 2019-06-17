@@ -132,7 +132,13 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
         }
 
     }
-
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
     public Bitmap rotationImage(Bitmap bitmap, String imageUri) throws IOException {
         ExifInterface exifInterface = new ExifInterface(imageUri);
         int oreintation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -156,14 +162,6 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
         }
     }
 
-    public String getRealPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-
     private Bitmap flip(Bitmap bitmap, boolean horizontal, boolean verticale) {
         Matrix matrix = new Matrix();
         matrix.postScale(horizontal ? -1 : 1, verticale ? -1 : 1);
@@ -175,8 +173,6 @@ public class Ajouter_Photo_Produit extends AppCompatActivity {
         matrix.postRotate(degrees);
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
-
-
 
     public void valid_photo(View view) {
         if ((Ajouter_Photo_Produit.PHOTOARTICLE != null) && (Ajouter_Photo_Produit.PHOTOFACTURE != null)) {

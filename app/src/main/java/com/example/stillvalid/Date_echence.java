@@ -27,7 +27,7 @@ import java.util.Locale;
 public class Date_echence extends AppCompatActivity {
     EditText Date;
     DatePickerDialog picker;
-    Calendar myCalendar=Calendar.getInstance();
+    Calendar myCalendar = Calendar.getInstance();
     ImageView btn_menu;
     ProgressDialog progressDialog;
     SharedPreferences prefs;
@@ -53,28 +53,6 @@ public class Date_echence extends AppCompatActivity {
         });
         Date = findViewById(R.id.sp_date_echeance);
     }
-
-    public void valid_echeance(View view) {
-        String date = Date.getText().toString();
-        if (!date.isEmpty()) {
-            editors.putString("dateecheance", date);
-            editors.apply();
-            startActivity(new Intent(this, Ajouter_photo_contrat.class));
-        } else {
-            Date.setError("Champ obligatoire");
-        }
-
-
-    }
-
-    public void return_type_contrat(View view) {
-        startActivity(new Intent(this, Type_contrat.class));
-    }
-
-    public void acueil(View view) {
-        startActivity(new Intent(this, Accueil.class));
-    }
-
 
     public void vocale(View view) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -102,23 +80,12 @@ public class Date_echence extends AppCompatActivity {
         }
     }
 
-    public void btn_efface(View view) {
-        String Text = Date.getText().toString();
-        if (Text.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Already Empty!!!", Toast.LENGTH_SHORT);
-        } else {
-            Date.setText("");
-        }
-
-
-    }
-
     public void getDate(View view) {
         final Calendar cldr = Calendar.getInstance();
         int day = cldr.get(Calendar.DAY_OF_MONTH);
         int month = cldr.get(Calendar.MONTH);
         int year = cldr.get(Calendar.YEAR);
-        picker = new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
+        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
@@ -130,21 +97,61 @@ public class Date_echence extends AppCompatActivity {
         }, year, month, day);
         picker.show();
     }
+
     private void updateLabel() {
         String myFormat = "dd MMMM yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         Date.setText(sdf.format(myCalendar.getTime()));
     }
+
+    public void valid_echeance(View view) {
+        String date = Date.getText().toString();
+        if (!date.isEmpty()) {
+            editors.putString("dateecheance", date);
+            editors.apply();
+            startActivity(new Intent(this, Ajouter_photo_contrat.class));
+        } else {
+            Date.setError("Champ obligatoire");
+        }
+
+
+    }
+
+    public void btn_efface(View view) {
+        String Text = Date.getText().toString();
+        if (Text.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Already Empty!!!", Toast.LENGTH_SHORT);
+        } else {
+            Date.setText("");
+        }
+
+
+    }
+
+    public void return_type_contrat(View view) {
+        startActivity(new Intent(this, Type_contrat.class));
+    }
+
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Date_echence.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

@@ -62,10 +62,13 @@ public class MesProduits extends AppCompatActivity {
         recyclerView_contrat.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView_contrat.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         prefs = getSharedPreferences("mesproduit", MODE_PRIVATE);
         editors = prefs.edit();
+
         prefss = getSharedPreferences("login", MODE_PRIVATE);
         id_user = prefss.getString("id", null);
+
         prefscontart = getSharedPreferences("mescontart", MODE_PRIVATE);
         editorscontart = prefscontart.edit();
 

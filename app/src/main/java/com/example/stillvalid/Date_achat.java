@@ -27,7 +27,7 @@ import java.util.Locale;
 public class Date_achat extends AppCompatActivity {
     EditText Date;
     DatePickerDialog picker;
-    Calendar myCalendar=Calendar.getInstance();
+    Calendar myCalendar = Calendar.getInstance();
     ImageView btn_menu;
     SharedPreferences prefs;
     ProgressDialog progressDialog;
@@ -104,7 +104,7 @@ public class Date_achat extends AppCompatActivity {
     }
 
     public void btn_efface(View view) {
-            Date.setText("");
+        Date.setText("");
     }
 
     public void getDate(View view) {
@@ -112,7 +112,7 @@ public class Date_achat extends AppCompatActivity {
         int day = cldr.get(Calendar.DAY_OF_MONTH);
         int month = cldr.get(Calendar.MONTH);
         int year = cldr.get(Calendar.YEAR);
-        picker = new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
+        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
@@ -124,21 +124,29 @@ public class Date_achat extends AppCompatActivity {
         }, year, month, day);
         picker.show();
     }
+
     private void updateLabel() {
         String myFormat = "dd MMMM yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         Date.setText(sdf.format(myCalendar.getTime()));
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Date_achat.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

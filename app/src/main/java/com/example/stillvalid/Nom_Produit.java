@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Nom_Produit extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class Nom_Produit extends AppCompatActivity {
     EditText nomproduit;
     SharedPreferences prefs;
     SharedPreferences.Editor editors;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +37,14 @@ public class Nom_Produit extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(Nom_Produit.this,btn_menu);
-                popupMenu.getMenuInflater().inflate(R.menu.listmenu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(Nom_Produit.this, btn_menu);
+                popupMenu.getMenuInflater().inflate(R.menu.listmenu, popupMenu.getMenu());
                 popupMenu.show();
             }
         });
 
     }
+
     public void vocale(View view) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -54,7 +57,21 @@ public class Nom_Produit extends AppCompatActivity {
         }
     }
 
-    public void valid_Article (View view){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 100:
+                if (resultCode == RESULT_OK && data != null) {
+
+                    ArrayList<String> listResult = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    nomproduit.setText(listResult.get(0));
+                }
+                break;
+        }
+    }
+
+    public void valid_Article(View view) {
         String NOMPRODUIT = nomproduit.getText().toString();
         if (!NOMPRODUIT.isEmpty()) {
             editors.putString("Nom_Produit", NOMPRODUIT);
@@ -66,11 +83,13 @@ public class Nom_Produit extends AppCompatActivity {
     }
 
 
-    public void return_marque_prod (View view){
-        startActivity(new Intent(this,Marque_Produit.class));
+    public void return_marque_prod(View view) {
+        startActivity(new Intent(this, Marque_Produit.class));
     }
-    public void acueil (View view){
-        startActivity(new Intent(this,Accueil.class));}
+
+    public void acueil(View view) {
+        startActivity(new Intent(this, Accueil.class));
+    }
 
     public void btn_efface(View view) {
         nomproduit.setText("");
@@ -86,16 +105,23 @@ public class Nom_Produit extends AppCompatActivity {
             nomproduit.setError("Champ obligatoire");
         }
     }
+
     public void LISTE_DES_REMINDERS(MenuItem item) {
 
         startActivity(new Intent(this, MesProduits.class));
-    }public void AJOUTER_UN_REMINDER(MenuItem item) {
+    }
+
+    public void AJOUTER_UN_REMINDER(MenuItem item) {
 
         startActivity(new Intent(this, Ajouter_Produits.class));
-    }public void BOUTIQUE(MenuItem item) {
+    }
+
+    public void BOUTIQUE(MenuItem item) {
 
         startActivity(new Intent(this, Boutique.class));
-    }public void DECONNEXION(MenuItem item) {
+    }
+
+    public void DECONNEXION(MenuItem item) {
         progressDialog = new ProgressDialog(Nom_Produit.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();

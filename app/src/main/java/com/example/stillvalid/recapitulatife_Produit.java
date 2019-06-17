@@ -197,9 +197,9 @@ public class recapitulatife_Produit extends AppCompatActivity {
             cal.setTime(sdf.parse(Dateeachat));
             cal.add(Calendar.MONTH, Integer.parseInt(Dureegrantie));
             Date_Fin = sdf.format(cal.getTime());
-            editors.putString("duree garentie", Dureegrantie);
-            editors.putString("Date_Fin", sdf.format(cal.getTime()));
-            editors.apply();
+//            editors.putString("duree garentie", Dureegrantie);
+//            editors.putString("Date_Fin", sdf.format(cal.getTime()));
+//            editors.apply();
         } catch (ParseException e) {
             e.printStackTrace();
         }

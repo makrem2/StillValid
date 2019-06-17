@@ -158,6 +158,7 @@ public class Ajouter_photo_contrat extends AppCompatActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
+
     public void return_date_echance(View view) {
         startActivity(new Intent(this, Date_echence.class));
     }

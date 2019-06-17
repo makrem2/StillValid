@@ -34,7 +34,6 @@ public class PostsAdapterProduit extends RecyclerView.Adapter<PostsAdapterProdui
             image = itemView.findViewById(R.id.profile_image);
             id_produit = itemView.findViewById(R.id.id_prod);
             jours = itemView.findViewById(R.id.jours);
-
         }
     }
 
